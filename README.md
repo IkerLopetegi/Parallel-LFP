@@ -1,18 +1,27 @@
 # Degradation-Induced Electrode Misalignment and Current Redistribution in Parallel LFP/Graphite Cells
 
-Python code and machine-readable results accompanying the manuscript submitted to *Electrochimica Acta*.
+Code and machine-readable results accompanying the manuscript submitted to *Electrochimica Acta*.
 
 ## Scope
 
-This repository contains the numerical models and analysis scripts used to study degradation-induced current redistribution between parallel-connected LFP/graphite cells. The model hierarchy includes a multiparticle single-particle model with electrolyte dynamics (MP-SPMe), reduced OCV-resistance calculations, degradation constructors for LLI/LAM, electrode-balance sensitivity analyses, and robustness studies.
+This repository contains the numerical material used to study degradation-induced current redistribution between parallel-connected LFP/graphite cells. The model hierarchy includes a multiparticle single-particle model with electrolyte dynamics (MP-SPMe), reduced OCV-resistance calculations, degradation constructors for LLI/LAM, electrode-balance sensitivity analyses, and robustness studies.
 
 ## Repository structure
 
-- `lfp_parallel/` — core electrochemical and reduced-order model implementation.
-- `analysis/` — scripts used for the manuscript and Supplementary Information analyses.
-- `results/` — machine-readable CSV outputs for key manuscript and supplementary results.
-- `requirements.txt` — Python package requirements.
-- `CITATION.cff` — citation metadata.
+- `source/parallel_lfp_essential_source.tar.xz` - curated source-code archive containing the core electrochemical model and the analysis scripts used for the current manuscript.
+- `analysis/` - selected analysis scripts also exposed directly for inspection.
+- `results/` - machine-readable CSV outputs for key manuscript and supplementary results.
+- `requirements.txt` - Python package requirements.
+- `CITATION.cff` - citation metadata.
+
+The source archive contains:
+- `lfp_parallel/model.py`
+- `analysis/run_final_v8.py`
+- `analysis/revision_v12_diffusivity.py`
+- `analysis/negative_electrode_potential_sensitivity.py`
+- `analysis/np_sensitivity.py`
+- `analysis/run_robustness.py`
+- `analysis/robust_worker.py`
 
 ## Python environment
 
@@ -24,11 +33,17 @@ source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+To unpack the curated source archive:
+
+```bash
+tar -xJf source/parallel_lfp_essential_source.tar.xz
+```
+
 ## Main analyses
 
-The central manuscript workflow is contained in `analysis/run_final_v8.py`. Additional scripts reproduce specific sensitivity studies, including the concentration-dependent graphite diffusivity comparison, negative-electrode potential-margin analysis, beginning-of-life electrode-balance studies, and parameter robustness analyses.
+The central manuscript workflow is contained in `analysis/run_final_v8.py` inside the source archive. Dedicated scripts reproduce the concentration-dependent graphite diffusivity comparison, negative-electrode potential-margin analysis, beginning-of-life electrode-balance studies, and parameter robustness analyses.
 
-Some full parameter sweeps are computationally intensive. The `results/` directory contains the machine-readable outputs used for the reported manuscript values.
+Some full parameter sweeps are computationally intensive. The `results/` directory contains machine-readable outputs used for the reported manuscript values.
 
 ## Reproducibility notes
 
