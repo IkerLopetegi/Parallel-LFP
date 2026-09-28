@@ -4,7 +4,7 @@ Code and machine-readable results accompanying the manuscript submitted to *Elec
 
 ## Scope
 
-This repository contains the numerical material used to study degradation-induced current redistribution between parallel-connected LFP/graphite cells. The model hierarchy includes a multiparticle single-particle model with electrolyte dynamics (MP-SPMe), reduced OCV-resistance calculations, degradation constructors for LLI/LAM, electrode-balance sensitivity analyses, and robustness studies.
+This repository contains the numerical material used to study degradation-induced current redistribution between parallel-connected LFP/graphite cells. The model hierarchy includes a multiparticle single-particle model with electrolyte dynamics (MP-SPMe), reduced OCV-resistance calculations, degradation constructors for LLI/LAM, electrode-balance sensitivity analyses, robustness studies, and degradation-heterogeneity threshold calculations.
 
 ## Repository structure
 
@@ -22,6 +22,9 @@ The source archive contains:
 - `analysis/np_sensitivity.py`
 - `analysis/run_robustness.py`
 - `analysis/robust_worker.py`
+
+Additional directly exposed analysis:
+- `analysis/section37_heterogeneity_thresholds.py` - dense reduced-model scan of degradation heterogeneity and selected full MP-SPMe verification points for the revised Section 3.7 analysis.
 
 ## Python environment
 
@@ -41,7 +44,23 @@ tar -xJf source/parallel_lfp_essential_source.tar.xz
 
 ## Main analyses
 
-The central manuscript workflow is contained in `analysis/run_final_v8.py` inside the source archive. Dedicated scripts reproduce the concentration-dependent graphite diffusivity comparison, negative-electrode potential-margin analysis, beginning-of-life electrode-balance studies, and parameter robustness analyses.
+The central manuscript workflow is contained in `analysis/run_final_v8.py` inside the source archive. Dedicated scripts reproduce the concentration-dependent graphite diffusivity comparison, negative-electrode potential-margin analysis, beginning-of-life electrode-balance studies, parameter robustness analyses, and the degradation-heterogeneity threshold study.
+
+For the Section 3.7 threshold analysis, run:
+
+```bash
+python analysis/section37_heterogeneity_thresholds.py
+```
+
+This generates dense reduced-model results and extracts the minimum heterogeneity required to reach `M_peak = 0.50`, `0.80`, and `0.95`. A selected full MP-SPMe verification point can be run with, for example:
+
+```bash
+python analysis/section37_heterogeneity_thresholds.py --full-bg 0.10 --full-dlamn 0.02
+```
+
+The corresponding summary outputs are stored in:
+- `results/Section37_fine_thresholds_reduced.csv`
+- `results/Section37_full_selected.csv`
 
 Some full parameter sweeps are computationally intensive. The `results/` directory contains machine-readable outputs used for the reported manuscript values.
 
