@@ -23,8 +23,9 @@ The source archive contains:
 - `analysis/run_robustness.py`
 - `analysis/robust_worker.py`
 
-Additional directly exposed analysis:
-- `analysis/section37_heterogeneity_thresholds.py` - dense reduced-model scan of degradation heterogeneity and selected full MP-SPMe verification points for the revised Section 3.7 analysis.
+Additional directly exposed Section 3.7 analyses:
+- `analysis/section37_heterogeneity_thresholds.py` - dense reduced-model scan of degradation heterogeneity and selected full MP-SPMe verification points.
+- `analysis/section37_full_threshold_refinement.py` - full MP-SPMe threshold search for the minimum heterogeneity required to reach strong current redistribution.
 
 ## Python environment
 
@@ -46,21 +47,31 @@ tar -xJf source/parallel_lfp_essential_source.tar.xz
 
 The central manuscript workflow is contained in `analysis/run_final_v8.py` inside the source archive. Dedicated scripts reproduce the concentration-dependent graphite diffusivity comparison, negative-electrode potential-margin analysis, beginning-of-life electrode-balance studies, parameter robustness analyses, and the degradation-heterogeneity threshold study.
 
-For the Section 3.7 threshold analysis, run:
+### Section 3.7 degradation-heterogeneity analysis
+
+The dense reduced-model scan is run with:
 
 ```bash
 python analysis/section37_heterogeneity_thresholds.py
 ```
 
-This generates dense reduced-model results and extracts the minimum heterogeneity required to reach `M_peak = 0.50`, `0.80`, and `0.95`. A selected full MP-SPMe verification point can be run with, for example:
+The full MP-SPMe threshold refinement is run with:
 
 ```bash
-python analysis/section37_heterogeneity_thresholds.py --full-bg 0.10 --full-dlamn 0.02
+python analysis/section37_full_threshold_refinement.py
 ```
 
-The corresponding summary outputs are stored in:
+The refinement considers two mechanistic families:
+
+1. a common LLI background with additional LAMn in one branch;
+2. two cells following the same LLI+LAMn trajectory but at unequal severity.
+
+For each family, common/background degradation levels of 0, 5, 10, and 15% are analyzed. The full MP-SPMe search brackets the minimum heterogeneity required for `M_peak >= 0.80` and `M_peak >= 0.95`, then refines the crossing to 0.05 percentage-point resolution (0.025 percentage points for some brackets).
+
+Key outputs are stored in:
 - `results/Section37_fine_thresholds_reduced.csv`
 - `results/Section37_full_selected.csv`
+- `results/Section37_full_thresholds_final.csv`
 
 Some full parameter sweeps are computationally intensive. The `results/` directory contains machine-readable outputs used for the reported manuscript values.
 
