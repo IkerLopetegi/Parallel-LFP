@@ -15,6 +15,7 @@ The default dense study resolves background degradation from 0 to 15% in
 and 0.95, corresponding approximately to 75/25, 90/10, and 97.5/2.5
 current splits while both branch currents retain the applied-current sign.
 """
+
 from pathlib import Path
 import argparse
 import sys
@@ -25,8 +26,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import lfp_parallel.model as m
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "results_section37"
-OUT.mkdir(exist_ok=True)
+from analysis.common import OUT, prepare_output
 
 CAP_RATE = 0.05
 C_RATE = 1.0
@@ -37,8 +37,7 @@ THRESHOLDS = (0.50, 0.80, 0.95)
 
 def reduced_pair_metrics(p1, p2, q1, q2):
     sim = m.simulate_ocvr_pair_fast_stateR(
-        p1, p2, C_RATE, "charge", 3.30,
-        dq_frac=2e-3, cap1=q1, cap2=q2
+        p1, p2, C_RATE, "charge", 3.30, dq_frac=2e-3, cap1=q1, cap2=q2
     )
     z = m.compute_current_metrics(sim["t"], sim["I"], sim["Iapp"])
     z["qex_norm"] = z["Q_excess_Ahm2"] / (0.5 * (q1 + q2))
@@ -60,13 +59,13 @@ def run_dense_reduced():
 
     families = (
         "common_LLI_dLAMn",
-        "same_LLI_LAMn_deltaSeverity",
+        "same_LLI_LAMn_trajectory",
         "common_LLI_dLLI",
     )
 
     for family in families:
         for background in COMMON:
-            if family == "same_LLI_LAMn_deltaSeverity":
+            if family == "same_LLI_LAMn_trajectory":
                 p1, q1 = cell(background, background)
             else:
                 p1, q1 = cell(background, 0.0)
@@ -74,7 +73,7 @@ def run_dense_reduced():
             for delta in DELTA:
                 if family == "common_LLI_dLAMn":
                     p2, q2 = cell(background, delta)
-                elif family == "same_LLI_LAMn_deltaSeverity":
+                elif family == "same_LLI_LAMn_trajectory":
                     if background + delta > 0.25:
                         continue
                     p2, q2 = cell(background + delta, background + delta)
@@ -84,17 +83,19 @@ def run_dense_reduced():
                     p2, q2 = cell(background + delta, 0.0)
 
                 z = reduced_pair_metrics(p1, p2, q1, q2)
-                rows.append({
-                    "family": family,
-                    "background": background,
-                    "delta": delta,
-                    "M_peak": z["M_peak"],
-                    "M_rms": z["M_rms"],
-                    "qex_norm": z["qex_norm"],
-                    "capdiff": z["capdiff"],
-                    "Q1": q1,
-                    "Q2": q2,
-                })
+                rows.append(
+                    {
+                        "family": family,
+                        "background": background,
+                        "delta": delta,
+                        "M_peak": z["M_peak"],
+                        "M_rms": z["M_rms"],
+                        "qex_norm": z["qex_norm"],
+                        "capdiff": z["capdiff"],
+                        "Q1": q1,
+                        "Q2": q2,
+                    }
+                )
 
     df = pd.DataFrame(rows)
     df.to_csv(OUT / "Section37_fine_reduced.csv", index=False)
@@ -106,27 +107,31 @@ def run_dense_reduced():
             hit = group[group["M_peak"] >= threshold]
             if len(hit):
                 r = hit.iloc[0]
-                threshold_rows.append({
-                    "family": family,
-                    "background": background,
-                    "threshold": threshold,
-                    "delta_crit": r["delta"],
-                    "M_peak": r["M_peak"],
-                    "M_rms": r["M_rms"],
-                    "qex_norm": r["qex_norm"],
-                    "capdiff": r["capdiff"],
-                })
+                threshold_rows.append(
+                    {
+                        "family": family,
+                        "background": background,
+                        "threshold": threshold,
+                        "delta_crit": r["delta"],
+                        "M_peak": r["M_peak"],
+                        "M_rms": r["M_rms"],
+                        "qex_norm": r["qex_norm"],
+                        "capdiff": r["capdiff"],
+                    }
+                )
             else:
-                threshold_rows.append({
-                    "family": family,
-                    "background": background,
-                    "threshold": threshold,
-                    "delta_crit": np.nan,
-                    "M_peak": np.nan,
-                    "M_rms": np.nan,
-                    "qex_norm": np.nan,
-                    "capdiff": np.nan,
-                })
+                threshold_rows.append(
+                    {
+                        "family": family,
+                        "background": background,
+                        "threshold": threshold,
+                        "delta_crit": np.nan,
+                        "M_peak": np.nan,
+                        "M_rms": np.nan,
+                        "qex_norm": np.nan,
+                        "capdiff": np.nan,
+                    }
+                )
 
     td = pd.DataFrame(threshold_rows)
     td.to_csv(OUT / "Section37_fine_thresholds_reduced.csv", index=False)
@@ -136,14 +141,13 @@ def run_dense_reduced():
 def run_full_point(background, delta):
     """Run one full MP-SPMe verification point for common LLI + differential LAMn."""
     base = m.get_reference_params()
-    p1 = m.make_mixed_degraded_cell(base, background, 0.0, 0.0)
-    p2 = m.make_mixed_degraded_cell(base, background, delta, 0.0)
+    p1 = m.make_mixed_degraded_cell(base, background, 0.0, 0.0, "decoupled")
+    p2 = m.make_mixed_degraded_cell(base, background, delta, 0.0, "decoupled")
     q1 = m.lowrate_capacity(p1, CAP_RATE)
     q2 = m.lowrate_capacity(p2, CAP_RATE)
     y0, _ = m.init_parallel_at_common_ocv([p1, p2], 3.30, 0.4)
     sim = m.simulate_cc_halfcycle(
-        [p1, p2], y0, C_RATE, "charge",
-        max_step=12, rtol=1.5e-4, atol=1.5e-6
+        [p1, p2], y0, C_RATE, "charge", max_step=12, rtol=1.5e-4, atol=1.5e-6
     )
     z = m.compute_current_metrics(sim["t"], sim["I"], sim["Iapp"])
     return {
@@ -161,17 +165,29 @@ def run_full_point(background, delta):
 
 
 def main():
+    prepare_output()
     parser = argparse.ArgumentParser()
-    parser.add_argument("--full-bg", type=float, default=None,
-                        help="common LLI fraction for one full MP-SPMe verification point")
-    parser.add_argument("--full-dlamn", type=float, default=None,
-                        help="additional LAMn fraction in cell 2 for one full MP-SPMe verification point")
+    parser.add_argument(
+        "--full-bg",
+        type=float,
+        default=None,
+        help="common LLI fraction for one full MP-SPMe verification point",
+    )
+    parser.add_argument(
+        "--full-dlamn",
+        type=float,
+        default=None,
+        help="additional LAMn fraction in cell 2 for one full MP-SPMe verification point",
+    )
     args = parser.parse_args()
 
     if args.full_bg is not None or args.full_dlamn is not None:
         if args.full_bg is None or args.full_dlamn is None:
             parser.error("--full-bg and --full-dlamn must be supplied together")
-        print(pd.Series(run_full_point(args.full_bg, args.full_dlamn)).to_string())
+        result = run_full_point(args.full_bg, args.full_dlamn)
+        name = f"Section37_full_bg{args.full_bg:.6f}_dlamn{args.full_dlamn:.6f}.csv"
+        pd.DataFrame([result]).to_csv(OUT / name, index=False)
+        print(pd.Series(result).to_string())
     else:
         _, thresholds = run_dense_reduced()
         print(thresholds.to_string(index=False))

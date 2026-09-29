@@ -1,0 +1,23 @@
+test_analysis_imports_do_not_run (test_model.ModelTests.test_analysis_imports_do_not_run) ... ok
+test_blocking_and_release (test_model.ModelTests.test_blocking_and_release) ... ok
+test_brent_fallback (test_model.ModelTests.test_brent_fallback) ... ok
+test_degradation_conservation_of_exchange_area (test_model.ModelTests.test_degradation_conservation_of_exchange_area) ... ok
+test_differential_conductance (test_model.ModelTests.test_differential_conductance) ... ok
+test_electrolyte_weighted_interface (test_model.ModelTests.test_electrolyte_weighted_interface) ... ok
+test_full_branch_balance_and_surface (test_model.ModelTests.test_full_branch_balance_and_surface) ... ok
+test_full_incomplete_run_is_rejected (test_model.ModelTests.test_full_incomplete_run_is_rejected) ... ok
+test_identical_branch_symmetry_and_swap (test_model.ModelTests.test_identical_branch_symmetry_and_swap) ... ok
+test_metrics_time_weighting (test_model.ModelTests.test_metrics_time_weighting) ... ok
+test_psd_monodisperse_state_size (test_model.ModelTests.test_psd_monodisperse_state_size) ... ok
+test_reduced_identical_pair_cutoff_and_charge_balance (test_model.ModelTests.test_reduced_identical_pair_cutoff_and_charge_balance) ... ok
+test_reject_invalid_parameters (test_model.ModelTests.test_reject_invalid_parameters) ... ok
+test_spherical_flux_conservation (test_model.ModelTests.test_spherical_flux_conservation) ... ok
+test_threshold_checks_earlier_nonmonotone_crossing (test_model.ModelTests.test_threshold_checks_earlier_nonmonotone_crossing) ... common_LLI_dLAMn: background=0.000, delta=0.00000, M_peak=0.000000
+common_LLI_dLAMn: background=0.000, delta=0.00025, M_peak=0.900000
+ok
+test_zero_current_initialization (test_model.ModelTests.test_zero_current_initialization) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 1.001s
+
+OK
