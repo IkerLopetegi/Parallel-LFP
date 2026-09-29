@@ -1,0 +1,145 @@
+{
+  "model_and_script_sha256": "e940ff17265a1d57f8ce1cfc831b0f9efa3e860787e51de1ebe8d02c99b24455",
+  "grid": {
+    "Nneg": 10,
+    "Nsep": 5,
+    "Npos": 10,
+    "Npsd": 13,
+    "Nr_neg": 13
+  },
+  "solver": {
+    "max_step": 4,
+    "rtol": 1e-05,
+    "atol": 1e-07
+  },
+  "C_rate": 1.0,
+  "capacity_rate": 0.05,
+  "initial_voltage": 3.3,
+  "variants": [
+    [
+      "Mean $R_p$ (nm)",
+      "rmean_nm",
+      36.5
+    ],
+    [
+      "Mean $R_p$ (nm)",
+      "rmean_nm",
+      50
+    ],
+    [
+      "Mean $R_p$ (nm)",
+      "rmean_nm",
+      70
+    ],
+    [
+      "Mean $R_p$ (nm)",
+      "rmean_nm",
+      100
+    ],
+    [
+      "PSD CV",
+      "psd_cv",
+      0.1
+    ],
+    [
+      "PSD CV",
+      "psd_cv",
+      0.25
+    ],
+    [
+      "PSD CV",
+      "psd_cv",
+      0.35
+    ],
+    [
+      "$D_{s,n}$",
+      "ds_neg",
+      3e-15
+    ],
+    [
+      "$D_{s,n}$",
+      "ds_neg",
+      1e-14
+    ],
+    [
+      "$D_{s,n}$",
+      "ds_neg",
+      3e-14
+    ],
+    [
+      "$j_{0,p}$ multiplier",
+      "j0_pos_mult",
+      0.5
+    ],
+    [
+      "$j_{0,p}$ multiplier",
+      "j0_pos_mult",
+      1.0
+    ],
+    [
+      "$j_{0,p}$ multiplier",
+      "j0_pos_mult",
+      1.5
+    ],
+    [
+      "$j_{0,n}$ multiplier",
+      "j0_neg_mult",
+      0.5
+    ],
+    [
+      "$j_{0,n}$ multiplier",
+      "j0_neg_mult",
+      1.0
+    ],
+    [
+      "$j_{0,n}$ multiplier",
+      "j0_neg_mult",
+      1.5
+    ],
+    [
+      "$\\kappa_e$",
+      "kappa",
+      0.55
+    ],
+    [
+      "$\\kappa_e$",
+      "kappa",
+      0.78
+    ],
+    [
+      "$\\kappa_e$",
+      "kappa",
+      1.2
+    ],
+    [
+      "$D_e$",
+      "de",
+      7.5e-11
+    ],
+    [
+      "$D_e$",
+      "de",
+      1.2e-10
+    ],
+    [
+      "$D_e$",
+      "de",
+      3e-10
+    ],
+    [
+      "$R_{contact}$",
+      "rcontact",
+      0.0
+    ],
+    [
+      "$R_{contact}$",
+      "rcontact",
+      0.001
+    ],
+    [
+      "$R_{contact}$",
+      "rcontact",
+      0.003
+    ]
+  ]
+}

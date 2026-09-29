@@ -1,6 +1,6 @@
 # Corrections and their scientific implications
 
-This revision corrects the supplied archive and the three analysis scripts exposed in GitHub commit `6061e2078e11c3307166b456bd5ffcb9d3d0782a`. It is a source-package update; the remote GitHub repository and manuscript files have not been edited.
+This document records the original source corrections relative to GitHub commit `6061e2078e11c3307166b456bd5ffcb9d3d0782a`. The subsequent V28 regeneration and manuscript changes are documented in `FINAL_RELEASE_REPORT.md`.
 
 ## Numerical changes
 
@@ -25,8 +25,8 @@ This revision corrects the supplied archive and the three analysis scripts expos
 - Generated results use one output tree. Historical CSVs are preserved separately; they are not relabeled as verified outputs.
 - Architecture redrawing was removed from the numerical workflow; the supplied author schematic is preserved.
 
-## What must be revisited in the manuscript
+## Follow-up completed for V28
 
-The corrections change numerical predictions. Regenerate the final thresholds, parameter/design sweeps and associated figures before transferring values into the paper. The representative runs retain strong current redistribution, but they do not validate every quantitative threshold or claim in V28. `VALIDATION.md` lists exactly what was run and what remains outside this verification.
+The corrections change numerical predictions. The final thresholds, parameter/design sweeps and associated figures were regenerated and reconciled with the revised paper. `FINAL_RELEASE_REPORT.md` records the complete V28 result matrix and remaining scientific limitations. `VALIDATION.md` preserves the earlier focused solver comparison.
 
 No electrochemical fit, experimental validation or replacement of the chosen LFP constitutive law was performed. The retained low-rate MP0D illustration routines are approximate fixed-step methods; they should not be interpreted as independent validation of the full model.

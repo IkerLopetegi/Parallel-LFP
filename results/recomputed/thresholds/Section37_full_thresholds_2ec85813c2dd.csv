@@ -1,0 +1,3 @@
+family,background,target,grid_step_fraction,status,delta_below,M_below,delta_crit_sampled,M_peak,M_rms,Q1,Q2,capacity_difference_pct,bracket_width_pctpoints
+common_LLI_dLAMn,0.0,0.8,0.00025,reached,0.017,0.7984883652185498,0.01725,0.8023101965726991,0.034672817551699674,13.702507686327175,13.70318283854821,0.004927095125899304,0.025000000000000022
+common_LLI_dLAMn,0.0,0.95,0.00025,not_reached,,,,,,,,,

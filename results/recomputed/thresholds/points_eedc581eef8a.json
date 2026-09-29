@@ -1,0 +1,517 @@
+{
+  "config": {
+    "model_and_script_sha256": "525f63c80e84f1d1cacebe390c2c7d3c91426a40d10962c6f66ac43609cf943f",
+    "arguments": {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "fine_step": 0.00025
+    },
+    "numpy": "2.3.5"
+  },
+  "points": [
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.0,
+      "M_peak": 3.1748891523118895e-10,
+      "M_rms": 1.0424940889374311e-11,
+      "peak_recipient": 1,
+      "duration_min": 14.247691681821152
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00025,
+      "M_peak": 0.022198638387980755,
+      "M_rms": 0.0010359877619872974,
+      "peak_recipient": 2,
+      "duration_min": 14.253364934955865
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.0005,
+      "M_peak": 0.04418260787936468,
+      "M_rms": 0.002078060716486855,
+      "peak_recipient": 2,
+      "duration_min": 14.259021030462709
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00075,
+      "M_peak": 0.06649422143393954,
+      "M_rms": 0.003119488350647163,
+      "peak_recipient": 2,
+      "duration_min": 14.26465403627169
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.001,
+      "M_peak": 0.08843172788991648,
+      "M_rms": 0.0041613318010613595,
+      "peak_recipient": 2,
+      "duration_min": 14.270270470668958
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00125,
+      "M_peak": 0.11053461728074998,
+      "M_rms": 0.005207187128691407,
+      "peak_recipient": 2,
+      "duration_min": 14.275865834801829
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.0015,
+      "M_peak": 0.1324288839586533,
+      "M_rms": 0.006234433204867424,
+      "peak_recipient": 2,
+      "duration_min": 14.28144306285474
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00175,
+      "M_peak": 0.15431718681435097,
+      "M_rms": 0.007280143618971006,
+      "peak_recipient": 2,
+      "duration_min": 14.287000268326901
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.002,
+      "M_peak": 0.1764437569485942,
+      "M_rms": 0.008302293678199167,
+      "peak_recipient": 2,
+      "duration_min": 14.29253505942742
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00225,
+      "M_peak": 0.19818538219231638,
+      "M_rms": 0.009327147581974922,
+      "peak_recipient": 2,
+      "duration_min": 14.298052881827477
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.0025,
+      "M_peak": 0.21969459158468818,
+      "M_rms": 0.010367688725907997,
+      "peak_recipient": 2,
+      "duration_min": 14.303553228477096
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00275,
+      "M_peak": 0.24145408498780607,
+      "M_rms": 0.011362355264914387,
+      "peak_recipient": 2,
+      "duration_min": 14.30902976163237
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.003,
+      "M_peak": 0.2626914162383974,
+      "M_rms": 0.012391703909588402,
+      "peak_recipient": 2,
+      "duration_min": 14.314492446401864
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00325,
+      "M_peak": 0.2840152608770389,
+      "M_rms": 0.013386731506107898,
+      "peak_recipient": 2,
+      "duration_min": 14.31993291551953
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.0035,
+      "M_peak": 0.30482236381746847,
+      "M_rms": 0.014424793554828735,
+      "peak_recipient": 2,
+      "duration_min": 14.32536004964935
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00375,
+      "M_peak": 0.32591246893071346,
+      "M_rms": 0.015410405934536756,
+      "peak_recipient": 2,
+      "duration_min": 14.330761932871571
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.004,
+      "M_peak": 0.3460552596694412,
+      "M_rms": 0.01645797422016266,
+      "peak_recipient": 2,
+      "duration_min": 14.336158400710298
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00425,
+      "M_peak": 0.36668279586203445,
+      "M_rms": 0.017447295172991453,
+      "peak_recipient": 2,
+      "duration_min": 14.341525719787105
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.0045,
+      "M_peak": 0.38693611996903865,
+      "M_rms": 0.018448471185281406,
+      "peak_recipient": 2,
+      "duration_min": 14.34687851882509
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00475,
+      "M_peak": 0.40688699546767676,
+      "M_rms": 0.019443639315275596,
+      "peak_recipient": 2,
+      "duration_min": 14.352216074838308
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.005,
+      "M_peak": 0.42640424708049945,
+      "M_rms": 0.020466153691260904,
+      "peak_recipient": 2,
+      "duration_min": 14.357541389318587
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00525,
+      "M_peak": 0.44620256654271717,
+      "M_rms": 0.021398078034846064,
+      "peak_recipient": 2,
+      "duration_min": 14.36283955669335
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.0055,
+      "M_peak": 0.4655390290549897,
+      "M_rms": 0.02238618943778991,
+      "peak_recipient": 2,
+      "duration_min": 14.368126450426315
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00575,
+      "M_peak": 0.4843700566817874,
+      "M_rms": 0.023400042238657447,
+      "peak_recipient": 2,
+      "duration_min": 14.373403852238777
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.006,
+      "M_peak": 0.5030577960359732,
+      "M_rms": 0.024375464724229714,
+      "peak_recipient": 2,
+      "duration_min": 14.378664214819317
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00625,
+      "M_peak": 0.5217585580577185,
+      "M_rms": 0.025337527640485583,
+      "peak_recipient": 2,
+      "duration_min": 14.3839025357796
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.0065,
+      "M_peak": 0.5401635335853181,
+      "M_rms": 0.0262951028644395,
+      "peak_recipient": 2,
+      "duration_min": 14.389127152785587
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00675,
+      "M_peak": 0.5578820732089497,
+      "M_rms": 0.027285586435023733,
+      "peak_recipient": 2,
+      "duration_min": 14.394349791623426
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.007,
+      "M_peak": 0.575817127329219,
+      "M_rms": 0.0282366960253808,
+      "peak_recipient": 2,
+      "duration_min": 14.399545125372319
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00725,
+      "M_peak": 0.5931854783454155,
+      "M_rms": 0.029209619583830355,
+      "peak_recipient": 2,
+      "duration_min": 14.404736495424604
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.0075,
+      "M_peak": 0.6107816561079581,
+      "M_rms": 0.030111665413348553,
+      "peak_recipient": 2,
+      "duration_min": 14.409898719182504
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00775,
+      "M_peak": 0.6274676168769737,
+      "M_rms": 0.03109445820273602,
+      "peak_recipient": 2,
+      "duration_min": 14.415070068242349
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.008,
+      "M_peak": 0.644128434235283,
+      "M_rms": 0.03203583164879301,
+      "peak_recipient": 2,
+      "duration_min": 14.42022131807851
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00825,
+      "M_peak": 0.660660642573875,
+      "M_rms": 0.03296754194957738,
+      "peak_recipient": 2,
+      "duration_min": 14.425356087640978
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.0085,
+      "M_peak": 0.6768002898749317,
+      "M_rms": 0.03389891467076459,
+      "peak_recipient": 2,
+      "duration_min": 14.430484281834683
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00875,
+      "M_peak": 0.6927492561684175,
+      "M_rms": 0.03483187632001766,
+      "peak_recipient": 2,
+      "duration_min": 14.435598402634401
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.009,
+      "M_peak": 0.708492471216408,
+      "M_rms": 0.03575803345745093,
+      "peak_recipient": 2,
+      "duration_min": 14.440698600596601
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00925,
+      "M_peak": 0.7239363610116064,
+      "M_rms": 0.03667881332682414,
+      "peak_recipient": 2,
+      "duration_min": 14.44579025679937
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.0095,
+      "M_peak": 0.7388405021634232,
+      "M_rms": 0.03764829226465832,
+      "peak_recipient": 2,
+      "duration_min": 14.450883992206359
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.00975,
+      "M_peak": 0.7539155224704727,
+      "M_rms": 0.03854442821086706,
+      "peak_recipient": 2,
+      "duration_min": 14.45594948657544
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.01,
+      "M_peak": 0.768580515342002,
+      "M_rms": 0.039474473875169676,
+      "peak_recipient": 2,
+      "duration_min": 14.461012143625508
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.01025,
+      "M_peak": 0.7830192227853585,
+      "M_rms": 0.04038405726332787,
+      "peak_recipient": 2,
+      "duration_min": 14.46606467191498
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.0105,
+      "M_peak": 0.7971499493891546,
+      "M_rms": 0.04130944457949003,
+      "peak_recipient": 2,
+      "duration_min": 14.471112250105227
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.01075,
+      "M_peak": 0.8112688878402208,
+      "M_rms": 0.042212794656578824,
+      "peak_recipient": 2,
+      "duration_min": 14.476137996052655
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.011,
+      "M_peak": 0.8248530839463122,
+      "M_rms": 0.04313087931801881,
+      "peak_recipient": 2,
+      "duration_min": 14.481171951299928
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.01125,
+      "M_peak": 0.8382083423914569,
+      "M_rms": 0.04404937293180836,
+      "peak_recipient": 2,
+      "duration_min": 14.486197491232879
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.0115,
+      "M_peak": 0.8512421218236125,
+      "M_rms": 0.044998076328074704,
+      "peak_recipient": 2,
+      "duration_min": 14.491221048797382
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.01175,
+      "M_peak": 0.8642384368619946,
+      "M_rms": 0.04587004619249504,
+      "peak_recipient": 2,
+      "duration_min": 14.496227289512104
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.012,
+      "M_peak": 0.8766571192449307,
+      "M_rms": 0.046819870986666144,
+      "peak_recipient": 2,
+      "duration_min": 14.501247640424221
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.01225,
+      "M_peak": 0.8888045726225972,
+      "M_rms": 0.04773630704436264,
+      "peak_recipient": 2,
+      "duration_min": 14.506265588576566
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.0125,
+      "M_peak": 0.9005084753403964,
+      "M_rms": 0.04866802734103036,
+      "peak_recipient": 2,
+      "duration_min": 14.51129248668107
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.01275,
+      "M_peak": 0.9118342542773805,
+      "M_rms": 0.04962461216204519,
+      "peak_recipient": 2,
+      "duration_min": 14.5163257382441
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.013,
+      "M_peak": 0.923091600710376,
+      "M_rms": 0.05054469642013376,
+      "peak_recipient": 2,
+      "duration_min": 14.521346327788713
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.01325,
+      "M_peak": 0.9335851718408501,
+      "M_rms": 0.051498289056098316,
+      "peak_recipient": 2,
+      "duration_min": 14.526401206194889
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.0135,
+      "M_peak": 0.9435332379048783,
+      "M_rms": 0.05246519281346931,
+      "peak_recipient": 2,
+      "duration_min": 14.531477227482124
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "delta": 0.01375,
+      "M_peak": 0.9528700914536605,
+      "M_rms": 0.053455500744221264,
+      "peak_recipient": 2,
+      "duration_min": 14.536581546910833
+    }
+  ]
+}

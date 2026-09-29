@@ -1,0 +1,2542 @@
+{
+  "config": {
+    "model_and_script_sha256": "525f63c80e84f1d1cacebe390c2c7d3c91426a40d10962c6f66ac43609cf943f",
+    "arguments": {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "fine_step": 0.00025
+    },
+    "numpy": "2.3.5"
+  },
+  "points": [
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0,
+      "M_peak": 1.020505912981428e-10,
+      "M_rms": 2.650418044721258e-12,
+      "peak_recipient": 1,
+      "duration_min": 21.679351862914686
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00025,
+      "M_peak": 0.010372506830401034,
+      "M_rms": 0.0003827476656560059,
+      "peak_recipient": 1,
+      "duration_min": 21.67928691168699
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0005,
+      "M_peak": 0.020738759534211528,
+      "M_rms": 0.0007663156998626575,
+      "peak_recipient": 1,
+      "duration_min": 21.679204980971765
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00075,
+      "M_peak": 0.031099341700321165,
+      "M_rms": 0.0011491069844204315,
+      "peak_recipient": 1,
+      "duration_min": 21.679105749992015
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.001,
+      "M_peak": 0.04144599288999377,
+      "M_rms": 0.0015319840333901794,
+      "peak_recipient": 1,
+      "duration_min": 21.678989403010792
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00125,
+      "M_peak": 0.05177088123344697,
+      "M_rms": 0.001912164490417547,
+      "peak_recipient": 1,
+      "duration_min": 21.67885601663251
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0015,
+      "M_peak": 0.06210371391995129,
+      "M_rms": 0.002287994146820497,
+      "peak_recipient": 1,
+      "duration_min": 21.67870506074316
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00175,
+      "M_peak": 0.07238215737904578,
+      "M_rms": 0.0026672864032976588,
+      "peak_recipient": 1,
+      "duration_min": 21.67853768685777
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.002,
+      "M_peak": 0.08258187463502556,
+      "M_rms": 0.003051244899129031,
+      "peak_recipient": 1,
+      "duration_min": 21.67835433882387
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00225,
+      "M_peak": 0.09281975594785183,
+      "M_rms": 0.003425381078232465,
+      "peak_recipient": 1,
+      "duration_min": 21.678152850532033
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0025,
+      "M_peak": 0.1029759040991348,
+      "M_rms": 0.0038011020911928525,
+      "peak_recipient": 1,
+      "duration_min": 21.67793556030043
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00275,
+      "M_peak": 0.11307163430488872,
+      "M_rms": 0.00417820925371254,
+      "peak_recipient": 1,
+      "duration_min": 21.677702161043662
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.003,
+      "M_peak": 0.1231083838453222,
+      "M_rms": 0.004558085635609171,
+      "peak_recipient": 1,
+      "duration_min": 21.677452748945996
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00325,
+      "M_peak": 0.13308621558049116,
+      "M_rms": 0.004929253324233575,
+      "peak_recipient": 1,
+      "duration_min": 21.67718737257911
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0035,
+      "M_peak": 0.14301937224750028,
+      "M_rms": 0.0052984215972369155,
+      "peak_recipient": 1,
+      "duration_min": 21.6769058282622
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00375,
+      "M_peak": 0.15288111711046695,
+      "M_rms": 0.005667603901203653,
+      "peak_recipient": 1,
+      "duration_min": 21.67660881417718
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.004,
+      "M_peak": 0.1626821148050052,
+      "M_rms": 0.006033019899397804,
+      "peak_recipient": 1,
+      "duration_min": 21.676296173103324
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00425,
+      "M_peak": 0.17238597910919015,
+      "M_rms": 0.00639692547253818,
+      "peak_recipient": 1,
+      "duration_min": 21.675969096703213
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0045,
+      "M_peak": 0.18201663492077985,
+      "M_rms": 0.006759631572410146,
+      "peak_recipient": 1,
+      "duration_min": 21.675627088911995
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00475,
+      "M_peak": 0.19158077802082493,
+      "M_rms": 0.007121130061382006,
+      "peak_recipient": 1,
+      "duration_min": 21.67527003871578
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.005,
+      "M_peak": 0.20105322687477423,
+      "M_rms": 0.007479598348757469,
+      "peak_recipient": 1,
+      "duration_min": 21.674898887737978
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00525,
+      "M_peak": 0.210428659384321,
+      "M_rms": 0.00783422212882086,
+      "peak_recipient": 1,
+      "duration_min": 21.674514033868164
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0055,
+      "M_peak": 0.21971459774207575,
+      "M_rms": 0.00818814257666587,
+      "peak_recipient": 1,
+      "duration_min": 21.67411550772984
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00575,
+      "M_peak": 0.2288955991082709,
+      "M_rms": 0.008549760148401803,
+      "peak_recipient": 1,
+      "duration_min": 21.673704008653342
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.006,
+      "M_peak": 0.23806451627318892,
+      "M_rms": 0.008882640232938941,
+      "peak_recipient": 1,
+      "duration_min": 21.673275936026986
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00625,
+      "M_peak": 0.2470465584900008,
+      "M_rms": 0.009231253812846136,
+      "peak_recipient": 1,
+      "duration_min": 21.67283877870351
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0065,
+      "M_peak": 0.25596731651581206,
+      "M_rms": 0.009575049418534145,
+      "peak_recipient": 1,
+      "duration_min": 21.672387434138408
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00675,
+      "M_peak": 0.2647921889900534,
+      "M_rms": 0.00991613558702011,
+      "peak_recipient": 1,
+      "duration_min": 21.6719236174443
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.007,
+      "M_peak": 0.2735336175228403,
+      "M_rms": 0.010249009309290947,
+      "peak_recipient": 1,
+      "duration_min": 21.671446921797955
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00725,
+      "M_peak": 0.2821702184664876,
+      "M_rms": 0.010577497590988543,
+      "peak_recipient": 1,
+      "duration_min": 21.670958555138903
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0075,
+      "M_peak": 0.2907013196793094,
+      "M_rms": 0.010912253204782733,
+      "peak_recipient": 1,
+      "duration_min": 21.670458921595873
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00775,
+      "M_peak": 0.29912636775812096,
+      "M_rms": 0.01123969826490474,
+      "peak_recipient": 1,
+      "duration_min": 21.669948236080085
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.008,
+      "M_peak": 0.30743449477089124,
+      "M_rms": 0.011569428075906914,
+      "peak_recipient": 1,
+      "duration_min": 21.669427421905528
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00825,
+      "M_peak": 0.31565217912763943,
+      "M_rms": 0.01188778243703993,
+      "peak_recipient": 1,
+      "duration_min": 21.668895280466323
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0085,
+      "M_peak": 0.3237890806379086,
+      "M_rms": 0.012212570674139878,
+      "peak_recipient": 1,
+      "duration_min": 21.668351425798246
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00875,
+      "M_peak": 0.33181951203448395,
+      "M_rms": 0.012524410358809886,
+      "peak_recipient": 1,
+      "duration_min": 21.667797605714835
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.009,
+      "M_peak": 0.3397355995345208,
+      "M_rms": 0.012836072287912819,
+      "peak_recipient": 1,
+      "duration_min": 21.667234624655592
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00925,
+      "M_peak": 0.34754797719311775,
+      "M_rms": 0.013144651468109083,
+      "peak_recipient": 1,
+      "duration_min": 21.666662101667786
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0095,
+      "M_peak": 0.35527829719508663,
+      "M_rms": 0.013451735738550399,
+      "peak_recipient": 1,
+      "duration_min": 21.666078957317033
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.00975,
+      "M_peak": 0.3628841342693476,
+      "M_rms": 0.013755718930043037,
+      "peak_recipient": 1,
+      "duration_min": 21.665488197501045
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01,
+      "M_peak": 0.37042530505062715,
+      "M_rms": 0.014050909419089284,
+      "peak_recipient": 1,
+      "duration_min": 21.664886111103897
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01025,
+      "M_peak": 0.3778227116744608,
+      "M_rms": 0.014355442181748342,
+      "peak_recipient": 1,
+      "duration_min": 21.664278447065627
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0105,
+      "M_peak": 0.3851489399917963,
+      "M_rms": 0.01465029115364202,
+      "peak_recipient": 1,
+      "duration_min": 21.66366034665021
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01075,
+      "M_peak": 0.39239452736347663,
+      "M_rms": 0.014940362472723841,
+      "peak_recipient": 1,
+      "duration_min": 21.663032741269102
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.011,
+      "M_peak": 0.3994886965886846,
+      "M_rms": 0.015240793553534037,
+      "peak_recipient": 1,
+      "duration_min": 21.662401420778902
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01125,
+      "M_peak": 0.40655840451058634,
+      "M_rms": 0.015516376740053649,
+      "peak_recipient": 1,
+      "duration_min": 21.661756506439055
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0115,
+      "M_peak": 0.41349751593843825,
+      "M_rms": 0.015799508787064,
+      "peak_recipient": 1,
+      "duration_min": 21.661106948443297
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01175,
+      "M_peak": 0.4203369296220859,
+      "M_rms": 0.01607876330066011,
+      "peak_recipient": 1,
+      "duration_min": 21.660450517265566
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.012,
+      "M_peak": 0.427067140087129,
+      "M_rms": 0.01636427710363774,
+      "peak_recipient": 1,
+      "duration_min": 21.659788356202167
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01225,
+      "M_peak": 0.43376366269371236,
+      "M_rms": 0.016627637078037463,
+      "peak_recipient": 1,
+      "duration_min": 21.6591141662084
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0125,
+      "M_peak": 0.44033806123714553,
+      "M_rms": 0.016903804148287696,
+      "peak_recipient": 1,
+      "duration_min": 21.658435975532026
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01275,
+      "M_peak": 0.4468222938067981,
+      "M_rms": 0.01716870768616967,
+      "peak_recipient": 1,
+      "duration_min": 21.65775126034974
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.013,
+      "M_peak": 0.45322006588893854,
+      "M_rms": 0.017435177520955396,
+      "peak_recipient": 1,
+      "duration_min": 21.657059989577963
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01325,
+      "M_peak": 0.4595320453610255,
+      "M_rms": 0.01769894928011338,
+      "peak_recipient": 1,
+      "duration_min": 21.65636237618127
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0135,
+      "M_peak": 0.4657627174398629,
+      "M_rms": 0.01796715612791586,
+      "peak_recipient": 1,
+      "duration_min": 21.655658129779457
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01375,
+      "M_peak": 0.47188634626733356,
+      "M_rms": 0.01823421410232614,
+      "peak_recipient": 1,
+      "duration_min": 21.65495051284904
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.014,
+      "M_peak": 0.4779570811741101,
+      "M_rms": 0.018486473319667202,
+      "peak_recipient": 1,
+      "duration_min": 21.654233961881896
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01425,
+      "M_peak": 0.4839459435874518,
+      "M_rms": 0.018733062391356387,
+      "peak_recipient": 1,
+      "duration_min": 21.653511781893897
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0145,
+      "M_peak": 0.4898626526141157,
+      "M_rms": 0.018982048531361827,
+      "peak_recipient": 1,
+      "duration_min": 21.652783267244043
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01475,
+      "M_peak": 0.4956893405488097,
+      "M_rms": 0.019229531295814443,
+      "peak_recipient": 1,
+      "duration_min": 21.652050534975384
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.015,
+      "M_peak": 0.5014179410850417,
+      "M_rms": 0.01947348864858721,
+      "peak_recipient": 1,
+      "duration_min": 21.65131492576264
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01525,
+      "M_peak": 0.5071110092737176,
+      "M_rms": 0.019713154240909747,
+      "peak_recipient": 1,
+      "duration_min": 21.65056957007603
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0155,
+      "M_peak": 0.5127100202026186,
+      "M_rms": 0.01995422731248404,
+      "peak_recipient": 1,
+      "duration_min": 21.649821420030776
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01575,
+      "M_peak": 0.5182341494895679,
+      "M_rms": 0.0201924199403692,
+      "peak_recipient": 1,
+      "duration_min": 21.649068586040453
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.016,
+      "M_peak": 0.5236858207503283,
+      "M_rms": 0.020428036194511237,
+      "peak_recipient": 1,
+      "duration_min": 21.64831102641137
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01625,
+      "M_peak": 0.5290681708977178,
+      "M_rms": 0.020661934474845458,
+      "peak_recipient": 1,
+      "duration_min": 21.647548618541048
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0165,
+      "M_peak": 0.534406376856935,
+      "M_rms": 0.020887286890092012,
+      "peak_recipient": 1,
+      "duration_min": 21.6467784875702
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01675,
+      "M_peak": 0.5396452548077285,
+      "M_rms": 0.02112070165435266,
+      "peak_recipient": 1,
+      "duration_min": 21.646007731466902
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.017,
+      "M_peak": 0.5448016037398002,
+      "M_rms": 0.021353740648029147,
+      "peak_recipient": 1,
+      "duration_min": 21.645234576917805
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01725,
+      "M_peak": 0.5499244020989539,
+      "M_rms": 0.021577910111081695,
+      "peak_recipient": 1,
+      "duration_min": 21.644453063474998
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0175,
+      "M_peak": 0.5549386472714322,
+      "M_rms": 0.021811523984891727,
+      "peak_recipient": 1,
+      "duration_min": 21.643673293941454
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01775,
+      "M_peak": 0.5599726129174958,
+      "M_rms": 0.022017959431505543,
+      "peak_recipient": 1,
+      "duration_min": 21.64287800142716
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.018,
+      "M_peak": 0.56489377504417,
+      "M_rms": 0.02224300146555256,
+      "peak_recipient": 1,
+      "duration_min": 21.642085655846277
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01825,
+      "M_peak": 0.5697690555144221,
+      "M_rms": 0.022459953107935915,
+      "peak_recipient": 1,
+      "duration_min": 21.641287192522007
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0185,
+      "M_peak": 0.5745874241938584,
+      "M_rms": 0.02266844156872732,
+      "peak_recipient": 1,
+      "duration_min": 21.640484405393252
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01875,
+      "M_peak": 0.5793406449388927,
+      "M_rms": 0.022879839425007237,
+      "peak_recipient": 1,
+      "duration_min": 21.639678615653942
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.019,
+      "M_peak": 0.5840043155887129,
+      "M_rms": 0.023105912710296675,
+      "peak_recipient": 1,
+      "duration_min": 21.638873704041362
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01925,
+      "M_peak": 0.5886400844483899,
+      "M_rms": 0.02331900982711641,
+      "peak_recipient": 1,
+      "duration_min": 21.638060944535034
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0195,
+      "M_peak": 0.5932224220241172,
+      "M_rms": 0.02352837960570662,
+      "peak_recipient": 1,
+      "duration_min": 21.637244190315574
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.01975,
+      "M_peak": 0.5977520857582299,
+      "M_rms": 0.02373585316837295,
+      "peak_recipient": 1,
+      "duration_min": 21.636423542011862
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02,
+      "M_peak": 0.6022420180876705,
+      "M_rms": 0.02393483201455769,
+      "peak_recipient": 1,
+      "duration_min": 21.635597179463733
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02025,
+      "M_peak": 0.6066557651898636,
+      "M_rms": 0.024145946878706307,
+      "peak_recipient": 1,
+      "duration_min": 21.63477104522965
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0205,
+      "M_peak": 0.6110614720721256,
+      "M_rms": 0.024338738055509485,
+      "peak_recipient": 1,
+      "duration_min": 21.633934255085492
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02075,
+      "M_peak": 0.6153798630622136,
+      "M_rms": 0.02454010777715378,
+      "peak_recipient": 1,
+      "duration_min": 21.63310019186032
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.021,
+      "M_peak": 0.6196425589199727,
+      "M_rms": 0.02474761341199096,
+      "peak_recipient": 1,
+      "duration_min": 21.632263735951955
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02125,
+      "M_peak": 0.6238690189067677,
+      "M_rms": 0.024946726928258677,
+      "peak_recipient": 1,
+      "duration_min": 21.631421917247753
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0215,
+      "M_peak": 0.6280828410517706,
+      "M_rms": 0.025134092787365666,
+      "peak_recipient": 1,
+      "duration_min": 21.630570497931977
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02175,
+      "M_peak": 0.6321611938575147,
+      "M_rms": 0.02535470799714656,
+      "peak_recipient": 1,
+      "duration_min": 21.6297315983404
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.022,
+      "M_peak": 0.6362541811716064,
+      "M_rms": 0.02554513409113281,
+      "peak_recipient": 1,
+      "duration_min": 21.628878686657238
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02225,
+      "M_peak": 0.6403051853759147,
+      "M_rms": 0.025748524956477743,
+      "peak_recipient": 1,
+      "duration_min": 21.628022032744084
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0225,
+      "M_peak": 0.6443131394637781,
+      "M_rms": 0.02594144871257704,
+      "peak_recipient": 1,
+      "duration_min": 21.627161860287174
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02275,
+      "M_peak": 0.6482788354774812,
+      "M_rms": 0.026119102456270114,
+      "peak_recipient": 1,
+      "duration_min": 21.62629825589534
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.023,
+      "M_peak": 0.6522500595910932,
+      "M_rms": 0.026296435681334326,
+      "peak_recipient": 1,
+      "duration_min": 21.6254221978407
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02325,
+      "M_peak": 0.6561373080308187,
+      "M_rms": 0.026483573809752876,
+      "peak_recipient": 1,
+      "duration_min": 21.62455143433139
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0235,
+      "M_peak": 0.6599773582437073,
+      "M_rms": 0.026674395994509,
+      "peak_recipient": 1,
+      "duration_min": 21.623678245043802
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02375,
+      "M_peak": 0.663802439427217,
+      "M_rms": 0.02685358108674913,
+      "peak_recipient": 1,
+      "duration_min": 21.62279638455686
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.024,
+      "M_peak": 0.6675676800098852,
+      "M_rms": 0.027031691957491957,
+      "peak_recipient": 1,
+      "duration_min": 21.62191652752381
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02425,
+      "M_peak": 0.6712735311122222,
+      "M_rms": 0.02723261429857473,
+      "peak_recipient": 1,
+      "duration_min": 21.621036466175003
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0245,
+      "M_peak": 0.6749817784055399,
+      "M_rms": 0.027410325840846145,
+      "peak_recipient": 1,
+      "duration_min": 21.620145648703435
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02475,
+      "M_peak": 0.6786343590742159,
+      "M_rms": 0.027592904768867985,
+      "peak_recipient": 1,
+      "duration_min": 21.619255471754364
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.025,
+      "M_peak": 0.6822257097273791,
+      "M_rms": 0.027798267536124847,
+      "peak_recipient": 1,
+      "duration_min": 21.618367144166697
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02525,
+      "M_peak": 0.6858408287849824,
+      "M_rms": 0.027960623198884763,
+      "peak_recipient": 1,
+      "duration_min": 21.617463680149687
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0255,
+      "M_peak": 0.6893539850364153,
+      "M_rms": 0.028159958418020357,
+      "peak_recipient": 1,
+      "duration_min": 21.616571201583934
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02575,
+      "M_peak": 0.6929076968169511,
+      "M_rms": 0.028319839495571795,
+      "peak_recipient": 1,
+      "duration_min": 21.615659047555642
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.026,
+      "M_peak": 0.6963803188242449,
+      "M_rms": 0.02850655575334057,
+      "peak_recipient": 1,
+      "duration_min": 21.61475411133045
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02625,
+      "M_peak": 0.6998167706872732,
+      "M_rms": 0.02868918340456312,
+      "peak_recipient": 1,
+      "duration_min": 21.613846658139206
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0265,
+      "M_peak": 0.7032287848925568,
+      "M_rms": 0.028875606102636533,
+      "peak_recipient": 1,
+      "duration_min": 21.612934419337613
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.027,
+      "M_peak": 0.7099669060959422,
+      "M_rms": 0.029222723432529785,
+      "peak_recipient": 1,
+      "duration_min": 21.61109815529819
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02725,
+      "M_peak": 0.7133007545495941,
+      "M_rms": 0.029392483898834157,
+      "peak_recipient": 1,
+      "duration_min": 21.61017290209714
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02675,
+      "M_peak": 0.7066261771778536,
+      "M_rms": 0.029046684105691147,
+      "peak_recipient": 1,
+      "duration_min": 21.61201492478116
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0275,
+      "M_peak": 0.7165870004716224,
+      "M_rms": 0.02957662818451478,
+      "peak_recipient": 1,
+      "duration_min": 21.609248158806242
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02775,
+      "M_peak": 0.719848439366018,
+      "M_rms": 0.029743546064104846,
+      "peak_recipient": 1,
+      "duration_min": 21.60831953616969
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.028,
+      "M_peak": 0.7230749201185034,
+      "M_rms": 0.029918561772161685,
+      "peak_recipient": 1,
+      "duration_min": 21.60738927186218
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02825,
+      "M_peak": 0.7262466517812063,
+      "M_rms": 0.03010833512344882,
+      "peak_recipient": 1,
+      "duration_min": 21.606461821958593
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0285,
+      "M_peak": 0.7294431918309374,
+      "M_rms": 0.03026567862261374,
+      "peak_recipient": 1,
+      "duration_min": 21.605518527806513
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02875,
+      "M_peak": 0.7325784378025556,
+      "M_rms": 0.030445154545091363,
+      "peak_recipient": 1,
+      "duration_min": 21.604579702186548
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02925,
+      "M_peak": 0.7387888755297699,
+      "M_rms": 0.03078314362481154,
+      "peak_recipient": 1,
+      "duration_min": 21.602688879783738
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.029,
+      "M_peak": 0.7357246992073362,
+      "M_rms": 0.03059678113297813,
+      "peak_recipient": 1,
+      "duration_min": 21.603629064837016
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.02975,
+      "M_peak": 0.7448793577160856,
+      "M_rms": 0.03112066385308084,
+      "peak_recipient": 1,
+      "duration_min": 21.600789050736203
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0295,
+      "M_peak": 0.7418484232412365,
+      "M_rms": 0.03095388324040768,
+      "peak_recipient": 1,
+      "duration_min": 21.601740037906982
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03,
+      "M_peak": 0.747864851796491,
+      "M_rms": 0.03129794783704029,
+      "peak_recipient": 1,
+      "duration_min": 21.599839877485504
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03025,
+      "M_peak": 0.7508420086335234,
+      "M_rms": 0.03146300478930421,
+      "peak_recipient": 1,
+      "duration_min": 21.598884000368027
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0305,
+      "M_peak": 0.7537988373320285,
+      "M_rms": 0.031627859811839173,
+      "peak_recipient": 1,
+      "duration_min": 21.597923259239312
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.031,
+      "M_peak": 0.7596359491774244,
+      "M_rms": 0.03195783138971148,
+      "peak_recipient": 1,
+      "duration_min": 21.59599372699325
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03075,
+      "M_peak": 0.7567175730589989,
+      "M_rms": 0.031795426855530544,
+      "peak_recipient": 1,
+      "duration_min": 21.59696358646006
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03125,
+      "M_peak": 0.7624531883702144,
+      "M_rms": 0.032151990181434116,
+      "peak_recipient": 1,
+      "duration_min": 21.59504285630695
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0315,
+      "M_peak": 0.7653690073211594,
+      "M_rms": 0.032280961037847236,
+      "peak_recipient": 1,
+      "duration_min": 21.594055283439626
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.032,
+      "M_peak": 0.7709834889593109,
+      "M_rms": 0.03260662431218669,
+      "peak_recipient": 1,
+      "duration_min": 21.592112739293842
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03175,
+      "M_peak": 0.7681794542914052,
+      "M_rms": 0.032455376857738666,
+      "peak_recipient": 1,
+      "duration_min": 21.593088053074375
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0325,
+      "M_peak": 0.7765223410741382,
+      "M_rms": 0.03292949183449982,
+      "peak_recipient": 1,
+      "duration_min": 21.590154591051302
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03225,
+      "M_peak": 0.7737627536632972,
+      "M_rms": 0.03278474909240961,
+      "peak_recipient": 1,
+      "duration_min": 21.59113580895661
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.033,
+      "M_peak": 0.7819176684803718,
+      "M_rms": 0.03329088497490911,
+      "peak_recipient": 1,
+      "duration_min": 21.588201673486846
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03275,
+      "M_peak": 0.7792506606834196,
+      "M_rms": 0.03310380530610935,
+      "peak_recipient": 1,
+      "duration_min": 21.589173946429444
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03325,
+      "M_peak": 0.7846376999883745,
+      "M_rms": 0.03340086513029473,
+      "peak_recipient": 1,
+      "duration_min": 21.587206638951454
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0335,
+      "M_peak": 0.7872991180844802,
+      "M_rms": 0.03358031130624423,
+      "peak_recipient": 1,
+      "duration_min": 21.586217918972302
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03375,
+      "M_peak": 0.7899256951470958,
+      "M_rms": 0.033732115965206734,
+      "peak_recipient": 1,
+      "duration_min": 21.585231586102292
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.034,
+      "M_peak": 0.7925532858274986,
+      "M_rms": 0.03389515650203354,
+      "peak_recipient": 1,
+      "duration_min": 21.584235405609856
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03425,
+      "M_peak": 0.7951517733836192,
+      "M_rms": 0.034048039313460544,
+      "peak_recipient": 1,
+      "duration_min": 21.58324016330044
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.035,
+      "M_peak": 0.8027856289599005,
+      "M_rms": 0.03450199029034513,
+      "peak_recipient": 1,
+      "duration_min": 21.580253398159922
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0345,
+      "M_peak": 0.7977262415666004,
+      "M_rms": 0.034199894070543704,
+      "peak_recipient": 1,
+      "duration_min": 21.582243536432774
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03475,
+      "M_peak": 0.8002836920649218,
+      "M_rms": 0.03435745796082497,
+      "peak_recipient": 1,
+      "duration_min": 21.581243626744303
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03525,
+      "M_peak": 0.8052962830825008,
+      "M_rms": 0.03468522735019073,
+      "peak_recipient": 1,
+      "duration_min": 21.579250114787026
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0355,
+      "M_peak": 0.8078185792191998,
+      "M_rms": 0.03482014438484489,
+      "peak_recipient": 1,
+      "duration_min": 21.57823557046509
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03575,
+      "M_peak": 0.8102865293307988,
+      "M_rms": 0.03495574234173316,
+      "peak_recipient": 1,
+      "duration_min": 21.577230421426243
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.036,
+      "M_peak": 0.8127089069701554,
+      "M_rms": 0.03513611650795815,
+      "peak_recipient": 1,
+      "duration_min": 21.576231005964804
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03625,
+      "M_peak": 0.8151701661072465,
+      "M_rms": 0.035257243255668744,
+      "peak_recipient": 1,
+      "duration_min": 21.575211217246647
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0365,
+      "M_peak": 0.8175463442731783,
+      "M_rms": 0.03544787383601726,
+      "peak_recipient": 1,
+      "duration_min": 21.574210386488573
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03675,
+      "M_peak": 0.8199573807610151,
+      "M_rms": 0.03557017408206931,
+      "peak_recipient": 1,
+      "duration_min": 21.573190874193465
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.037,
+      "M_peak": 0.8223443276121836,
+      "M_rms": 0.03570280115683851,
+      "peak_recipient": 1,
+      "duration_min": 21.572171198440873
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03725,
+      "M_peak": 0.8246857476101371,
+      "M_rms": 0.035866699185552416,
+      "peak_recipient": 1,
+      "duration_min": 21.571158255687404
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03775,
+      "M_peak": 0.8293400020367421,
+      "M_rms": 0.03615866849635066,
+      "peak_recipient": 1,
+      "duration_min": 21.569119009283103
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0375,
+      "M_peak": 0.8270088757853957,
+      "M_rms": 0.03601974576541966,
+      "peak_recipient": 1,
+      "duration_min": 21.570144155017317
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.038,
+      "M_peak": 0.8316117180373489,
+      "M_rms": 0.03631973631169653,
+      "peak_recipient": 1,
+      "duration_min": 21.5681072782388
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03875,
+      "M_peak": 0.8383877149982225,
+      "M_rms": 0.036728409691731426,
+      "peak_recipient": 1,
+      "duration_min": 21.56503863929762
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0385,
+      "M_peak": 0.8361589704679498,
+      "M_rms": 0.03661311941080971,
+      "peak_recipient": 1,
+      "duration_min": 21.566058448889976
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03825,
+      "M_peak": 0.8338932399276497,
+      "M_rms": 0.03646686330415025,
+      "peak_recipient": 1,
+      "duration_min": 21.567084001986984
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03925,
+      "M_peak": 0.8428824114985,
+      "M_rms": 0.037012784706738425,
+      "peak_recipient": 1,
+      "duration_min": 21.562961755028088
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.039,
+      "M_peak": 0.8406622496353908,
+      "M_rms": 0.036862410901352165,
+      "peak_recipient": 1,
+      "duration_min": 21.563993934045588
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0395,
+      "M_peak": 0.8450615437880716,
+      "M_rms": 0.03715684005936457,
+      "peak_recipient": 1,
+      "duration_min": 21.56193698836896
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.03975,
+      "M_peak": 0.8472340903996878,
+      "M_rms": 0.037286799127334194,
+      "peak_recipient": 1,
+      "duration_min": 21.560906795386057
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04,
+      "M_peak": 0.8493854703363323,
+      "M_rms": 0.03744410324751646,
+      "peak_recipient": 1,
+      "duration_min": 21.55987788944901
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04025,
+      "M_peak": 0.851525595189553,
+      "M_rms": 0.037581256732536386,
+      "peak_recipient": 1,
+      "duration_min": 21.558844975322806
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0405,
+      "M_peak": 0.8536261915880408,
+      "M_rms": 0.03772830306923568,
+      "peak_recipient": 1,
+      "duration_min": 21.557820186197258
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04075,
+      "M_peak": 0.8557730296434776,
+      "M_rms": 0.037856086667859216,
+      "peak_recipient": 1,
+      "duration_min": 21.556771027092633
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.041,
+      "M_peak": 0.8578644746512445,
+      "M_rms": 0.0379929520303401,
+      "peak_recipient": 1,
+      "duration_min": 21.55573452451023
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04125,
+      "M_peak": 0.8599767214495516,
+      "M_rms": 0.038116487319676005,
+      "peak_recipient": 1,
+      "duration_min": 21.55468382273091
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0415,
+      "M_peak": 0.8620216186502273,
+      "M_rms": 0.03825182996555586,
+      "peak_recipient": 1,
+      "duration_min": 21.55365131232569
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04175,
+      "M_peak": 0.8640724543943643,
+      "M_rms": 0.03839856447887627,
+      "peak_recipient": 1,
+      "duration_min": 21.552610060392627
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.042,
+      "M_peak": 0.866115089366368,
+      "M_rms": 0.038519347049805176,
+      "peak_recipient": 1,
+      "duration_min": 21.55156476826887
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0425,
+      "M_peak": 0.8701316307895901,
+      "M_rms": 0.03880786813690171,
+      "peak_recipient": 1,
+      "duration_min": 21.54948160013763
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04275,
+      "M_peak": 0.8721440315341674,
+      "M_rms": 0.038921333553755356,
+      "peak_recipient": 1,
+      "duration_min": 21.548427957852205
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04225,
+      "M_peak": 0.8681287581673133,
+      "M_rms": 0.03867149355783536,
+      "peak_recipient": 1,
+      "duration_min": 21.550524863297078
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.043,
+      "M_peak": 0.8741110445215069,
+      "M_rms": 0.03906881884341363,
+      "peak_recipient": 1,
+      "duration_min": 21.547385344365697
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04325,
+      "M_peak": 0.876060292562929,
+      "M_rms": 0.03919887791268514,
+      "peak_recipient": 1,
+      "duration_min": 21.546344329188273
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0435,
+      "M_peak": 0.8779973622512725,
+      "M_rms": 0.039337886253122754,
+      "peak_recipient": 1,
+      "duration_min": 21.545301239321198
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04375,
+      "M_peak": 0.8799475411101486,
+      "M_rms": 0.03945406463239929,
+      "peak_recipient": 1,
+      "duration_min": 21.544245394189385
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.044,
+      "M_peak": 0.8818900123706438,
+      "M_rms": 0.03957633639659125,
+      "peak_recipient": 1,
+      "duration_min": 21.543187446167472
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04425,
+      "M_peak": 0.8837757774465167,
+      "M_rms": 0.03973107623663899,
+      "peak_recipient": 1,
+      "duration_min": 21.542146428437015
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04475,
+      "M_peak": 0.8875511390398187,
+      "M_rms": 0.03998394288315022,
+      "peak_recipient": 1,
+      "duration_min": 21.540042907599496
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0445,
+      "M_peak": 0.8856581579086343,
+      "M_rms": 0.03985989846153748,
+      "peak_recipient": 1,
+      "duration_min": 21.541099456419406
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.045,
+      "M_peak": 0.8894431621792868,
+      "M_rms": 0.04009853602857051,
+      "peak_recipient": 1,
+      "duration_min": 21.538979562198563
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0455,
+      "M_peak": 0.8931189802323378,
+      "M_rms": 0.04038897989514318,
+      "peak_recipient": 1,
+      "duration_min": 21.536881400724358
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04525,
+      "M_peak": 0.8912587410625289,
+      "M_rms": 0.04026899523482713,
+      "peak_recipient": 1,
+      "duration_min": 21.537942481162435
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04575,
+      "M_peak": 0.8949337354769913,
+      "M_rms": 0.04051027147947464,
+      "peak_recipient": 1,
+      "duration_min": 21.535832953119513
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.046,
+      "M_peak": 0.8967862941823272,
+      "M_rms": 0.04063119209326439,
+      "peak_recipient": 1,
+      "duration_min": 21.534761313401837
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0465,
+      "M_peak": 0.9003996324674217,
+      "M_rms": 0.04085711369780216,
+      "peak_recipient": 1,
+      "duration_min": 21.532641264766703
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04675,
+      "M_peak": 0.9021562623236469,
+      "M_rms": 0.041013616940360105,
+      "peak_recipient": 1,
+      "duration_min": 21.531594404296843
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04625,
+      "M_peak": 0.8985624874327939,
+      "M_rms": 0.040776483080742804,
+      "peak_recipient": 1,
+      "duration_min": 21.533717887336444
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.047,
+      "M_peak": 0.903912951042435,
+      "M_rms": 0.04116753886478161,
+      "peak_recipient": 1,
+      "duration_min": 21.53054196356259
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04775,
+      "M_peak": 0.9091583083249409,
+      "M_rms": 0.04154943650253193,
+      "peak_recipient": 1,
+      "duration_min": 21.527359855645383
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04725,
+      "M_peak": 0.9056768915784084,
+      "M_rms": 0.041292232940155396,
+      "peak_recipient": 1,
+      "duration_min": 21.52947985020473
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0475,
+      "M_peak": 0.9074407778976825,
+      "M_rms": 0.04140735808772391,
+      "peak_recipient": 1,
+      "duration_min": 21.528412608376552
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.048,
+      "M_peak": 0.9108802466916616,
+      "M_rms": 0.041679227596732676,
+      "peak_recipient": 1,
+      "duration_min": 21.526299876325037
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04825,
+      "M_peak": 0.9125896046160938,
+      "M_rms": 0.04180913540363255,
+      "peak_recipient": 1,
+      "duration_min": 21.525240063050646
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04875,
+      "M_peak": 0.9159759551995452,
+      "M_rms": 0.04206864526087792,
+      "peak_recipient": 1,
+      "duration_min": 21.52311875029443
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0485,
+      "M_peak": 0.9142641590199982,
+      "M_rms": 0.041953891993360436,
+      "peak_recipient": 1,
+      "duration_min": 21.52419066309286
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.049,
+      "M_peak": 0.9176521433811098,
+      "M_rms": 0.04219856345208417,
+      "peak_recipient": 1,
+      "duration_min": 21.5220577322909
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04925,
+      "M_peak": 0.9193495138837746,
+      "M_rms": 0.042304524194120875,
+      "peak_recipient": 1,
+      "duration_min": 21.520981270257188
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.04975,
+      "M_peak": 0.9226417485479266,
+      "M_rms": 0.04257287417185692,
+      "peak_recipient": 1,
+      "duration_min": 21.518860265620557
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0495,
+      "M_peak": 0.9210097724359906,
+      "M_rms": 0.04243315104784197,
+      "peak_recipient": 1,
+      "duration_min": 21.519916954615805
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05,
+      "M_peak": 0.92428014615571,
+      "M_rms": 0.04270022557956895,
+      "peak_recipient": 1,
+      "duration_min": 21.517795995630856
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05025,
+      "M_peak": 0.9258901729808551,
+      "M_rms": 0.04283995144824954,
+      "peak_recipient": 1,
+      "duration_min": 21.51673965314027
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0505,
+      "M_peak": 0.9275321354270567,
+      "M_rms": 0.04294622905299975,
+      "peak_recipient": 1,
+      "duration_min": 21.51566341811397
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05075,
+      "M_peak": 0.9290910513714405,
+      "M_rms": 0.04309625517380637,
+      "peak_recipient": 1,
+      "duration_min": 21.51462017864646
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05125,
+      "M_peak": 0.9322838792147182,
+      "M_rms": 0.043352006004789626,
+      "peak_recipient": 1,
+      "duration_min": 21.512485542294222
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.051,
+      "M_peak": 0.930714680680403,
+      "M_rms": 0.043218643783399846,
+      "peak_recipient": 1,
+      "duration_min": 21.513543268917612
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0515,
+      "M_peak": 0.9338694030857445,
+      "M_rms": 0.04348563449924407,
+      "peak_recipient": 1,
+      "duration_min": 21.511416696336195
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05175,
+      "M_peak": 0.9354404582233428,
+      "M_rms": 0.04359311381284881,
+      "peak_recipient": 1,
+      "duration_min": 21.510348593901465
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.052,
+      "M_peak": 0.9369860239606924,
+      "M_rms": 0.04374082533961352,
+      "peak_recipient": 1,
+      "duration_min": 21.50928853454798
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05225,
+      "M_peak": 0.9385423101436695,
+      "M_rms": 0.04385805430194424,
+      "peak_recipient": 1,
+      "duration_min": 21.508218651648026
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0525,
+      "M_peak": 0.9401110699652268,
+      "M_rms": 0.04397441253857852,
+      "peak_recipient": 1,
+      "duration_min": 21.507137378469153
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05275,
+      "M_peak": 0.941605582940243,
+      "M_rms": 0.04412953988536074,
+      "peak_recipient": 1,
+      "duration_min": 21.506088269771507
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.053,
+      "M_peak": 0.9431388549779033,
+      "M_rms": 0.04425971352399686,
+      "peak_recipient": 1,
+      "duration_min": 21.505014869322466
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05375,
+      "M_peak": 0.947684763881565,
+      "M_rms": 0.044630616713117584,
+      "peak_recipient": 1,
+      "duration_min": 21.501796938438712
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0535,
+      "M_peak": 0.9461227147465476,
+      "M_rms": 0.044533403925469395,
+      "peak_recipient": 1,
+      "duration_min": 21.502897703111504
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05325,
+      "M_peak": 0.9446687403144407,
+      "M_rms": 0.04438153041205144,
+      "peak_recipient": 1,
+      "duration_min": 21.50393979775737
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.054,
+      "M_peak": 0.949139378272746,
+      "M_rms": 0.04476772078775418,
+      "peak_recipient": 1,
+      "duration_min": 21.500744708658853
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05425,
+      "M_peak": 0.9506239836730856,
+      "M_rms": 0.04489244612489191,
+      "peak_recipient": 1,
+      "duration_min": 21.499673436049132
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0545,
+      "M_peak": 0.9520865952267542,
+      "M_rms": 0.04502560582550157,
+      "peak_recipient": 1,
+      "duration_min": 21.49860931652295
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05475,
+      "M_peak": 0.9535397194928752,
+      "M_rms": 0.045158635719451966,
+      "peak_recipient": 1,
+      "duration_min": 21.4975454914253
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.055,
+      "M_peak": 0.9549828992796172,
+      "M_rms": 0.04529270690270755,
+      "peak_recipient": 1,
+      "duration_min": 21.496482757945497
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05525,
+      "M_peak": 0.9563941269679366,
+      "M_rms": 0.045447542382220686,
+      "peak_recipient": 1,
+      "duration_min": 21.49543284865504
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0555,
+      "M_peak": 0.9578608075146665,
+      "M_rms": 0.04557335628970391,
+      "peak_recipient": 1,
+      "duration_min": 21.4943501564732
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05575,
+      "M_peak": 0.9592411778611254,
+      "M_rms": 0.045718720667391494,
+      "peak_recipient": 1,
+      "duration_min": 21.49330720467689
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.056,
+      "M_peak": 0.9606491557122357,
+      "M_rms": 0.04585618250059135,
+      "peak_recipient": 1,
+      "duration_min": 21.49224640494426
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05625,
+      "M_peak": 0.9620558334800212,
+      "M_rms": 0.04599249958264385,
+      "peak_recipient": 1,
+      "duration_min": 21.49118223062862
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05675,
+      "M_peak": 0.964828561835948,
+      "M_rms": 0.04626863961289713,
+      "peak_recipient": 1,
+      "duration_min": 21.489063220171882
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0565,
+      "M_peak": 0.963447767065889,
+      "M_rms": 0.046130639248572004,
+      "peak_recipient": 1,
+      "duration_min": 21.490121862210426
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.057,
+      "M_peak": 0.9662008496860832,
+      "M_rms": 0.0464084322019084,
+      "peak_recipient": 1,
+      "duration_min": 21.488005564785755
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05725,
+      "M_peak": 0.9675767061269035,
+      "M_rms": 0.04654579679597111,
+      "peak_recipient": 1,
+      "duration_min": 21.4869420185567
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.058,
+      "M_peak": 0.971640030535624,
+      "M_rms": 0.04695290999777959,
+      "peak_recipient": 1,
+      "duration_min": 21.483764082241645
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0575,
+      "M_peak": 0.9689852682113878,
+      "M_rms": 0.04665252196013987,
+      "peak_recipient": 1,
+      "duration_min": 21.485857825235307
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05775,
+      "M_peak": 0.9703044556892204,
+      "M_rms": 0.046800942423608625,
+      "peak_recipient": 1,
+      "duration_min": 21.484816579056584
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05825,
+      "M_peak": 0.972972167370294,
+      "M_rms": 0.047086510460719835,
+      "peak_recipient": 1,
+      "duration_min": 21.48270944474091
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0585,
+      "M_peak": 0.974290893176408,
+      "M_rms": 0.04722123202663174,
+      "peak_recipient": 1,
+      "duration_min": 21.481658358168673
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05875,
+      "M_peak": 0.9755907734955482,
+      "M_rms": 0.04736827944017796,
+      "peak_recipient": 1,
+      "duration_min": 21.480614501100675
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.059,
+      "M_peak": 0.9768732341828975,
+      "M_rms": 0.04751832429425161,
+      "peak_recipient": 1,
+      "duration_min": 21.47957662569238
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05925,
+      "M_peak": 0.9781431595791233,
+      "M_rms": 0.0476701643798737,
+      "peak_recipient": 1,
+      "duration_min": 21.478542386184962
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0595,
+      "M_peak": 0.9793910043629358,
+      "M_rms": 0.047826272633264943,
+      "peak_recipient": 1,
+      "duration_min": 21.477517035826203
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06,
+      "M_peak": 0.9818522279834313,
+      "M_rms": 0.04814457135181825,
+      "peak_recipient": 1,
+      "duration_min": 21.475476221634654
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.05975,
+      "M_peak": 0.9806212228042294,
+      "M_rms": 0.04798552599889693,
+      "peak_recipient": 1,
+      "duration_min": 21.476498258669572
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06025,
+      "M_peak": 0.9830498271834045,
+      "M_rms": 0.04830953975602122,
+      "peak_recipient": 1,
+      "duration_min": 21.474469699384272
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06075,
+      "M_peak": 0.9853471561507123,
+      "M_rms": 0.04866596480899743,
+      "peak_recipient": 1,
+      "duration_min": 21.472501664770856
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0605,
+      "M_peak": 0.9842188500789549,
+      "M_rms": 0.04847258636600652,
+      "peak_recipient": 1,
+      "duration_min": 21.47347525065705
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.061,
+      "M_peak": 0.9864716785390951,
+      "M_rms": 0.048846086770452726,
+      "peak_recipient": 1,
+      "duration_min": 21.47152743842035
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06125,
+      "M_peak": 0.9875657851153772,
+      "M_rms": 0.04902228692462287,
+      "peak_recipient": 1,
+      "duration_min": 21.47056742095076
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06175,
+      "M_peak": 0.9896561282663677,
+      "M_rms": 0.04942238759152709,
+      "peak_recipient": 1,
+      "duration_min": 21.468696770759458
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0615,
+      "M_peak": 0.9886093194610437,
+      "M_rms": 0.04923753386544936,
+      "peak_recipient": 1,
+      "duration_min": 21.46963419866916
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.062,
+      "M_peak": 0.9906252749980615,
+      "M_rms": 0.04964942345821712,
+      "peak_recipient": 1,
+      "duration_min": 21.467800256351328
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06225,
+      "M_peak": 0.9916102173879179,
+      "M_rms": 0.04982883867992819,
+      "peak_recipient": 1,
+      "duration_min": 21.466891445440158
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0625,
+      "M_peak": 0.9924857838402003,
+      "M_rms": 0.050088869356517934,
+      "peak_recipient": 1,
+      "duration_min": 21.466044681635005
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.063,
+      "M_peak": 0.9941373997837509,
+      "M_rms": 0.050588330585947014,
+      "peak_recipient": 1,
+      "duration_min": 21.464403319264115
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06325,
+      "M_peak": 0.9949049675909483,
+      "M_rms": 0.05084431007202094,
+      "peak_recipient": 1,
+      "duration_min": 21.463613460880442
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06275,
+      "M_peak": 0.9933143676408993,
+      "M_rms": 0.05033127728014764,
+      "peak_recipient": 1,
+      "duration_min": 21.465222324690572
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0635,
+      "M_peak": 0.9956233536036635,
+      "M_rms": 0.05111700658214325,
+      "peak_recipient": 1,
+      "duration_min": 21.46285048883544
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.064,
+      "M_peak": 0.9969908366331426,
+      "M_rms": 0.05165361849277682,
+      "peak_recipient": 1,
+      "duration_min": 21.46135993806969
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06375,
+      "M_peak": 0.9963225532193277,
+      "M_rms": 0.05139036026106651,
+      "peak_recipient": 1,
+      "duration_min": 21.46209625429549
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06425,
+      "M_peak": 0.997565015224301,
+      "M_rms": 0.051959155627568795,
+      "peak_recipient": 1,
+      "duration_min": 21.460677664942285
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0645,
+      "M_peak": 0.9980437135592242,
+      "M_rms": 0.05228150169984108,
+      "peak_recipient": 1,
+      "duration_min": 21.46004977309463
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.065,
+      "M_peak": 0.9987453726137894,
+      "M_rms": 0.05302475516651756,
+      "peak_recipient": 1,
+      "duration_min": 21.458943744598784
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06475,
+      "M_peak": 0.9984319200304557,
+      "M_rms": 0.052631224139626835,
+      "peak_recipient": 1,
+      "duration_min": 21.459474134953016
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06525,
+      "M_peak": 0.99897982947058,
+      "M_rms": 0.0533831194806643,
+      "peak_recipient": 1,
+      "duration_min": 21.458455933126864
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0655,
+      "M_peak": 0.9991863122517527,
+      "M_rms": 0.05379877964475511,
+      "peak_recipient": 1,
+      "duration_min": 21.45798965607308
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06575,
+      "M_peak": 0.999366998388756,
+      "M_rms": 0.05418535995862742,
+      "peak_recipient": 1,
+      "duration_min": 21.457535978460555
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.066,
+      "M_peak": 0.9995121873643863,
+      "M_rms": 0.05456682397551874,
+      "peak_recipient": 1,
+      "duration_min": 21.45710500295046
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06625,
+      "M_peak": 0.9996171411481816,
+      "M_rms": 0.05497504707753875,
+      "peak_recipient": 1,
+      "duration_min": 21.456699718691784
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0665,
+      "M_peak": 0.9997119346098353,
+      "M_rms": 0.055392991945888814,
+      "peak_recipient": 1,
+      "duration_min": 21.456303313359587
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.067,
+      "M_peak": 0.999830884114069,
+      "M_rms": 0.056218464095753345,
+      "peak_recipient": 1,
+      "duration_min": 21.455553959255077
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06675,
+      "M_peak": 0.9997715490837498,
+      "M_rms": 0.05580696602707482,
+      "peak_recipient": 1,
+      "duration_min": 21.45592759952549
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06725,
+      "M_peak": 0.9999069256739349,
+      "M_rms": 0.056639927815428724,
+      "peak_recipient": 1,
+      "duration_min": 21.455172311216717
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0675,
+      "M_peak": 0.9998880629175193,
+      "M_rms": 0.057065665675228236,
+      "peak_recipient": 1,
+      "duration_min": 21.454848417235663
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06775,
+      "M_peak": 0.999835015014603,
+      "M_rms": 0.057488074914979426,
+      "peak_recipient": 1,
+      "duration_min": 21.45454685544942
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06825,
+      "M_peak": 0.9999709739571782,
+      "M_rms": 0.058285005079067344,
+      "peak_recipient": 1,
+      "duration_min": 21.453804991566628
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.068,
+      "M_peak": 0.9999729164376887,
+      "M_rms": 0.057873947969229934,
+      "peak_recipient": 1,
+      "duration_min": 21.454134083390695
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0685,
+      "M_peak": 0.9999709389237822,
+      "M_rms": 0.058687748153288706,
+      "peak_recipient": 1,
+      "duration_min": 21.453477752261417
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.069,
+      "M_peak": 0.999965134425656,
+      "M_rms": 0.05952195445984857,
+      "peak_recipient": 1,
+      "duration_min": 21.452834327237607
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06925,
+      "M_peak": 0.9999882398676883,
+      "M_rms": 0.059922598172619856,
+      "peak_recipient": 1,
+      "duration_min": 21.452500342917695
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06875,
+      "M_peak": 0.9999909775000533,
+      "M_rms": 0.059112208497127304,
+      "peak_recipient": 1,
+      "duration_min": 21.453141109836803
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.0695,
+      "M_peak": 0.9999976334549221,
+      "M_rms": 0.06034752354066049,
+      "peak_recipient": 1,
+      "duration_min": 21.4521765183951
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.06975,
+      "M_peak": 0.9999999553426067,
+      "M_rms": 0.060730901576884405,
+      "peak_recipient": 1,
+      "duration_min": 21.45185791722328
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "delta": 0.07,
+      "M_peak": 0.9999985043919531,
+      "M_rms": 0.06114028694111551,
+      "peak_recipient": 1,
+      "duration_min": 21.451544518942065
+    }
+  ]
+}

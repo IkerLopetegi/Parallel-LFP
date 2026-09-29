@@ -167,13 +167,13 @@ def figure3_lowrate(base):
         qnch = z["q_charge"] / z["capacity_Ahm2"]
         qnds = z["q_discharge"] / z["capacity_Ahm2"]
         axs[0].plot(
-            np.r_[0, qnch],
-            np.r_[base["Vmin"], z["V_charge"]],
+            qnch,
+            z["V_charge"],
             color=c,
             label=f'{lab}\n$Q={z["capacity_Ahm2"]:.2f}$ Ah m$^{{-2}}$',
         )
         axs[1].plot(
-            np.r_[0, qnds], np.r_[base["Vmax"], z["V_discharge"]], color=c, label=lab
+            qnds, z["V_discharge"], color=c, label=lab
         )
         rows.append(
             [
@@ -185,7 +185,7 @@ def figure3_lowrate(base):
                 z["xn_low"],
             ]
         )
-    axs[0].set(xlabel="Normalized charged capacity", ylabel="C/20 terminal voltage (V)")
+    axs[0].set(xlabel="Normalized charged capacity", ylabel="C/20 OCV--R voltage (V)")
     axs[1].set(xlabel="Normalized discharged capacity")
     for ax in axs:
         ax.axhline(base["Vmin"], color="0.82", lw=0.8)
@@ -320,49 +320,9 @@ def figure5_model_fidelity(base, sn):
 
 
 def figure6_robustness(base, sn):
-    variants = [
-        ("Mean $R_p$ (nm)", "rmean_nm", [36.5, 50, 70, 100]),
-        ("PSD CV", "psd_cv", [0.10, 0.25, 0.40]),
-        ("$D_{s,n}$", "ds_neg", [3e-15, 1e-14, 2e-14]),
-        ("$j_{0,p}$ multiplier", "j0_pos_mult", [0.5, 1, 2]),
-        ("$j_{0,n}$ multiplier", "j0_neg_mult", [0.5, 1, 2]),
-        ("$\\kappa_e$", "kappa", [0.7, 1.0, 1.4]),
-        ("$D_e$", "de", [1e-10, 1.2e-10, 2.4e-10]),
-        ("$R_{contact}$", "rcontact", [0, 0.001, 0.003]),
-    ]
-    rows = []
-    for disp, name, vals in variants:
-        for val in vals:
-            b = m.apply_parameter_variant(base, name, val)
-            p1 = m.make_degraded_cell(b, "LLI", 0.10)
-            p2 = m.make_degraded_cell(b, "LAMn", sn)
-            y, _ = m.init_parallel_at_common_ocv([p1, p2], 3.30, 0.4)
-            s = m.simulate_cc_halfcycle(
-                [p1, p2], y, 1, "charge", max_step=9, rtol=1.1e-4, atol=1e-6
-            )
-            met = qex_norm(s, p1, p2)
-            rows.append([disp, name, val, met["M_peak"], met["M_rms"], met["qex_norm"]])
-            print("robust", name, val, met["M_peak"])
-    T = pd.DataFrame(
-        rows, columns=["Parameter", "Key", "Value", "M_peak", "M_rms", "qex_norm"]
-    )
-    T.to_csv(OUT / "Figure06_parameter_robustness.csv", index=False)
-    fig, axs = plt.subplots(1, 2, figsize=(7.25, 3.15), constrained_layout=True)
-    cats = list(dict.fromkeys(T["Parameter"]))
-    xs = np.arange(len(cats))
-    for i, cat in enumerate(cats):
-        z = T[T.Parameter == cat]
-        axs[0].scatter(np.full(len(z), i), z.M_peak, s=25)
-        axs[1].scatter(np.full(len(z), i), z.qex_norm, s=25)
-        axs[0].plot([i, i], [z.M_peak.min(), z.M_peak.max()], color="0.75", lw=0.8)
-        axs[1].plot([i, i], [z.qex_norm.min(), z.qex_norm.max()], color="0.75", lw=0.8)
-    for ax in axs:
-        ax.set_xticks(xs, cats, rotation=45, ha="right")
-    axs[0].set(ylabel="$M_{peak}$")
-    axs[1].set(ylabel="$Q_{excess}/\\bar Q$")
-    for a, l in zip(axs, "ab"):
-        panel(a, l)
-    save(fig, "Figure06_parameter_robustness")
+    from analysis.robustness_v28 import run_all
+
+    return run_all(base)
 
 
 def get_cell_cached(cache, base, lli, lamn, lamp, coupling="decoupled"):
@@ -882,9 +842,9 @@ def supplementary(base, sn, real_data):
             y,
             cr,
             "charge",
-            max_step=10 if cr <= 1 else 5,
-            rtol=1.2e-4,
-            atol=1e-6,
+            max_step=4,
+            rtol=1e-5,
+            atol=1e-7,
         )
         z = qex_norm(s, p1, p2)
         rows.append([cr, z["M_peak"], z["M_rms"], z["qex_norm"], s["t"][-1] / 60])
@@ -933,7 +893,7 @@ def supplementary(base, sn, real_data):
             [p1, p2], V0, 0.4 if mode == "charge" else 0.75
         )
         full = m.simulate_cc_halfcycle(
-            [p1, p2], y, 1, mode, max_step=9, rtol=1.1e-4, atol=1e-6
+            [p1, p2], y, 1, mode, max_step=4, rtol=1e-5, atol=1e-7
         )
         mm = qex_norm(full, p1, p2)
         ax.plot(

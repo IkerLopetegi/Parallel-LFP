@@ -1,5 +1,7 @@
 # Validation report
 
+This report records the initial focused solver audit. The later complete V28 regeneration, 16-test run, and numerical release checks are in `FINAL_RELEASE_REPORT.md` and `validation/verify_v28_release.py`.
+
 ## Scope
 
 Sixteen focused regression tests passed with the recorded environment. Representative full-model and reduced-model workflows were executed; this is not an exhaustive rerun of all manuscript sweeps.
@@ -51,7 +53,7 @@ The published column is read from the supplied historical CSV; the old BV script
 
 ## Not rerun in full
 
-The full 0.025-percentage-point threshold grids, complete robustness grids, all N/P ratios, complete diffusivity matrix, and all 0–25% degradation maps were not regenerated. Their code is included, but results_published/ must not be treated as corrected output. Legacy figure numbering remains in some filenames; README maps studies to entry points.
+At the time of this initial audit, the full 0.025-percentage-point threshold grids, complete robustness grids, N/P ratios, diffusivity matrix, and 0–25% degradation maps had not yet been regenerated. These follow-up calculations are now in `results/recomputed/`. `results_published/` remains historical. The README maps final figure numbering to the study entry points.
 
 ## Reproduce
 

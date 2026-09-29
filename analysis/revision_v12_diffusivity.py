@@ -94,14 +94,23 @@ def main():
     T = pd.DataFrame(rows)
     T.to_csv(SUP / "TableS03_graphite_diffusivity_sensitivity.csv", index=False)
 
-    # Figure S6: retain only the moderate, isothermal range (<=1C).
+    # Reduced-model diagnostic. The final Figure S4 and Table S1 use the
+    # full MP-SPMe; do not overwrite them when this script is rerun.
     crate_rows = []
     for cr in [0.10, 0.25, 0.50, 1.00]:
-        sim = m.simulate_ocvr_pair_fast_stateR(p_lli, p_lamn, cr, "charge", 3.30)
-        met, qex = qex_norm(sim, p_lli, p_lamn)
-        crate_rows.append([cr, met["M_peak"], met["M_rms"], qex])
-    C6 = pd.DataFrame(crate_rows, columns=["C_rate", "M_peak", "M_rms", "qex_norm"])
-    C6.to_csv(SUP / "TableS01_Crate_sensitivity.csv", index=False)
+        try:
+            sim = m.simulate_ocvr_pair_fast_stateR(p_lli, p_lamn, cr, "charge", 3.30)
+            met, qex = qex_norm(sim, p_lli, p_lamn)
+            crate_rows.append([cr, met["M_peak"], met["M_rms"], qex, "cutoff_reached"])
+        except m.NumericalError as exc:
+            # At 0.1C the corrected OCV-R model hits an electrode composition
+            # bound before the requested terminal-voltage cutoff. No complete
+            # cycle metric exists for that condition.
+            if cr != 0.10 or "did not reach voltage cutoff" not in str(exc):
+                raise
+            crate_rows.append([cr, np.nan, np.nan, np.nan, "electrode_bound_first"])
+    C6 = pd.DataFrame(crate_rows, columns=["C_rate", "M_peak", "M_rms", "qex_norm", "status"])
+    C6.to_csv(SUP / "TableS01_Crate_sensitivity_reduced_diagnostic.csv", index=False)
     fig, axs = plt.subplots(1, 2, figsize=(6.9, 2.8), constrained_layout=True)
     axs[0].plot(C6.C_rate, C6.M_peak, marker="o")
     axs[1].plot(C6.C_rate, C6.qex_norm, marker="o")
@@ -109,7 +118,7 @@ def main():
     axs[1].set(xlabel="C-rate", ylabel="$Q_{excess}/\\bar Q$", xticks=C6.C_rate)
     panel(axs[0], "a")
     panel(axs[1], "b")
-    save(fig, SUP / "FigureS04_Crate_sensitivity")
+    save(fig, SUP / "FigureS04_Crate_sensitivity_reduced_diagnostic")
 
     # Figure S9: physical diffusivity comparison, 1C current-sharing histories, and moderate-rate summary.
     fig, axs = plt.subplots(2, 2, figsize=(7.1, 5.2), constrained_layout=True)

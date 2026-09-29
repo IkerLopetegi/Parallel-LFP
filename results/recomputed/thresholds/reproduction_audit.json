@@ -1,0 +1,119 @@
+{
+  "model_and_script_sha256": "525f63c80e84f1d1cacebe390c2c7d3c91426a40d10962c6f66ac43609cf943f",
+  "grid_step_fraction": 0.00025,
+  "rows": 16,
+  "sources": [
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.0,
+      "target": 0.8,
+      "source": "Section37_full_thresholds_2ec85813c2dd.csv",
+      "points_checked": 70
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.0,
+      "target": 0.95,
+      "source": "Section37_full_thresholds_2ec85813c2dd.csv",
+      "points_checked": 241
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.05,
+      "target": 0.8,
+      "source": "Section37_full_thresholds_52656266ff59.csv",
+      "points_checked": 35
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.05,
+      "target": 0.95,
+      "source": "Section37_full_thresholds_52656266ff59.csv",
+      "points_checked": 55
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.15,
+      "target": 0.8,
+      "source": "Section37_full_thresholds_794fdea9b72d.csv",
+      "points_checked": 126
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.15,
+      "target": 0.95,
+      "source": "Section37_full_thresholds_794fdea9b72d.csv",
+      "points_checked": 175
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.1,
+      "target": 0.8,
+      "source": "Section37_full_thresholds_87199e0609f1.csv",
+      "points_checked": 34
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.1,
+      "target": 0.95,
+      "source": "Section37_full_thresholds_87199e0609f1.csv",
+      "points_checked": 55
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "target": 0.8,
+      "source": "Section37_full_thresholds_897c56c033c7.csv",
+      "points_checked": 140
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.05,
+      "target": 0.95,
+      "source": "Section37_full_thresholds_897c56c033c7.csv",
+      "points_checked": 218
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.0,
+      "target": 0.8,
+      "source": "Section37_full_thresholds_dd91aae5eb7a.csv",
+      "points_checked": 170
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.0,
+      "target": 0.95,
+      "source": "Section37_full_thresholds_dd91aae5eb7a.csv",
+      "points_checked": 261
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "target": 0.8,
+      "source": "Section37_full_thresholds_eedc581eef8a.csv",
+      "points_checked": 44
+    },
+    {
+      "family": "common_LLI_dLAMn",
+      "background": 0.15,
+      "target": 0.95,
+      "source": "Section37_full_thresholds_eedc581eef8a.csv",
+      "points_checked": 56
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.1,
+      "target": 0.8,
+      "source": "Section37_full_thresholds_f6dc2f569237.csv",
+      "points_checked": 135
+    },
+    {
+      "family": "same_LLI_LAMn_trajectory",
+      "background": 0.1,
+      "target": 0.95,
+      "source": "Section37_full_thresholds_f6dc2f569237.csv",
+      "points_checked": 201
+    }
+  ]
+}
