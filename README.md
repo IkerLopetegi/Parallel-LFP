@@ -4,6 +4,8 @@ Physics-based and reduced models accompanying *Degradation-Induced Electrode Mis
 
 This package contains the corrected V28 source and regenerated results used in the revised manuscript and Supplementary Information. Historical CSVs are preserved in `results_published/`; final computed outputs and their source-bound threshold checkpoints are under `results/recomputed/`. Read `FINAL_RELEASE_REPORT.md`, `CORRECTIONS.md`, and `VALIDATION.md` for the numerical changes and scope of verification.
 
+`FINAL_RELEASE_MANIFEST.sha256` records checksums of the final release files. Run `sha256sum -c FINAL_RELEASE_MANIFEST.sha256` from the repository root to check a downloaded copy.
+
 ## Quick start
 
 Python 3.10 or newer:

@@ -5,6 +5,6 @@ type: software
 authors:
   - family-names: Lopetegi
     given-names: Iker
-version: 1.0.0
-date-released: 2026-09-24
-repository-code: "GITHUB_REPOSITORY_URL"
+version: 1.1.0
+date-released: 2026-09-29
+repository-code: "https://github.com/IkerLopetegi/Parallel-LFP"
