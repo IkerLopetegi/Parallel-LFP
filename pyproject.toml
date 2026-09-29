@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lfp-parallel"
+version = "0.2.0"
+description = "Mechanistic LFP/graphite parallel-cell simulations"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.26", "scipy>=1.11", "pandas>=2.0", "matplotlib>=3.8"]
+
+[tool.setuptools.packages.find]
+include = ["lfp_parallel*", "analysis*"]
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]

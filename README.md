@@ -1,92 +1,72 @@
-# Degradation-Induced Electrode Misalignment and Current Redistribution in Parallel LFP/Graphite Cells
+# Parallel LFP/graphite cells — corrected source package
 
-Code and machine-readable results accompanying the manuscript submitted to *Electrochimica Acta*.
+Physics-based and reduced models accompanying *Degradation-Induced Electrode Misalignment and Current Redistribution in Parallel LFP/Graphite Cells*.
 
-## Scope
+This corrected package changes numerical behavior. **The V28 numerical results are not certified by this revision.** Original CSVs are preserved in `results_published/`; new calculations go to `results/recomputed/`. Read `CORRECTIONS.md` and `VALIDATION.md` before updating manuscript claims.
 
-This repository contains the numerical material used to study degradation-induced current redistribution between parallel-connected LFP/graphite cells. The model hierarchy includes a multiparticle single-particle model with electrolyte dynamics (MP-SPMe), reduced OCV-resistance calculations, degradation constructors for LLI/LAM, electrode-balance sensitivity analyses, robustness studies, and degradation-heterogeneity threshold calculations.
+## Quick start
 
-## Repository structure
-
-- `source/parallel_lfp_essential_source.tar.xz` - curated source-code archive containing the core electrochemical model and the analysis scripts used for the current manuscript.
-- `analysis/` - selected analysis scripts also exposed directly for inspection.
-- `results/` - machine-readable CSV outputs for key manuscript and supplementary results.
-- `requirements.txt` - Python package requirements.
-- `CITATION.cff` - citation metadata.
-
-The source archive contains:
-- `lfp_parallel/model.py`
-- `analysis/run_final_v8.py`
-- `analysis/revision_v12_diffusivity.py`
-- `analysis/negative_electrode_potential_sensitivity.py`
-- `analysis/np_sensitivity.py`
-- `analysis/run_robustness.py`
-- `analysis/robust_worker.py`
-
-Additional directly exposed Section 3.7 analyses:
-- `analysis/section37_heterogeneity_thresholds.py` - dense reduced-model scan of degradation heterogeneity and selected full MP-SPMe verification points.
-- `analysis/section37_full_threshold_refinement.py` - full MP-SPMe threshold search for the minimum heterogeneity required to reach strong current redistribution.
-
-## Python environment
-
-The calculations use Python with NumPy, SciPy, pandas, and Matplotlib.
+Python 3.10 or newer:
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+# Linux/macOS:
+source .venv/bin/activate
+# Windows PowerShell: .venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+python -m unittest discover -s tests -v
+python analysis/example.py
 ```
 
-To unpack the curated source archive:
+The example runs a reduced-model charge step for common 5% LLI with 5% additional LAMn in cell 2. It prints current metrics and writes a time history. No LaTeX installation is required for figures. `requirements-tested.txt` records the versions used for validation; the broader minimum requirements are in `requirements.txt`.
 
-```bash
-tar -xJf source/parallel_lfp_essential_source.tar.xz
-```
+To install the model as a package, use `python -m pip install -e .`.
 
-## Main analyses
+## Source map
 
-The central manuscript workflow is contained in `analysis/run_final_v8.py` inside the source archive. Dedicated scripts reproduce the concentration-dependent graphite diffusivity comparison, negative-electrode potential-margin analysis, beginning-of-life electrode-balance studies, parameter robustness analyses, and the degradation-heterogeneity threshold study.
+| File | Purpose |
+|---|---|
+| `lfp_parallel/model.py` | Parameters, thermodynamics, degradation, diffusion, full and reduced solvers |
+| `MODEL_GUIDE.md` | Units, state layout, model choices and numerical contracts |
+| `analysis/common.py` | Output paths and plotting configuration |
+| `analysis/example.py` | Small, runnable starting example |
+| `tests/test_model.py` | Conservation, symmetry, blocking, solver and workflow regressions |
+| `results_published/` | Historical CSVs from the reviewed GitHub snapshot, unchanged |
+| `results/recomputed/` | Results actually regenerated using corrected code |
+| `validation/` | Audit summaries and reproducible validation driver |
 
-### Section 3.7 degradation-heterogeneity analysis
+All source is unpacked and directly browsable. The archive can be extracted into a clean directory; do not overlay it onto a previous result tree when making comparisons.
 
-The dense reduced-model scan is run with:
+## Analyses
 
-```bash
-python analysis/section37_heterogeneity_thresholds.py
-```
+For a single study, for example: `python analysis/run_studies.py --study dynamics`. Run `python analysis/run_studies.py --help` for choices.
 
-The full MP-SPMe threshold refinement is run with:
+Run commands from the package root. Full-model studies are more expensive than the example. Threshold scans can require hundreds of integrations per family/background; they checkpoint each point and resume when code and settings match.
 
-```bash
-python analysis/section37_full_threshold_refinement.py
-```
+| Study | Command |
+|---|---|
+| Main numerical collection: hysteresis, capacities, dynamics, fidelity, robustness, maps, resistance, supplementary studies | `python analysis/run_final_v8.py` |
+| Main N/P sensitivity: vary positive loading, fixed negative electrode/inventory | `python analysis/np_sensitivity.py` |
+| Alternative N/P path: vary negative loading | `python analysis/np_sensitivity_anode_loading.py` |
+| Graphite diffusivity comparison and calculated reduced-model C-rate sweep | `python analysis/revision_v12_diffusivity.py` |
+| Graphite potential diagnostic using full BV kinetics | `python analysis/negative_electrode_potential_sensitivity.py` |
+| Dense reduced-model heterogeneity thresholds | `python analysis/section37_heterogeneity_thresholds.py` |
+| One full verification point | `python analysis/section37_heterogeneity_thresholds.py --full-bg 0.05 --full-dlamn 0.05` |
+| Full-model thresholds at 0.025 percentage-point spacing | `python analysis/section37_full_threshold_refinement.py` |
+| One full-threshold family/background | `python analysis/section37_full_threshold_refinement.py --family common_LLI_dLAMn --background 0.10` |
+| Full reference-grid robustness sweep | `python analysis/run_robustness.py` |
+| One robustness point; contact resistance uses ohm m² | `python analysis/robust_worker.py contact rcontact 0.001 0` |
 
-The refinement considers two mechanistic families:
+Threshold summaries use configuration-specific filenames to prevent partial runs overwriting another study. The full threshold search checks **every smaller point on the requested grid**, not just a coarse bracket. Grid spacing is not a confidence interval or a substitute for temporal convergence.
 
-1. a common LLI background with additional LAMn in one branch;
-2. two cells following the same LLI+LAMn trajectory but at unequal severity.
+`run_final_v8.py` retains its historical filename for compatibility. Some historical figure names differ from the latest manuscript numbering; use the **study description**, not the number alone. The main-text positive-loading N/P recipe was missing from the uploaded archive and is now supplied explicitly. It must be independently compared with the manuscript's original plotting data.
 
-For each family, common/background degradation levels of 0, 5, 10, and 15% are analyzed. The full MP-SPMe search brackets the minimum heterogeneity required for `M_peak >= 0.80` and `M_peak >= 0.95`, then refines the crossing to 0.05 percentage-point resolution (0.025 percentage points for some brackets).
+The architecture schematic is an author-supplied asset and is not regenerated by code. The supplied current manuscript schematic is preserved under `figures/`.
 
-Key outputs are stored in:
-- `results/Section37_fine_thresholds_reduced.csv`
-- `results/Section37_full_selected.csv`
-- `results/Section37_full_thresholds_final.csv`
+## Scientific scope
 
-Some full parameter sweeps are computationally intensive. The `results/` directory contains machine-readable outputs used for the reported manuscript values.
+These are isothermal mechanistic models, not a calibrated commercial-cell prediction. No lithium-plating, thermal or aging-rate submodel is included. Graphite BV potential diagnostics report a representative-particle potential, not deposited lithium. Model parameter values and the high-overpotential LFP constitutive choice were retained. Code verification does not establish experimental validity.
 
-## Reproducibility notes
+## Citation and license
 
-The study uses a representative composite LFP/graphite parameterization rather than a fitted model of a named commercial cell. The model-architecture schematic used in the manuscript is maintained separately from the numerical code and is not regenerated by the analysis scripts.
-
-## Citation
-
-If you use this repository, please cite the associated manuscript:
-
-> I. Lopetegi, "Degradation-Induced Electrode Misalignment and Current Redistribution in Parallel LFP/Graphite Cells," submitted to *Electrochimica Acta*.
-
-Repository: https://github.com/IkerLopetegi/Parallel-LFP
-
-## License
-
-This repository is released under the MIT License. See `LICENSE`.
+See `CITATION.cff` and `LICENSE`. The original repository is https://github.com/IkerLopetegi/Parallel-LFP.
