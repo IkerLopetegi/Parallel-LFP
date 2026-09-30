@@ -64,6 +64,17 @@ Run commands from the package root. Full-model studies are more expensive than t
 | Map computed outputs to SI figure/table numbering | `python analysis/finalize_figures_v28.py` |
 | Check final result inventory and numerical claims | `python validation/verify_v28_release.py` |
 
+## September 2026 manuscript checks
+
+The revised manuscript adds a controlled N/P loading comparison, selected cutoff sensitivity, and full-model electrode trajectories (Figure S11). Reproduce their CSVs and Figure S11 from the repository root:
+
+```bash
+python analysis/manuscript_revision_checks.py
+python analysis/graphical_abstract.py
+```
+
+The first command writes `matched_NP_design.csv`, `cutoff_sensitivity.csv`, `full_model_electrode_trajectories.csv`, and Figure S11 under `results/recomputed/supplementary/`. The second command uses the trajectory CSV to generate the revised graphical abstract in the same directory. The three CSVs are committed alongside their generating scripts. These are focused full-model checks; the 0.80 and 0.95 current-sharing levels remain descriptive markers, and the cutoff comparison does not predict plating or temperature.
+
 Threshold summaries use configuration-specific filenames to prevent partial runs overwriting another study. The full threshold search checks **every smaller point on the requested grid**, not just a coarse bracket. Grid spacing is not a confidence interval or a substitute for temporal convergence.
 
 `run_final_v8.py` retains its historical filename for compatibility. Some intermediate names differ from final manuscript numbering; `analysis/finalize_figures_v28.py` and `validation/assemble_v28_figures.py` establish the final mapping. The main-text N/P recipe varies positive loading at fixed negative loading and lithium inventory; the alternative negative-loading path is reported separately. Figure S4 and Table S1 use the full MP-SPMe; the reduced-model 0.1C case reaches an electrode bound before voltage cutoff and has no valid completed-cycle metric.
