@@ -1,12 +1,14 @@
 """Main-text N/P study: change positive loading at fixed negative electrode/inventory.
 
-N/P uses the reference stoichiometric spans specified in balancing_reference.
-This is a design ratio, not Qn/Qp over the full 0--1 composition range.
+N/P uses full 0--1 intercalation spans for LFP and graphite: Qn/Qp.
+These are ideal model host capacities, not measured degradation-free windows.
 """
 
 from pathlib import Path
 import argparse
 import copy
+import hashlib
+import json
 import sys
 import numpy as np
 import pandas as pd
@@ -18,8 +20,7 @@ from analysis.common import OUT, prepare_output
 
 
 def design_np(p):
-    a = p["balancing_reference"]
-    return p["Qn"] * (a["xn_100"] - a["xn_0"]) / (p["Qp"] * (a["xp_0"] - a["xp_100"]))
+    return p["Qn"] / p["Qp"]
 
 
 def base_at_np(base, target):
@@ -40,6 +41,15 @@ def main():
     args = parser.parse_args()
     prepare_output()
     base = m.get_reference_params()
+    protocol=dict(capacity_convention='full_0_1_intercalation_host_capacity',
+                  graphite_span=[0.,1.], LFP_span=[0.,1.],
+                  reference_NP=design_np(base), target_ratios=args.ratios,
+                  loading_path='positive_thickness', fixed_negative_electrode=True,
+                  fixed_lithium_inventory=True, fixed_nominal_capacity_reference=True,
+                  degradation_fraction=.20, C_rate=1.0,
+                  grid=base['disc'], rtol=8e-5, atol=7e-7,max_step_s=8,
+                  model_sha256=hashlib.sha256((Path(__file__).resolve().parents[1]/'lfp_parallel/model.py').read_bytes()).hexdigest())
+    (OUT/'Figure07_protocol.json').write_text(json.dumps(protocol,indent=2))
     rows = []
     for ratio in args.ratios:
         p1 = base_at_np(base, ratio)
@@ -58,7 +68,10 @@ def main():
             )
             met = m.compute_current_metrics(sim["t"], sim["I"], sim["Iapp"])
             row = dict(
-                NP_ratio=ratio,
+                NP_ratio=design_np(p1),
+                L_pos_um=p1["geom"]["L_pos"] * 1e6,
+                Qn_host_Ahm2=p1["Qn"] / 3600,
+                Qp_host_Ahm2=p1["Qp"] / 3600,
                 mode=mode,
                 M_peak=met["M_peak"],
                 M_rms=met["M_rms"],
@@ -71,21 +84,8 @@ def main():
                 OUT / "Figure07_NP_design_sensitivity.csv", index=False
             )
             print(row, flush=True)
-    fig, axs = plt.subplots(1, 2, figsize=(7.2, 3.0), constrained_layout=True)
-    table = pd.DataFrame(rows)
-    for mode, g in table.groupby("mode"):
-        g = g.sort_values("NP_ratio")
-        axs[0].plot(g.NP_ratio, g.M_peak, "o-", label=mode)
-        axs[1].plot(g.NP_ratio, g.qex_norm, "o-", label=mode)
-    for ax in axs:
-        ax.set_xlabel("Beginning-of-life N/P ratio")
-        ax.axvline(design_np(base), ls=":", color="gray")
-        ax.legend(frameon=False)
-    axs[0].set_ylabel(r"$M_{\mathrm{peak}}$")
-    axs[1].set_ylabel(r"$q_{\mathrm{excess}}$")
-    fig.savefig(OUT / "Figure07_NP_design_sensitivity.pdf")
-    fig.savefig(OUT / "Figure07_NP_design_sensitivity.png")
-    plt.close(fig)
+    from analysis.publication_figures import render_np_figure
+    render_np_figure()
 
 
 if __name__ == "__main__":

@@ -51,3 +51,7 @@ The positive populations are internally uniform and use the regular-solution hig
 Low-rate capacity matching uses the equilibrium Maxwell OCP plus state-dependent resistance; it is not a full MP-SPMe charge/discharge experiment. The legacy MP0D fixed-step routines are retained for low-overpotential hysteresis illustrations. Their time-step sensitivity and endpoint approximations should be checked before using them for new quantitative studies; the primary dynamic verification targets the MP-SPMe and adaptive OCV-R paths.
 
 Composition and BV argument guards remain numerical protections. Returned `xn_surface_raw` exposes the un-clipped reconstructed graphite surface value for diagnostics. Validate state admissibility and convergence for new extreme parameter sets. Neither passing software tests nor a converged solver demonstrates that the chosen constitutive model is physically accurate for every rate.
+
+## Electrode capacity and N/P
+
+N/P is Qn/Qp using ideal 0–1 intercalation spans for both graphite and LFP. The baseline ratio is 0.883036; full-cell SOC reference spans do not define independent electrode capacity. `balancing_reference` initializes lithium inventory and the fixed nominal capacity scale only. Main designs use positive thickness L_pos = L_pos_ref*(Qn/Qp)_ref/target at fixed negative electrode and lithium inventory. The controlled SI comparison also varies negative thickness L_neg = L_neg_ref*target/(Qn/Qp)_ref. These nominal host capacities do not establish degradation-free windows or experimentally measured reversible capacities.

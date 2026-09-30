@@ -56,3 +56,7 @@ Final vector PDFs and numerical tables are in `results/`; supplementary assets a
 `publication_figures.py` applies publication typography and layout. Core and diffusivity figures require rerunning their representative simulations because their baseline CSVs store summary metrics rather than complete plotting trajectories. Other supported panels use retained numerical tables. Some table filenames retain descriptive identifiers that differ from their final SI table numbers; use the result map above.
 
 The robustness checkpoint fingerprint covers the numerical model and recipe, excluding typography. The S10 summary extrema are calculated from its retained time histories. `MANIFEST.sha256` records exact release file contents.
+
+N/P is defined from full 0–1 intercalation spans for graphite and LFP (Qn/Qp). The reference design is 0.883036; Figure 7 samples 13 independently constructed beginning-of-life designs from 0.90 to 1.20. See MODEL_GUIDE.md for capacity and inventory conventions.
+
+`python -m analysis.reproduce --stage np_tolerance` repeats three representative Figure 7 points with tighter solver tolerances and writes `NP_solver_tolerance_check.csv`.

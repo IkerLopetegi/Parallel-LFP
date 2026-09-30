@@ -46,7 +46,9 @@ def matched_design_check(base):
             s = simulate_pair(cells, 3.35, "discharge")
             met = m.compute_current_metrics(s["t"], s["I"], s["Iapp"])
             qbar = np.mean([m.lowrate_capacity(p) for p in cells])
-            row = dict(path=path, NP=ratio, LLI_common=0.0,
+            row = dict(path=path, NP=design["Qn"] / design["Qp"],
+                       L_pos_um=design["geom"]["L_pos"]*1e6,
+                       L_neg_um=design["geom"]["L_neg"]*1e6, LLI_common=0.0,
                        LAMp_difference=0.20, M_peak=met["M_peak"],
                        M_rms=met["M_rms"], q_excess=met["Q_excess_Ahm2"] / qbar,
                        duration_min=s["t"][-1] / 60)

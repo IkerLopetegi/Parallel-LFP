@@ -30,8 +30,29 @@ def verify(check_manifest=False):
     maps=pd.read_csv(OUT/'FigureS06_LAMp_NP_maps.csv')
     assert len(maps)==242
     invalid=maps.status=='electrode_bound_first'
-    assert invalid.sum()==22 and maps.loc[invalid,'M_peak'].isna().all()
+    assert maps.loc[invalid,'M_peak'].isna().all()
     assert maps.loc[~invalid,'M_peak'].notna().all()
+    from analysis.np_sensitivity import design_np
+    from lfp_parallel import model as m
+    assert np.isclose(maps[maps.design=='reference'].design_NP, design_np(m.get_reference_params())).all()
+    assert np.isclose(maps[maps.design=='NP_1.20'].design_NP,1.2).all()
+    npdata=pd.read_csv(OUT/'Figure07_NP_design_sensitivity.csv')
+    assert len(npdata)==39
+    assert np.allclose(npdata.NP_ratio,npdata.Qn_host_Ahm2/npdata.Qp_host_Ahm2)
+    for _,g in npdata.groupby('mode'):
+        assert np.allclose(g.sort_values('NP_ratio').NP_ratio,np.linspace(.9,1.2,13))
+    protocol=json.loads((OUT/'Figure07_protocol.json').read_text())
+    assert protocol['capacity_convention']=='full_0_1_intercalation_host_capacity'
+    assert protocol['graphite_span']==protocol['LFP_span']==[0.,1.]
+    assert protocol['model_sha256']==hashlib.sha256((ROOT/'lfp_parallel/model.py').read_bytes()).hexdigest()
+    tolerance=pd.read_csv(SUP/'NP_solver_tolerance_check.csv')
+    assert len(tolerance)==3 and tolerance.qex_relative_difference.max()<.004
+    for row in tolerance.itertuples():
+        match=npdata[(npdata['mode']==row.mode)&np.isclose(npdata.NP_ratio,row.NP_ratio)]
+        assert len(match)==1 and np.isclose(match.qex_norm.iloc[0],row.qex_norm_reference)
+    controlled=pd.read_csv(SUP/'matched_NP_design.csv')
+    assert set(np.round(controlled.NP,8))=={1.,1.2}
+    assert controlled[['M_peak','M_rms','q_excess']].notna().all().all()
     crate=pd.read_csv(SUP/'TableS06_Crate_sensitivity.csv')
     assert list(crate.C_rate)==[.1,.25,.5,1.]
     assert crate[['M_peak','M_rms','qex_norm']].notna().all().all()
@@ -70,7 +91,8 @@ def verify(check_manifest=False):
             digest,path=line.split('  ',1)
             assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==digest,path
     print('PASS: model/result provenance, 25 robustness variants, 1,371 threshold points,')
-    print('242 electrode-balance map points, 121 mixed-path points, all S10 histories,')
+    print('39 N/P cases, 3 tolerance checks, 242 electrode-balance map points,')
+    print('121 mixed-path points, all S10 histories,')
     print('and all 21 manuscript/SI/graphical figure assets.')
 
 

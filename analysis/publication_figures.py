@@ -40,6 +40,29 @@ def render_core_main_figures():
     mainplots.figure5_model_fidelity(base, sn)
 
 
+def render_np_figure():
+    base = m.get_reference_params()
+    # Figure 7: publication plot from the completed, checked sweep.
+    data = pd.read_csv(OUT / "Figure07_NP_design_sensitivity.csv")
+    fig, ax = plt.subplots(1, 2, figsize=(7.1, 2.9), constrained_layout=True)
+    colors = {"LLI": BLUE, "LAMn": ORANGE, "LAMp": GREEN}
+    for mode, rows in data.groupby("mode", sort=False):
+        rows = rows.sort_values("NP_ratio")
+        ax[0].plot(rows.NP_ratio, rows.M_peak, "o-", ms=3,
+                   label={"LLI":"LLI","LAMn":r"LAM$_n$","LAMp":r"LAM$_p$"}[mode], color=colors[mode])
+        ax[1].plot(rows.NP_ratio, rows.qex_norm, "o-", ms=3,
+                   label={"LLI":"LLI","LAMn":r"LAM$_n$","LAMp":r"LAM$_p$"}[mode], color=colors[mode])
+    for a in ax:
+        a.set_xlabel("Beginning-of-life N/P ratio")
+        a.axvline(design_np(base), ls=":", color="0.45", lw=0.9)
+        a.legend(frameon=False, fontsize=8)
+    ax[0].set_ylabel(r"$M_{\mathrm{peak}}$")
+    ax[1].set_ylabel(r"$q_{\mathrm{excess}}$")
+    for a, label in zip(ax, "ab"):
+        a.text(.02,1.02,label,transform=a.transAxes,va="bottom",fontweight="bold",clip_on=False)
+    save(fig, OUT / "Figure07_NP_design_sensitivity")
+
+
 def render_saved_main_figures():
     base = m.get_reference_params()
     print("Plotting robustness, N/P, threshold, and resistance figures", flush=True)
@@ -48,23 +71,7 @@ def render_saved_main_figures():
         raise RuntimeError("The saved robustness table is incomplete")
     plot_robustness(robustness)
 
-    # Figure 7: publication plot from the completed, checked sweep.
-    data = pd.read_csv(OUT / "Figure07_NP_design_sensitivity.csv")
-    fig, ax = plt.subplots(1, 2, figsize=(7.1, 2.9), constrained_layout=True)
-    colors = {"LLI": BLUE, "LAMn": ORANGE, "LAMp": GREEN}
-    for mode, rows in data.groupby("mode", sort=False):
-        rows = rows.sort_values("NP_ratio")
-        ax[0].plot(rows.NP_ratio, rows.M_peak, "o-", ms=3,
-                   label=mode, color=colors[mode])
-        ax[1].plot(rows.NP_ratio, rows.qex_norm, "o-", ms=3,
-                   label=mode, color=colors[mode])
-    for a in ax:
-        a.set_xlabel("Beginning-of-life N/P ratio")
-        a.axvline(design_np(base), ls=":", color="0.45", lw=0.9)
-        a.legend(frameon=False, fontsize=8)
-    ax[0].set_ylabel(r"$M_{\mathrm{peak}}$")
-    ax[1].set_ylabel(r"$q_{\mathrm{excess}}$")
-    save(fig, OUT / "Figure07_NP_design_sensitivity")
+    render_np_figure()
 
     # Figure 9: draw both panels from the existing, complete sweep tables.
     tab = pd.read_csv(OUT / "Figure09_surface_area_coupling.csv")

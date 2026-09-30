@@ -9,7 +9,7 @@ import sys
 from analysis.common import prepare_output
 from lfp_parallel import model as m
 
-STAGES = ('verify','figures','saved','core','robustness','np','thresholds',
+STAGES = ('verify','figures','saved','core','robustness','np','np_tolerance','thresholds',
           'supplementary','resistance','diffusivity','potential','checks','all')
 
 
@@ -20,7 +20,7 @@ def run_module(name, *arguments):
 def run_stage(stage):
     prepare_output()
     if stage == 'all':
-        for name in ('core','robustness','np','thresholds','supplementary',
+        for name in ('core','robustness','np','np_tolerance','thresholds','supplementary',
                      'resistance','diffusivity','potential','checks','saved','verify'):
             run_stage(name)
     elif stage == 'verify':
@@ -37,6 +37,8 @@ def run_stage(stage):
         run_all()
     elif stage == 'np':
         run_module('np_sensitivity')
+    elif stage == 'np_tolerance':
+        run_module('np_tolerance_check')
     elif stage == 'thresholds':
         from analysis.threshold_scan import FAMILIES, BACKGROUNDS
         for family in FAMILIES:

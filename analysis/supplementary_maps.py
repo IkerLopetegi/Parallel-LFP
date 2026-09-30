@@ -20,11 +20,17 @@ def capacity_cell(base, lli, lamp):
 
 
 def lamp_map():
+    prepare_output()
     base = m.get_reference_params()
     previous = OUT / "FigureS06_LAMp_NP_maps.csv"
     rows = []
     if previous.exists():
-        rows = pd.read_csv(previous).to_dict("records")
+        checkpoint = pd.read_csv(previous)
+        expected = {"reference": design_np(base), "NP_1.20": 1.20}
+        if not all(np.allclose(g.design_NP, expected[name], rtol=1e-10)
+                   for name, g in checkpoint.groupby("design")):
+            raise RuntimeError("N/P map checkpoint uses a different electrode-capacity convention")
+        rows = checkpoint.to_dict("records")
         for row in rows:
             if "did not reach voltage cutoff" in row["status"]:
                 row["status"] = "electrode_bound_first"
@@ -62,7 +68,7 @@ def lamp_map():
         z = z.loc[grid, grid].to_numpy()
         image = ax.imshow(np.ma.masked_invalid(z), origin="lower", extent=[0, 25, 0, 25],
                           vmin=0, vmax=1.05, cmap="viridis", aspect="auto")
-        ax.set(title=title, xlabel="Additional LAM$_p$ (%)", ylabel="Common LLI (%)")
+        ax.set(xlabel="Additional LAM$_p$ (%)", ylabel="Common LLI (%)")
     fig.colorbar(image, ax=axs, label=r"$M_{\rm peak}$")
     fig.text(.5, -.025, "White cells: electrode bound reached before voltage cutoff",
              ha="center", fontsize=7)

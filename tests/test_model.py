@@ -179,6 +179,24 @@ class ModelTests(unittest.TestCase):
         self.assertEqual(hit["delta"], 0.00025)
         self.assertEqual(below["delta"], 0)
 
+    def test_np_uses_independent_host_capacities(self):
+        from analysis.np_sensitivity import design_np, base_at_np
+        from analysis.np_sensitivity_anode_loading import base_at_np as negative_design
+        base=m.get_reference_params()
+        self.assertAlmostEqual(design_np(base),base['Qn']/base['Qp'])
+        changed=m.get_reference_params()
+        changed['balancing_reference']['xp_0']=0.5
+        self.assertEqual(design_np(changed),design_np(base))
+        for target in (.9,1.,1.2):
+            for make_design in (base_at_np,negative_design):
+                p=make_design(base,target)
+                self.assertAlmostEqual(design_np(p),target,places=12)
+                self.assertEqual(p['QLi'],base['QLi'])
+            positive=base_at_np(base,target)
+            self.assertEqual(positive['Qn'],base['Qn'])
+            negative=negative_design(base,target)
+            self.assertEqual(negative['Qp'],base['Qp'])
+
     def test_analysis_imports_do_not_run(self):
         names = ["core_studies", "diffusivity_sensitivity",
                  "negative_electrode_potential_sensitivity", "np_sensitivity",
