@@ -162,7 +162,7 @@ class ModelTests(unittest.TestCase):
             m.simulate_cc_halfcycle([self.p], y, 1, "charge", max_time_factor=1e-6)
 
     def test_threshold_checks_earlier_nonmonotone_crossing(self):
-        from analysis import section37_full_threshold_refinement as r
+        from analysis import threshold_scan as r
 
         def point(base, family, bg, delta):
             return dict(
@@ -180,15 +180,10 @@ class ModelTests(unittest.TestCase):
         self.assertEqual(below["delta"], 0)
 
     def test_analysis_imports_do_not_run(self):
-        names = [
-            "run_final_v8",
-            "revision_v12_diffusivity",
-            "negative_electrode_potential_sensitivity",
-            "np_sensitivity",
-            "run_robustness",
-            "robust_worker",
-            "section37_heterogeneity_thresholds",
-        ]
+        names = ["core_studies", "diffusivity_sensitivity",
+                 "negative_electrode_potential_sensitivity", "np_sensitivity",
+                 "robustness", "threshold_scan", "publication_figures",
+                 "graphical_abstract", "manuscript_revision_checks"]
         with patch.object(
             m,
             "get_reference_params",

@@ -2,8 +2,6 @@
 
 N/P uses the reference stoichiometric spans specified in balancing_reference.
 This is a design ratio, not Qn/Qp over the full 0--1 composition range.
-The original archive only supplied the alternative negative-loading study;
-this explicit main-text recipe implements the construction stated in V28.
 """
 
 from pathlib import Path

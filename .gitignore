@@ -8,3 +8,7 @@ venv/
 *.aux
 *.out
 *.toc
+
+results/**/*.png
+results/*.png
+example.csv

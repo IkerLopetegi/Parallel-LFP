@@ -1,7 +1,7 @@
 """Focused full-model checks for the September 2026 manuscript revision.
 
 Run from a repository checkout with ``python analysis/manuscript_revision_checks.py``.
-Outputs are saved under ``results/recomputed/supplementary/``.
+Outputs are saved under ``results/supplementary/``.
 """
 
 from pathlib import Path
@@ -19,7 +19,7 @@ from lfp_parallel import model as m
 from analysis.np_sensitivity_anode_loading import base_at_np as anode_base_at_np
 from analysis.np_sensitivity import base_at_np as cathode_base_at_np
 
-OUT = ROOT / "results" / "recomputed" / "supplementary"
+OUT = ROOT / "results" / "supplementary"
 OUT.mkdir(parents=True, exist_ok=True)
 
 
