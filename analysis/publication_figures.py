@@ -170,7 +170,7 @@ def render_si_from_tables():
     save(fig, SUP / "FigureS04_Crate_sensitivity")
 
     # S6 and S8 use cached, complete map results.
-    lamp_map()
+    lamp_map(plot_only=True)
     integrated_map()
 
     # S9: same-trajectory full-model peak and excess-throughput maps.

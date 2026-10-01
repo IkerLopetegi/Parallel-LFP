@@ -1,0 +1,78 @@
+{
+  "model": "MP-SPMe",
+  "reference_NP": 0.8830361627322951,
+  "high_NP": 1.2,
+  "capacity_convention": "full_0_1_intercalation_host_capacity",
+  "loading_path": "positive_thickness; fixed negative electrode and lithium inventory",
+  "grid": {
+    "Nneg": 10,
+    "Nsep": 5,
+    "Npos": 10,
+    "Npsd": 13,
+    "Nr_neg": 13
+  },
+  "common_LLI": [
+    0.0,
+    0.025,
+    0.05,
+    0.07500000000000001,
+    0.1,
+    0.125,
+    0.15000000000000002,
+    0.17500000000000002,
+    0.2,
+    0.225,
+    0.25
+  ],
+  "additional_LAMp": [
+    0.0,
+    0.025,
+    0.05,
+    0.07500000000000001,
+    0.1,
+    0.125,
+    0.15000000000000002,
+    0.17500000000000002,
+    0.2,
+    0.225,
+    0.25
+  ],
+  "degradation_kinetic_coupling": "decoupled",
+  "C_rate": 1.0,
+  "current_reference": "sum of branch C/20 OCV-R usable capacities",
+  "direction": "discharge",
+  "initial_OCV_V": 3.35,
+  "SOC_root_hint": 0.75,
+  "cutoff_V": 2.5,
+  "solver": {
+    "reference": {
+      "max_step": 5.0,
+      "rtol": 4e-05,
+      "atol": 3e-07
+    },
+    "NP_1.20": {
+      "max_step": 2.5,
+      "rtol": 1e-05,
+      "atol": 1e-07
+    }
+  },
+  "tolerance_solver": {
+    "reference": {
+      "max_step": 2.5,
+      "rtol": 1e-05,
+      "atol": 1e-07
+    },
+    "NP_1.20": {
+      "max_step": 1.25,
+      "rtol": 2.5e-06,
+      "atol": 2.5e-08
+    }
+  },
+  "integration": {
+    "reference": "production solve_ivp BDF",
+    "NP_1.20": "BDF with out-of-domain trial rejection; smaller-first-step restart"
+  },
+  "positive_kinetics": "production high-overpotential regular-solution relation",
+  "graphite_kinetics": "production linear relation",
+  "model_sha256": "dbe3e38d2f5394ec1ed936a8df91738fa23ab21ab4282d0e7f836bc787b5e4b9"
+}

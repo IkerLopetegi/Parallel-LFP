@@ -10,7 +10,7 @@ from analysis.common import prepare_output
 from lfp_parallel import model as m
 
 STAGES = ('verify','figures','saved','core','robustness','np','np_tolerance','thresholds',
-          'supplementary','resistance','diffusivity','potential','checks','all')
+          'supplementary','resistance','diffusivity','potential','lamp_map','checks','all')
 
 
 def run_module(name, *arguments):
@@ -57,6 +57,8 @@ def run_stage(stage):
         charge_family_maps(base)
         mixed_trajectory_map(base)
         lamp_map()
+    elif stage == 'lamp_map':
+        run_module('fullmodel_lamp_map')
     elif stage == 'resistance':
         from analysis.core_studies import figure9_resistance
         figure9_resistance(m.get_reference_params())

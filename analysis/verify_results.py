@@ -48,9 +48,33 @@ def verify(check_manifest=False):
     assert len(data)==1371 and len(summary)==16 and (summary.status=='not_reached').sum()==1
     maps=pd.read_csv(OUT/'FigureS06_LAMp_NP_maps.csv')
     assert len(maps)==242
-    invalid=maps.status=='electrode_bound_first'
-    assert maps.loc[invalid,'M_peak'].isna().all()
-    assert maps.loc[~invalid,'M_peak'].notna().all()
+    assert set(maps.model)=={'MP-SPMe'} and set(maps.status)=={'voltage_cutoff'}
+    assert maps[['M_peak','M_rms','qex_norm']].notna().all().all()
+    assert np.allclose(maps.endpoint_V,2.5,atol=1e-7)
+    assert maps.lithium_error_relative.max()<1e-6
+    assert not maps.duplicated(['design','LLI','dLAMp']).any()
+    from analysis.fullmodel_lamp_map import protocol_hash, SOLVER
+    assert set(maps.protocol_sha256)=={protocol_hash()}
+    for name,g in maps.groupby('design'):
+        assert np.allclose(g.rtol,SOLVER[name]['rtol'])
+        assert np.allclose(g.atol,SOLVER[name]['atol'])
+        assert np.allclose(g.max_step_s,SOLVER[name]['max_step'])
+    s6protocol=json.loads((OUT/'FigureS06_protocol.json').read_text())
+    assert s6protocol['model']=='MP-SPMe'
+    assert s6protocol['model_sha256']==hashlib.sha256((ROOT/'lfp_parallel/model.py').read_bytes()).hexdigest()
+    s6checks=pd.read_csv(SUP/'FigureS06_solver_tolerance.csv')
+    assert len(s6checks)==4 and s6checks.M_peak_difference.max()<.01
+    assert s6checks.qex_absolute_difference.max()<.002
+    for row in s6checks.itertuples():
+        match=maps[(maps.design==row.design)&np.isclose(maps.LLI,row.LLI)&np.isclose(maps.dLAMp,row.dLAMp)]
+        assert len(match)==1 and np.isclose(match.M_peak.iloc[0],row.M_peak_reference)
+        assert np.isclose(match.qex_norm.iloc[0],row.qex_reference)
+    s6history=pd.read_csv(SUP/'FigureS06_selected_trajectories.csv')
+    assert np.allclose(s6history.I1+s6history.I2,s6history.Iapp,rtol=1e-8,atol=1e-7)
+    assert len(s6history.groupby(['design','LLI','dLAMp']))==4
+    for _,g in s6history.groupby(['design','LLI','dLAMp']):
+        assert np.isclose(g.V.iloc[-1],2.5,atol=1e-7)
+        assert (np.diff(g.t_s)>0).all()
     from analysis.np_sensitivity import design_np
     from lfp_parallel import model as m
     assert np.isclose(maps[maps.design=='reference'].design_NP, design_np(m.get_reference_params())).all()
@@ -110,7 +134,7 @@ def verify(check_manifest=False):
             digest,path=line.split('  ',1)
             assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==digest,path
     print('PASS: model/result provenance, 25 robustness variants, 1,371 threshold points,')
-    print('39 N/P cases, 3 tolerance checks, 242 electrode-balance map points,')
+    print('39 N/P cases, 3 tolerance checks, 242 full-model electrode-balance map points,')
     print('121 mixed-path points, all S10 histories,')
     print('and all 21 manuscript/SI/graphical figure assets.')
 

@@ -12,3 +12,6 @@ venv/
 results/**/*.png
 results/*.png
 example.csv
+
+# Resumable work in progress; final tables carry protocol hashes.
+results/*checkpoint*.csv

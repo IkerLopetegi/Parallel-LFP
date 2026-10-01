@@ -69,3 +69,9 @@ Suggested manuscript caption:
 ```
 
 In Section 3.1, describe Figure 2 as full MP-SPMe trajectories and remove the phrase "reduced-model illustration". Supplementary Fig. S11 supplies additional electrode trajectories for a capacity-matched parallel charge pair.
+
+## Figure S6 protocol
+
+`analysis.fullmodel_lamp_map` evaluates 242 full MP-SPMe discharge cases: an 11 by 11 common-LLI/additional-LAMp grid for each of the reference host N/P ratio and N/P=1.20. The latter changes positive thickness while retaining negative geometry and lithium inventory. Initialization is at a common zero-net-current terminal voltage of 3.35 V. The applied 1C current uses the sum of the two C/20 OCV-R usable capacities; the dynamic trajectory uses the full MP-SPMe and terminates at 2.50 V. LAM kinetic coupling is decoupled, consistent with the thermodynamic comparisons.
+
+The full model suppresses outward reaction flux near LFP population composition bounds and allows current transfer to the other branch. The reduced OCV-R boundary termination and its clipped LFP endpoint OCP are not used to determine S6 map completion. For the high-N/P panel, `analysis.bounded_fullmodel` rejects trial BDF steps outside an electrode composition domain and restarts from the last accepted state with a smaller first step. This preserves the production RHS and lithium conservation without clipping the state. Failed integrations raise an error rather than produce blank cells. Saved summaries contain the endpoint states, conservation residual, current-sharing metrics and protocol hash; four refined histories and their solver comparisons are retained. The figure can be rendered directly from the final numerical table.
