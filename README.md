@@ -36,7 +36,7 @@ Final vector PDFs and numerical tables are in `results/`; supplementary assets a
 
 | Paper result | Numerical recipe / retained data |
 |---|---|
-| Figure 2 | `figure02_hysteresis.py`; Figure02 metrics |
+| Figure 2 | `figure02_hysteresis.py`; full MP-SPMe trajectories, protocol and metrics |
 | Figures 3–5 | `core_studies.py`; low-rate, dynamics and model-fidelity tables |
 | Figure 6 | `robustness.py`; 25 variants and protocol |
 | Figure 7 | `np_sensitivity.py`; N/P design table |
@@ -52,6 +52,8 @@ Final vector PDFs and numerical tables are in `results/`; supplementary assets a
 | SI S11 | `manuscript_revision_checks.py`; electrode trajectories |
 | SI protocol, controlled N/P and cutoff tables | `core_studies.py`, `manuscript_revision_checks.py`; capacity-protocol, matched-N/P and cutoff CSVs |
 | Graphical abstract | `graphical_abstract.py`; final reduced-model map |
+
+Figure 2 uses the full MP-SPMe with the production high-overpotential LFP relation and linear graphite kinetics. Run `python -m analysis.figure02_hysteresis` to simulate its four C/2 cycles and the stricter LAMn check; use `--plot-only` to render the retained trajectories. All cases use the same current, referenced to fresh nominal capacity, start charge at a homogeneous zero-net-current state at 2.5 V, and discharge immediately from the charged state. The BDF runner retries an invalid endpoint trial from its last accepted state with a smaller step; both halves terminate at the first voltage cutoff.
 
 `publication_figures.py` applies publication typography and layout. Core and diffusivity figures require rerunning their representative simulations because their baseline CSVs store summary metrics rather than complete plotting trajectories. Other supported panels use retained numerical tables. Some table filenames retain descriptive identifiers that differ from their final SI table numbers; use the result map above.
 

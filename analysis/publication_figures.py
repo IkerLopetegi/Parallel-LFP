@@ -34,7 +34,7 @@ def save(fig, path, dpi=320):
 
 def render_core_main_figures():
     base = m.get_reference_params()
-    render_fig02()
+    render_fig02([])
     sn = mainplots.figure3_lowrate(base)
     mainplots.figure4_dynamics(base, sn)
     mainplots.figure5_model_fidelity(base, sn)

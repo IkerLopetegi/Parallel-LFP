@@ -18,6 +18,25 @@ SI=('FigureS01_grid_convergence','FigureS02_ZK_verification','FigureS03_capacity
 
 
 def verify(check_manifest=False):
+    fig2=pd.read_csv(OUT/'Figure02_fullmodel_trajectories.csv')
+    fig2protocol=json.loads((OUT/'Figure02_protocol.json').read_text())
+    fig2metrics=pd.read_csv(OUT/'Figure02_metrics.csv')
+    assert fig2protocol['model']=='MP-SPMe'
+    assert fig2protocol['model_sha256']==hashlib.sha256((ROOT/'lfp_parallel/model.py').read_bytes()).hexdigest()
+    assert set(fig2.case)=={'fresh','LLI','LAMn','LAMp'}
+    assert len(fig2metrics)==8 and set(fig2metrics.model)=={'MP-SPMe'}
+    assert fig2.lithium_error_relative.abs().max()<1e-6
+    assert fig2.xn.between(0,1).all()
+    assert np.allclose(fig2.Eneg,fig2.Un+fig2.eta_n,atol=1e-10)
+    for (case,direction),g in fig2.groupby(['case','direction']):
+        assert (np.diff(g.t_s)>0).all()
+        assert np.allclose(abs(g.I_Apm2),fig2protocol['current_magnitude_Apm2'])
+        assert np.isclose(g.V.iloc[-1],3.65 if direction=='charge' else 2.5,atol=1e-7)
+        assert np.allclose(g.capacity_Ahm2,abs(g.I_Apm2)*g.t_s/3600)
+        expected=fig2metrics[(fig2metrics.case==case)&(fig2metrics.direction==direction)]
+        assert len(expected)==1 and np.isclose(g.capacity_Ahm2.iloc[-1],expected.capacity_Ahm2.iloc[0])
+    assert fig2metrics.capacity_relative_difference.dropna().max()<.001
+    assert fig2metrics.max_curve_voltage_difference_V.dropna().max()<.002
     robust=pd.read_csv(OUT/'Figure06_parameter_robustness.csv')
     assert len(robust)==len(points())==25
     for row,(_,key,value) in zip(robust.itertuples(),points()):
