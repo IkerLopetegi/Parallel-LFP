@@ -67,64 +67,10 @@ def qex_norm(sim, p1, p2):
     return met
 
 
-def figure3_lowrate(base):
-    lli = 0.10
-    p_lli = m.make_degraded_cell(base, "LLI", lli)
-    p_lamn, sn, meta = m.match_capacity_lowrate_ocvr(
-        base, p_lli, "LAMn", bounds=(0, 0.25), C_rate=CAP_RATE
-    )
-    p_lamp, sp, _ = m.match_capacity_lowrate_ocvr(
-        base, p_lli, "LAMp", bounds=(0, 0.50), C_rate=CAP_RATE
-    )
-    cells = [p_lli, p_lamn, p_lamp]
-    labs = [
-        r"10\% LLI",
-        f"{sn*100:.1f}\\% LAM$_n$ (capacity matched)",
-        f"{sp*100:.1f}\\% LAM$_p$ (capacity matched)",
-    ]
-    cols = [COL["lli"], COL["lamn"], COL["lamp"]]
-    # Stack the charge and discharge panels at one-column width. The former
-    # side-by-side layout was reduced to half-width panels in the CAS template.
-    fig, axs = plt.subplots(2, 1, figsize=(3.4, 5.0), constrained_layout=True)
-    rows = []
-    for p, lab, c in zip(cells, labs, cols):
-        z = m.lowrate_ocvr_characterization(p, CAP_RATE, n_curve=800)
-        qnch = z["q_charge"] / z["capacity_Ahm2"]
-        qnds = z["q_discharge"] / z["capacity_Ahm2"]
-        axs[0].plot(
-            qnch,
-            z["V_charge"],
-            color=c,
-            label=f'{lab}\n$Q={z["capacity_Ahm2"]:.2f}$ Ah m$^{{-2}}$',
-        )
-        axs[1].plot(
-            qnds, z["V_discharge"], color=c, label=lab
-        )
-        rows.append(
-            [
-                lab,
-                z["capacity_Ahm2"],
-                z["xp_high"],
-                z["xp_low"],
-                z["xn_high"],
-                z["xn_low"],
-            ]
-        )
-    axs[0].set(xlabel="Normalized charged capacity", ylabel="C/20 OCV--R voltage (V)")
-    axs[1].set(xlabel="Normalized discharged capacity")
-    for ax in axs:
-        ax.axhline(base["Vmin"], color="0.82", lw=0.8)
-        ax.axhline(base["Vmax"], color="0.82", lw=0.8)
-        ax.set(xlim=(0, 1), ylim=(2.47, 3.69))
-    axs[0].legend(frameon=False, fontsize=7.0, loc="lower right")
-    for a, l in zip(axs, "ab"):
-        panel(a, l)
-    save(fig, "Figure03_lowrate_characterization")
-    pd.DataFrame(
-        rows,
-        columns=["Case", "Capacity_Ahm2", "xp_high", "xp_low", "xn_high", "xn_low"],
-    ).to_csv(OUT / "Figure03_lowrate.csv", index=False)
-    return sn
+def figure3_lowrate(base=None):
+    """Generate Figure 3 with full MP-SPMe and full-model capacity matching."""
+    from analysis.figure03_fullmodel import main
+    return main([])
 
 
 def figure4_dynamics(base, sn):

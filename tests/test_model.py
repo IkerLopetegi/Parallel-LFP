@@ -99,6 +99,26 @@ class ModelTests(unittest.TestCase):
             salt = st["ce"] @ (self.p["eps_e_vec"] * self.p["dx_vec"])
             self.assertLess(abs(salt), 1e-10)
 
+    def test_current_controlled_fullmodel_equivalence(self):
+        from lfp_parallel.current_controlled import evaluate_at_current
+        for kinetics in ('linear','butler_volmer'):
+            p=m.get_reference_params()
+            p['neg']['kinetics']=kinetics
+            y,_=m.init_cell_at_ocv(p,3.3)
+            y[p['idx']['ce']]*=np.linspace(.97,1.03,p['Nelec'])
+            for voltage in (3.22,3.38):
+                reference=m.cell_at_voltage(y,p,voltage)
+                direct=evaluate_at_current(y,p,reference['I'])
+                self.assertAlmostEqual(direct['V'],voltage,places=8)
+                np.testing.assert_allclose(direct['dy'],reference['dy'],rtol=2e-7,atol=1e-8)
+                self.assertLess(abs(direct['current_residual']),1e-7)
+                derivative=m.unpack_cell_state(direct['dy'],p)
+                weights=np.diff(np.linspace(0,1,p['disc']['Nr_neg']+1)**3)
+                lithium=(p['Qn']*(derivative['cn']@weights)/p['neg']['cmax']
+                         +p['Qp']*np.mean(derivative['xp']@p['lfp']['psd']['w_volume']))
+                self.assertLess(abs(lithium),1e-7)
+                self.assertLess(abs(derivative['ce']@(p['eps_e_vec']*p['dx_vec'])),1e-10)
+
     def test_differential_conductance(self):
         y, _ = m.init_cell_at_ocv(self.p, 3.3)
         for kinetics in ["linear", "butler_volmer"]:

@@ -22,6 +22,8 @@ def verify(check_manifest=False):
     fig2protocol=json.loads((OUT/'Figure02_protocol.json').read_text())
     fig2metrics=pd.read_csv(OUT/'Figure02_metrics.csv')
     assert fig2protocol['model']=='MP-SPMe'
+    assert fig2protocol['graphite_kinetics']=='butler_volmer'
+    assert fig2.xn_surface_raw.between(-1e-8,1+1e-8).all()
     assert fig2protocol['model_sha256']==hashlib.sha256((ROOT/'lfp_parallel/model.py').read_bytes()).hexdigest()
     assert set(fig2.case)=={'fresh','LLI','LAMn','LAMp'}
     assert len(fig2metrics)==8 and set(fig2metrics.model)=={'MP-SPMe'}
@@ -37,6 +39,33 @@ def verify(check_manifest=False):
         assert len(expected)==1 and np.isclose(g.capacity_Ahm2.iloc[-1],expected.capacity_Ahm2.iloc[0])
     assert fig2metrics.capacity_relative_difference.dropna().max()<.001
     assert fig2metrics.max_curve_voltage_difference_V.dropna().max()<.002
+    fig3=pd.read_csv(OUT/'Figure03_fullmodel_trajectories.csv')
+    protocol=json.loads((OUT/'Figure03_protocol.json').read_text())
+    metrics=pd.read_csv(OUT/'Figure03_lowrate.csv')
+    checks=pd.read_csv(OUT/'Figure03_solver_tolerance.csv')
+    assert protocol['model']=='MP-SPMe' and protocol['graphite_kinetics']=='butler_volmer'
+    assert protocol['model_sha256']==fig2protocol['model_sha256']
+    assert protocol['current_controlled_sha256']==hashlib.sha256((ROOT/'lfp_parallel/current_controlled.py').read_bytes()).hexdigest()
+    guard=pd.read_csv(OUT/'Figure03_composition_guard_check.csv')
+    assert len(guard)==2 and guard.capacity_relative_difference.max()<.001
+    assert guard.max_voltage_difference_V.max()<.002
+    assert (metrics.Capacity_Ahm2<=metrics.negative_host_capacity_Ahm2*(1+1e-6)).all()
+    assert (metrics.Capacity_Ahm2<=metrics.positive_host_capacity_Ahm2*(1+1e-6)).all()
+    assert len(metrics)==3 and len(checks)==6
+    assert set(metrics.case)==set(fig3.case)=={'LLI','LAMN','LAMP'}
+    assert set(metrics.graphite_kinetics)=={'butler_volmer'}
+    assert fig3.ce_min_molm3.min()>=1
+    assert fig3.branch_current_residual_Apm2.abs().max()<1e-7
+    assert metrics.Capacity_Ahm2.max()/metrics.Capacity_Ahm2.min()-1<protocol['matching_relative_tolerance']
+    assert fig3.xn_surface_raw.between(-1e-8,1+1e-8).all()
+    assert fig3.lithium_error_relative.abs().max()<1e-6
+    assert checks.capacity_relative_difference.max()<.001
+    assert checks.max_voltage_difference_V.max()<.002
+    for (case,direction),g in fig3.groupby(['case','direction']):
+        assert (np.diff(g.t_s)>0).all()
+        assert np.allclose(abs(g.I_Apm2),protocol['current_magnitude_Apm2'])
+        assert abs(g.V.iloc[-1]-(3.65 if direction=='charge' else 2.5))<1e-6
+        assert np.allclose(g.capacity_Ahm2,abs(g.I_Apm2)*g.t_s/3600)
     robust=pd.read_csv(OUT/'Figure06_parameter_robustness.csv')
     assert len(robust)==len(points())==25
     for row,(_,key,value) in zip(robust.itertuples(),points()):

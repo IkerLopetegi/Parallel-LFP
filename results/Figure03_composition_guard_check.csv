@@ -1,0 +1,3 @@
+case,direction,graphite_composition_floor,refined_graphite_composition_floor,capacity_relative_difference,max_voltage_difference_V
+LAMN,charge,1e-10,1.0000000000000001e-11,9.199904171808271e-10,0.0012135610361134752
+LAMN,discharge,1e-10,1.0000000000000001e-11,1.90111038023133e-10,4.4380654796505326e-05

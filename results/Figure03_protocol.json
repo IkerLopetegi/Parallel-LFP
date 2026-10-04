@@ -1,0 +1,42 @@
+{
+  "model": "MP-SPMe",
+  "graphite_kinetics": "butler_volmer",
+  "C_rate": 0.05,
+  "current_reference": "fresh Q_nominal_ref / 3600",
+  "current_magnitude_Apm2": 0.6444219977656979,
+  "initialization": "homogeneous midpoint of lithium-conserving admissible xp interval",
+  "conditioning": "one C/20 discharge to 2.5 V before plotted cycle",
+  "state_continuation": "no rest or reset between half-cycles",
+  "matching": "full-model discharge capacity after conditioning and charge",
+  "matching_relative_tolerance": 0.0001,
+  "curve_refinement_comparison": "own-halfcycle normalized capacity; capacities checked separately",
+  "reused_candidate_severities": [
+    0.22775088039999603,
+    0.3234038789057713
+  ],
+  "normalized_axes": "each half-cycle own passed charge",
+  "kinetic_coupling": "decoupled",
+  "positive_composition_floor": 2e-06,
+  "graphite_composition_floor": 1e-10,
+  "refined_composition_floor": 1.0000000000000001e-11,
+  "integrator": "BDF with rejection of out-of-domain trials; smaller-first-step restart",
+  "grid": {
+    "Nneg": 10,
+    "Nsep": 5,
+    "Npos": 10,
+    "Npsd": 13,
+    "Nr_neg": 13
+  },
+  "solver": {
+    "max_step": 30.0,
+    "rtol": 1e-07,
+    "atol": 1e-09
+  },
+  "tolerance_solver": {
+    "max_step": 15.0,
+    "rtol": 2e-08,
+    "atol": 2e-10
+  },
+  "model_sha256": "dbe3e38d2f5394ec1ed936a8df91738fa23ab21ab4282d0e7f836bc787b5e4b9",
+  "current_controlled_sha256": "f9b5c6b763e254607ec9feb63b7986b1666357ee1abd264bda7b7280b9f2df4d"
+}

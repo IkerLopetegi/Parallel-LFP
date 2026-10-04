@@ -22,12 +22,12 @@ from analysis.common import OUT, ROOT, prepare_output
 
 RATE = 0.5
 SEVERITY = 0.20
-SETTINGS = dict(max_step=5.0, rtol=4e-5, atol=3e-7)
-TIGHT = dict(max_step=2.5, rtol=1e-5, atol=1e-7)
+SETTINGS = dict(max_step=2.5, rtol=1e-5, atol=1e-7)
+TIGHT = dict(max_step=1.25, rtol=1e-6, atol=1e-8)
 MODES = ('fresh', 'LLI', 'LAMn', 'LAMp')
 
 
-def history(sim, p, case, direction):
+def history(sim, p, case, direction, current_evaluator=None):
     # Exact finite-volume shell volumes, rather than an arithmetic radial mean.
     faces = np.linspace(0., 1., p['disc']['Nr_neg'] + 1)
     weights = np.diff(faces**3)
@@ -41,11 +41,19 @@ def history(sim, p, case, direction):
         xn = float(weights @ state['cn'] / p['neg']['cmax'])
         xp = float(np.mean(state['xp'] @ p['lfp']['psd']['w_volume']))
         lithium = p['Qn'] * xn + p['Qp'] * xp
-        evaluation = m.cell_at_voltage(y, p, float(voltage))
+        evaluation = (m.cell_at_voltage(y, p, float(voltage)) if current_evaluator is None
+                      else current_evaluator(y, p, float(sim['Iapp'])))
+        if not -1e-8 <= evaluation['xn_surface_raw'] <= 1+1e-8:
+            raise m.NumericalError('Reconstructed graphite surface outside [0,1]')
+        if state['ce'].min() < p['num']['ce_min']:
+            raise m.NumericalError('Electrolyte concentration reached constitutive floor')
         rows.append(dict(case=case, direction=direction, t_s=t,
                          capacity_Ahm2=abs(sim['Iapp'])*t/3600.,
                          V=voltage, xn=xn, xp=xp,
                          xn_surface=evaluation['xn_surface'],
+                         xn_surface_raw=evaluation['xn_surface_raw'],
+                         ce_min_molm3=float(state['ce'].min()),
+                         branch_current_residual_Apm2=evaluation['current_residual'],
                          I_Apm2=sim['Iapp'], Un=evaluation['Un'],
                          eta_n=evaluation['eta_n'], Eneg=evaluation['Eneg'],
                          lithium_error_relative=(lithium-p['QLi'])/p['QLi']))
@@ -59,7 +67,7 @@ def history(sim, p, case, direction):
     return data
 
 
-def full_halfcycle(p, y0, direction, settings):
+def full_halfcycle(p, y0, direction, settings, rate=RATE):
     """Integrate the production MP-SPMe kernel, resolving boundary trial steps.
 
     BDF may propose a state beyond a composition boundary before locating the
@@ -67,8 +75,10 @@ def full_halfcycle(p, y0, direction, settings):
     that trial state has no algebraic current solution. No state clipping or
     model/kinetics substitution is introduced here.
     """
+    if direction not in ('charge', 'discharge') or not np.isfinite(rate) or rate <= 0:
+        raise ValueError('Positive finite rate and charge/discharge direction required')
     sign = 1 if direction == 'charge' else -1
-    current = sign * RATE * p['Q_nominal_ref'] / 3600.
+    current = sign * rate * p['Q_nominal_ref'] / 3600.
     cutoff = p['Vmax'] if sign > 0 else p['Vmin']
     guess = [3.3]
 
@@ -84,7 +94,7 @@ def full_halfcycle(p, y0, direction, settings):
     if sign * (voltage-cutoff) >= 0:
         raise m.NumericalError('Initial Figure 2 loaded voltage outside cutoff')
     times, states, voltages = [0.], [y0.copy()], [voltage]
-    end_time = 2. * 3600. / RATE
+    end_time = 2. * 3600. / rate
     max_step = settings['max_step']
     retries = 0
     solver = BDF(rhs, 0., y0, end_time, **settings)
@@ -99,7 +109,8 @@ def full_halfcycle(p, y0, direction, settings):
             print('endpoint trial-state retry:', direction,
                   't_s', times[-1], 'max_step_s', max_step, flush=True)
             solver = BDF(rhs, times[-1], states[-1], end_time,
-                         max_step=max_step, rtol=settings['rtol'], atol=settings['atol'])
+                         max_step=max_step, first_step=min(.01, max_step),
+                         rtol=settings['rtol'], atol=settings['atol'])
             continue
         if solver.status == 'failed':
             raise m.NumericalError('Figure 2 BDF integration failed')
@@ -107,7 +118,7 @@ def full_halfcycle(p, y0, direction, settings):
         if sign * (voltage-cutoff) >= 0:
             dense = solver.dense_output()
             tcut = brentq(lambda t: evaluate(t, dense(t))[0]-cutoff,
-                          times[-1], solver.t, xtol=1e-9)
+                          times[-1], solver.t, xtol=1e-12)
             times.append(tcut)
             states.append(dense(tcut))
             voltages.append(evaluate(tcut, states[-1])[0])
@@ -126,7 +137,7 @@ def run_case(p, case, settings=SETTINGS):
     for direction in ('charge', 'discharge'):
         sim = full_halfcycle(p, y, direction, settings)
         cutoff = p['Vmax'] if direction == 'charge' else p['Vmin']
-        if not sim['reached_cutoff'] or abs(sim['V'][-1]-cutoff) > 1e-7:
+        if not sim['reached_cutoff'] or abs(sim['V'][-1]-cutoff) > 1e-6:
             raise m.NumericalError('Figure 2 half-cycle missed voltage cutoff')
         frames.append(history(sim, p, case, direction))
         y = sim['y'][-1].copy()
@@ -166,9 +177,14 @@ def main(argv=None):
     args = parser.parse_args(argv)
     prepare_output()
     if args.plot_only:
+        protocol=json.loads((OUT/'Figure02_protocol.json').read_text())
+        if (protocol['graphite_kinetics'] != 'butler_volmer'
+                or protocol['model_sha256'] != hashlib.sha256((ROOT/'lfp_parallel/model.py').read_bytes()).hexdigest()):
+            raise m.NumericalError('Figure 2 data uses a different model or kinetics')
         render(pd.read_csv(OUT / 'Figure02_fullmodel_trajectories.csv'))
         return
     base = m.get_reference_params()
+    base['neg']['kinetics'] = 'butler_volmer'
     frames = []
     for case in MODES:
         p = m.make_degraded_cell(base, case, 0. if case == 'fresh' else SEVERITY)
@@ -201,7 +217,7 @@ def main(argv=None):
         rows.append(row)
     pd.DataFrame(rows).to_csv(OUT / 'Figure02_metrics.csv', index=False)
     protocol = dict(model='MP-SPMe', positive_kinetics='high-overpotential regular-solution relation',
-                    graphite_kinetics='linear', C_rate=RATE,
+                    graphite_kinetics='butler_volmer', C_rate=RATE,
                     current_reference='fresh Q_nominal_ref / 3600',
                     current_magnitude_Apm2=RATE*base['Q_nominal_ref']/3600.,
                     degradation_fraction=SEVERITY, cases=list(MODES),
@@ -209,6 +225,7 @@ def main(argv=None):
                     discharge_initialization='final charge state; no rest or reinitialization',
                     bulk_graphite_average='spherical finite-volume shell weights',
                     grid=base['disc'], solver=SETTINGS, LAMn_tolerance_solver=TIGHT,
+                    endpoint_voltage_tolerance_V=1e-6,
                     integrator='BDF; retry invalid trial states from last accepted state with 10x smaller max_step',
                     model_sha256=hashlib.sha256((ROOT/'lfp_parallel/model.py').read_bytes()).hexdigest())
     (OUT/'Figure02_protocol.json').write_text(json.dumps(protocol, indent=2)+'\n')

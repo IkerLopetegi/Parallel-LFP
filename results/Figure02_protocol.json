@@ -1,7 +1,7 @@
 {
   "model": "MP-SPMe",
   "positive_kinetics": "high-overpotential regular-solution relation",
-  "graphite_kinetics": "linear",
+  "graphite_kinetics": "butler_volmer",
   "C_rate": 0.5,
   "current_reference": "fresh Q_nominal_ref / 3600",
   "current_magnitude_Apm2": 6.444219977656978,
@@ -23,15 +23,16 @@
     "Nr_neg": 13
   },
   "solver": {
-    "max_step": 5.0,
-    "rtol": 4e-05,
-    "atol": 3e-07
-  },
-  "LAMn_tolerance_solver": {
     "max_step": 2.5,
     "rtol": 1e-05,
     "atol": 1e-07
   },
+  "LAMn_tolerance_solver": {
+    "max_step": 1.25,
+    "rtol": 1e-06,
+    "atol": 1e-08
+  },
+  "endpoint_voltage_tolerance_V": 1e-06,
   "integrator": "BDF; retry invalid trial states from last accepted state with 10x smaller max_step",
   "model_sha256": "dbe3e38d2f5394ec1ed936a8df91738fa23ab21ab4282d0e7f836bc787b5e4b9"
 }

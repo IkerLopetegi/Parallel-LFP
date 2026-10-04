@@ -18,6 +18,7 @@ from analysis.common import OUT, SUP, prepare_output
 from lfp_parallel import model as m
 from analysis import core_studies as mainplots
 from analysis.figure02_hysteresis import main as render_fig02
+from analysis.figure03_fullmodel import main as render_fig03
 from analysis.robustness import plot as plot_robustness
 from analysis.threshold_figures import main as render_thresholds
 from analysis.supplementary_maps import lamp_map, integrated_map
@@ -35,7 +36,11 @@ def save(fig, path, dpi=320):
 def render_core_main_figures():
     base = m.get_reference_params()
     render_fig02([])
-    sn = mainplots.figure3_lowrate(base)
+    mainplots.figure3_lowrate(base)
+    # Figures 4/5 retain their published reference matching protocol.
+    reference = m.make_degraded_cell(base, "LLI", .10)
+    _, sn, _ = m.match_capacity_lowrate_ocvr(
+        base, reference, "LAMn", bounds=(0, .25), C_rate=mainplots.CAP_RATE)
     mainplots.figure4_dynamics(base, sn)
     mainplots.figure5_model_fidelity(base, sn)
 
@@ -65,6 +70,8 @@ def render_np_figure():
 
 def render_saved_main_figures():
     base = m.get_reference_params()
+    render_fig02(['--plot-only'])
+    render_fig03(['--plot-only'])
     print("Plotting robustness, N/P, threshold, and resistance figures", flush=True)
     robustness = pd.read_csv(OUT / "Figure06_parameter_robustness.csv")
     if len(robustness) != 25 or robustness.M_peak.isna().any():
