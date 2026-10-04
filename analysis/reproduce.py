@@ -59,7 +59,7 @@ def run_stage(stage):
     elif stage == "figures":
         run_stage("saved")
     elif stage == "saved":
-        for part in ("saved", "si", "graphical"):
+        for part in ("saved", "si"):
             run_module("publication_figures", "--stage", part)
     elif stage == "core":
         run_module("publication_figures", "--stage", "core")

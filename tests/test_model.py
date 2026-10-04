@@ -267,7 +267,6 @@ class ModelTests(unittest.TestCase):
             "robustness",
             "threshold_scan",
             "publication_figures",
-            "graphical_abstract",
             "supplementary_checks",
             "fullmodel_lamp_map",
             "bounded_fullmodel",

@@ -286,7 +286,6 @@ def verify(check_manifest=False):
     pdfs = [OUT / f"{name}.pdf" for name in MAIN] + [SUP / f"{name}.pdf" for name in SI]
     pdfs += [
         ROOT / "figures/Figure01_model_architecture.pdf",
-        SUP / "Graphical_Abstract.pdf",
     ]
     for path in pdfs:
         b = path.read_bytes()
@@ -307,7 +306,7 @@ def verify(check_manifest=False):
         "39 N/P cases, 3 tolerance checks, 242 full-model electrode-balance map points,"
     )
     print("121 mixed-path points, all S10 histories,")
-    print("and all 21 manuscript/SI/graphical figure assets.")
+    print("and all 20 manuscript/SI figure assets.")
 
 
 if __name__ == "__main__":

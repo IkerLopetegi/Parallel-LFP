@@ -24,7 +24,7 @@ python -m analysis.verify_results --manifest
 python -m analysis.reproduce --stage saved
 ```
 
-The first command checks the supplied files, protocols and numerical tables. The second renders every numerical manuscript figure (2–9), every SI figure (S1–S11), and the graphical abstract from supplied histories, tables and analytical expressions. It runs no time-dependent simulations. Figure 1 is an author-supplied schematic at `figures/Figure01_model_architecture.pdf`.
+The first command checks the supplied files, protocols and numerical tables. The second renders every numerical manuscript figure (2–9) and every SI figure (S1–S11) from supplied histories, tables and analytical expressions. It runs no time-dependent simulations. Figure 1 is an author-supplied schematic at `figures/Figure01_model_architecture.pdf`.
 
 PDFs are written to `results/` and `results/supplementary/`; PNG previews are generated alongside them. PDF metadata may differ between runs, so check the supplied manifest before regeneration.
 
@@ -55,7 +55,6 @@ For an individual study, use the commands below. Finish a recomputation with `py
 | S6 | `python -m analysis.fullmodel_lamp_map --workers 6` |
 | S10 | `python -m analysis.reproduce --stage potential` |
 | S11 and loading-path/cutoff tables | `python -m analysis.reproduce --stage checks` |
-| Graphical abstract | `python -m analysis.graphical_abstract` |
 
 Figures 2, 3, S5 and S6 also accept `--plot-only` in their individual modules. To recompute the supplied Figure 3 cells at their specified severities, use:
 

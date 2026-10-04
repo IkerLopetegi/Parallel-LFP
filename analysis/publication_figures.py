@@ -1,6 +1,6 @@
 """Generate final paper and SI figures from the saved data and model recipes.
 
-Stages core and diffusivity rerun simulations; saved, si and graphical replot data.
+Stages core and diffusivity rerun simulations; saved and si replot data.
 """
 
 from pathlib import Path
@@ -308,7 +308,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--stage",
-        choices=("all", "core", "saved", "si", "diffusivity", "graphical"),
+        choices=("all", "core", "saved", "si", "diffusivity"),
         default="all",
     )
     stage = parser.parse_args().stage
@@ -325,10 +325,6 @@ def main():
         from analysis.diffusivity_sensitivity import main as render_diffusivity
 
         render_diffusivity()
-    if stage in ("all", "graphical"):
-        from analysis.graphical_abstract import main as render_graphical
-
-        render_graphical()
     print("Generated manuscript and SI figure assets", flush=True)
 
 
