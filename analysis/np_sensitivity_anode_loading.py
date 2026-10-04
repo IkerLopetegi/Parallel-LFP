@@ -1,7 +1,9 @@
 """Negative-loading N/P construction used by the controlled SI comparison."""
+
 from pathlib import Path
 import sys, copy
-sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from lfp_parallel import model as m
 
 from analysis.np_sensitivity import design_np

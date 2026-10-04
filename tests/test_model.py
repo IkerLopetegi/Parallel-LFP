@@ -101,23 +101,29 @@ class ModelTests(unittest.TestCase):
 
     def test_current_controlled_fullmodel_equivalence(self):
         from lfp_parallel.current_controlled import evaluate_at_current
-        for kinetics in ('linear','butler_volmer'):
-            p=m.get_reference_params()
-            p['neg']['kinetics']=kinetics
-            y,_=m.init_cell_at_ocv(p,3.3)
-            y[p['idx']['ce']]*=np.linspace(.97,1.03,p['Nelec'])
-            for voltage in (3.22,3.38):
-                reference=m.cell_at_voltage(y,p,voltage)
-                direct=evaluate_at_current(y,p,reference['I'])
-                self.assertAlmostEqual(direct['V'],voltage,places=8)
-                np.testing.assert_allclose(direct['dy'],reference['dy'],rtol=2e-7,atol=1e-8)
-                self.assertLess(abs(direct['current_residual']),1e-7)
-                derivative=m.unpack_cell_state(direct['dy'],p)
-                weights=np.diff(np.linspace(0,1,p['disc']['Nr_neg']+1)**3)
-                lithium=(p['Qn']*(derivative['cn']@weights)/p['neg']['cmax']
-                         +p['Qp']*np.mean(derivative['xp']@p['lfp']['psd']['w_volume']))
-                self.assertLess(abs(lithium),1e-7)
-                self.assertLess(abs(derivative['ce']@(p['eps_e_vec']*p['dx_vec'])),1e-10)
+
+        for kinetics in ("linear", "butler_volmer"):
+            p = m.get_reference_params()
+            p["neg"]["kinetics"] = kinetics
+            y, _ = m.init_cell_at_ocv(p, 3.3)
+            y[p["idx"]["ce"]] *= np.linspace(0.97, 1.03, p["Nelec"])
+            for voltage in (3.22, 3.38):
+                reference = m.cell_at_voltage(y, p, voltage)
+                direct = evaluate_at_current(y, p, reference["I"])
+                self.assertAlmostEqual(direct["V"], voltage, places=8)
+                np.testing.assert_allclose(
+                    direct["dy"], reference["dy"], rtol=2e-7, atol=1e-8
+                )
+                self.assertLess(abs(direct["current_residual"]), 1e-7)
+                derivative = m.unpack_cell_state(direct["dy"], p)
+                weights = np.diff(np.linspace(0, 1, p["disc"]["Nr_neg"] + 1) ** 3)
+                lithium = p["Qn"] * (derivative["cn"] @ weights) / p["neg"]["cmax"] + p[
+                    "Qp"
+                ] * np.mean(derivative["xp"] @ p["lfp"]["psd"]["w_volume"])
+                self.assertLess(abs(lithium), 1e-7)
+                self.assertLess(
+                    abs(derivative["ce"] @ (p["eps_e_vec"] * p["dx_vec"])), 1e-10
+                )
 
     def test_differential_conductance(self):
         y, _ = m.init_cell_at_ocv(self.p, 3.3)
@@ -202,51 +208,70 @@ class ModelTests(unittest.TestCase):
     def test_np_uses_independent_host_capacities(self):
         from analysis.np_sensitivity import design_np, base_at_np
         from analysis.np_sensitivity_anode_loading import base_at_np as negative_design
-        base=m.get_reference_params()
-        self.assertAlmostEqual(design_np(base),base['Qn']/base['Qp'])
-        changed=m.get_reference_params()
-        changed['balancing_reference']['xp_0']=0.5
-        self.assertEqual(design_np(changed),design_np(base))
-        for target in (.9,1.,1.2):
-            for make_design in (base_at_np,negative_design):
-                p=make_design(base,target)
-                self.assertAlmostEqual(design_np(p),target,places=12)
-                self.assertEqual(p['QLi'],base['QLi'])
-            positive=base_at_np(base,target)
-            self.assertEqual(positive['Qn'],base['Qn'])
-            negative=negative_design(base,target)
-            self.assertEqual(negative['Qp'],base['Qp'])
+
+        base = m.get_reference_params()
+        self.assertAlmostEqual(design_np(base), base["Qn"] / base["Qp"])
+        changed = m.get_reference_params()
+        changed["balancing_reference"]["xp_0"] = 0.5
+        self.assertEqual(design_np(changed), design_np(base))
+        for target in (0.9, 1.0, 1.2):
+            for make_design in (base_at_np, negative_design):
+                p = make_design(base, target)
+                self.assertAlmostEqual(design_np(p), target, places=12)
+                self.assertEqual(p["QLi"], base["QLi"])
+            positive = base_at_np(base, target)
+            self.assertEqual(positive["Qn"], base["Qn"])
+            negative = negative_design(base, target)
+            self.assertEqual(negative["Qp"], base["Qp"])
 
     def test_fullmodel_discharge_through_lfp_saturation(self):
         from analysis.np_sensitivity import base_at_np
         from analysis.bounded_fullmodel import simulate_discharge
-        base=m.get_reference_params()
-        base['disc'].update(Nneg=3,Nsep=2,Npos=3,Npsd=5,Nr_neg=7)
-        base=m.update_derived_params(base)
-        design=base_at_np(base,1.2)
-        degraded=m.make_mixed_degraded_cell(design,lamp=.075)
-        cells=[design,degraded]
-        y,_=m.init_parallel_at_common_ocv(cells,3.35,.75)
-        sim=simulate_discharge(cells,y,max_step=5.,rtol=1e-5,atol=1e-7)
-        self.assertAlmostEqual(sim['V'][-1],2.5,places=6)
-        self.assertTrue(np.allclose(sim['I'].sum(axis=1),sim['Iapp'],atol=1e-7))
-        start=0
+
+        base = m.get_reference_params()
+        base["disc"].update(Nneg=3, Nsep=2, Npos=3, Npsd=5, Nr_neg=7)
+        base = m.update_derived_params(base)
+        design = base_at_np(base, 1.2)
+        degraded = m.make_mixed_degraded_cell(design, lamp=0.075)
+        cells = [design, degraded]
+        y, _ = m.init_parallel_at_common_ocv(cells, 3.35, 0.75)
+        sim = simulate_discharge(cells, y, max_step=5.0, rtol=1e-5, atol=1e-7)
+        self.assertAlmostEqual(sim["V"][-1], 2.5, places=6)
+        self.assertTrue(np.allclose(sim["I"].sum(axis=1), sim["Iapp"], atol=1e-7))
+        start = 0
         for p in cells:
-            states=sim['y'][:,start:start+p['Nstate']]
-            xp=states[:,p['idx']['xp']].reshape(-1,p['disc']['Npos'],p['disc']['Npsd'])
-            xn=states[:,p['idx']['cn']] @ np.diff(np.linspace(0,1,p['disc']['Nr_neg']+1)**3)/p['neg']['cmax']
-            self.assertGreaterEqual(xp.min(),0.)
-            self.assertLessEqual(xp.max(),1.)
-            lithium=p['Qp']*np.mean(xp @ p['lfp']['psd']['w_volume'],axis=1)+p['Qn']*xn
-            self.assertLess(np.max(abs(lithium-p['QLi']))/p['QLi'],1e-6)
-            start+=p['Nstate']
+            states = sim["y"][:, start : start + p["Nstate"]]
+            xp = states[:, p["idx"]["xp"]].reshape(
+                -1, p["disc"]["Npos"], p["disc"]["Npsd"]
+            )
+            xn = (
+                states[:, p["idx"]["cn"]]
+                @ np.diff(np.linspace(0, 1, p["disc"]["Nr_neg"] + 1) ** 3)
+                / p["neg"]["cmax"]
+            )
+            self.assertGreaterEqual(xp.min(), 0.0)
+            self.assertLessEqual(xp.max(), 1.0)
+            lithium = (
+                p["Qp"] * np.mean(xp @ p["lfp"]["psd"]["w_volume"], axis=1)
+                + p["Qn"] * xn
+            )
+            self.assertLess(np.max(abs(lithium - p["QLi"])) / p["QLi"], 1e-6)
+            start += p["Nstate"]
 
     def test_analysis_imports_do_not_run(self):
-        names = ["core_studies", "diffusivity_sensitivity",
-                 "negative_electrode_potential_sensitivity", "np_sensitivity",
-                 "robustness", "threshold_scan", "publication_figures",
-                 "graphical_abstract", "manuscript_revision_checks",
-                 "fullmodel_lamp_map", "bounded_fullmodel"]
+        names = [
+            "core_studies",
+            "diffusivity_sensitivity",
+            "negative_electrode_potential_sensitivity",
+            "np_sensitivity",
+            "robustness",
+            "threshold_scan",
+            "publication_figures",
+            "graphical_abstract",
+            "supplementary_checks",
+            "fullmodel_lamp_map",
+            "bounded_fullmodel",
+        ]
         with patch.object(
             m,
             "get_reference_params",

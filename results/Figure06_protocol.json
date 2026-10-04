@@ -141,7 +141,7 @@
       0.003
     ]
   ],
-  "numerical_recipe_sha256": "28cc99d419dce856901386daf9727fda07f792d6ee133d741116d57994f20001",
+  "numerical_recipe_sha256": "d12101c63627b75d7d49870717358d827bfe59d440c1af98dd1241d52903c7b5",
   "model_sha256": "dbe3e38d2f5394ec1ed936a8df91738fa23ab21ab4282d0e7f836bc787b5e4b9",
   "hash_scope": "model source, variant/grid/solver configuration, capacity-matching and simulation functions; excludes plotting"
 }

@@ -37,7 +37,14 @@ def qex_norm(sim, p1, p2):
 from analysis.common import OUT, SUP, prepare_output
 
 
-def main():
+def main(argv=None):
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="Figure S5: graphite diffusivity sensitivity"
+    )
+    parser.add_argument("--plot-only", action="store_true")
+    args = parser.parse_args(argv)
     prepare_output()
     base = m.get_reference_params()
     p_lli = m.make_degraded_cell(base, "LLI", 0.10)
@@ -51,48 +58,76 @@ def main():
 
     rates = [0.5, 1.0]
     models = [("Constant $D_{s,n}$", "constant"), ("Ecker $D_{s,n}(x)$", "ecker2015")]
-    rows = []
-    sims = {}
-    for direction, p_other, V0 in [
-        ("charge", p_lamn, 3.30),
-        ("discharge", p_lamp, 3.35),
-    ]:
-        for Cr in rates:
-            for label, dsmodel in models:
-                a = copy.deepcopy(p_lli)
-                b = copy.deepcopy(p_other)
-                a["neg"]["Ds_model"] = dsmodel
-                b["neg"]["Ds_model"] = dsmodel
-                soc_guess = 0.4 if direction == "charge" else 0.75
-                y, _ = m.init_parallel_at_common_ocv([a, b], V0, soc_guess)
-                max_step = 8
-                t0 = time.time()
-                sim = m.simulate_cc_halfcycle(
-                    [a, b], y, Cr, direction, max_step=max_step, rtol=8e-5, atol=7e-7
-                )
-                met, qex = qex_norm(sim, a, b)
-                mismatch = np.abs(sim["I"][:, 0] - sim["I"][:, 1]) / abs(sim["Iapp"])
-                k = int(np.argmax(mismatch))
-                recipient = int(np.argmax(np.abs(sim["I"][k, :]))) + 1
-                rows.append(
-                    dict(
-                        direction=direction,
-                        C_rate=Cr,
-                        diffusivity_model=dsmodel,
-                        M_peak=met["M_peak"],
-                        M_rms=met["M_rms"],
-                        qex_norm=qex,
-                        peak_recipient_cell=recipient,
-                        duration_min=sim["t"][-1] / 60,
-                        runtime_s=time.time() - t0,
-                        success=sim["success"],
+    if not args.plot_only:
+        rows = []
+        sims = {}
+        for direction, p_other, V0 in [
+            ("charge", p_lamn, 3.30),
+            ("discharge", p_lamp, 3.35),
+        ]:
+            for Cr in rates:
+                for label, dsmodel in models:
+                    a = copy.deepcopy(p_lli)
+                    b = copy.deepcopy(p_other)
+                    a["neg"]["Ds_model"] = dsmodel
+                    b["neg"]["Ds_model"] = dsmodel
+                    soc_guess = 0.4 if direction == "charge" else 0.75
+                    y, _ = m.init_parallel_at_common_ocv([a, b], V0, soc_guess)
+                    max_step = 8
+                    t0 = time.time()
+                    sim = m.simulate_cc_halfcycle(
+                        [a, b],
+                        y,
+                        Cr,
+                        direction,
+                        max_step=max_step,
+                        rtol=8e-5,
+                        atol=7e-7,
                     )
-                )
-                sims[(direction, Cr, dsmodel)] = sim
-                print(rows[-1], flush=True)
+                    met, qex = qex_norm(sim, a, b)
+                    mismatch = np.abs(sim["I"][:, 0] - sim["I"][:, 1]) / abs(
+                        sim["Iapp"]
+                    )
+                    k = int(np.argmax(mismatch))
+                    recipient = int(np.argmax(np.abs(sim["I"][k, :]))) + 1
+                    rows.append(
+                        dict(
+                            direction=direction,
+                            C_rate=Cr,
+                            diffusivity_model=dsmodel,
+                            M_peak=met["M_peak"],
+                            M_rms=met["M_rms"],
+                            qex_norm=qex,
+                            peak_recipient_cell=recipient,
+                            duration_min=sim["t"][-1] / 60,
+                            runtime_s=time.time() - t0,
+                            success=sim["success"],
+                        )
+                    )
+                    from analysis.core_studies import save_current_history
 
-    T = pd.DataFrame(rows)
-    T.to_csv(SUP / "TableS03_graphite_diffusivity_sensitivity.csv", index=False)
+                    save_current_history(
+                        sim,
+                        SUP
+                        / f"FigureS05_{direction}_{Cr:.1f}C_{dsmodel}_trajectories.csv",
+                    )
+                    sims[(direction, Cr, dsmodel)] = sim
+                    print(rows[-1], flush=True)
+
+        T = pd.DataFrame(rows)
+        T.to_csv(SUP / "TableS03_graphite_diffusivity_sensitivity.csv", index=False)
+    else:
+        from analysis.core_studies import load_current_history
+
+        T = pd.read_csv(SUP / "TableS03_graphite_diffusivity_sensitivity.csv")
+        sims = {
+            (direction, rate, model): load_current_history(
+                SUP / f"FigureS05_{direction}_{rate:.1f}C_{model}_trajectories.csv"
+            )
+            for direction in ("charge", "discharge")
+            for rate in rates
+            for _, model in models
+        }
 
     # Figure S5: physical diffusivity comparison, 1C current-sharing histories, and moderate-rate summary.
     fig, axs = plt.subplots(2, 2, figsize=(7.1, 5.2), constrained_layout=True)

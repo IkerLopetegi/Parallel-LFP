@@ -7,7 +7,6 @@ import math
 import numpy as np
 import pandas as pd
 
-
 ROOT = Path(__file__).resolve().parents[1]
 THRESHOLDS = ROOT / "results" / "thresholds"
 EXPECTED_FAMILIES = ("common_LLI_dLAMn", "same_LLI_LAMn_trajectory")
@@ -39,9 +38,17 @@ def main():
         }
         table = pd.read_csv(path)
         for _, r in table.iterrows():
-            family, background, target = r.family, round(float(r.background), 8), float(r.target)
+            family, background, target = (
+                r.family,
+                round(float(r.background), 8),
+                float(r.target),
+            )
             key = (family, background, target)
-            if family not in EXPECTED_FAMILIES or background not in BACKGROUNDS or target not in TARGETS:
+            if (
+                family not in EXPECTED_FAMILIES
+                or background not in BACKGROUNDS
+                or target not in TARGETS
+            ):
                 raise RuntimeError(f"Unexpected threshold combination: {key}")
             if r.status == "reached":
                 last = int(round(float(r.delta_crit_sampled) / step))
@@ -67,24 +74,42 @@ def main():
             if key in audited:
                 prior = audited[key]
                 if prior.status != r.status or (
-                    r.status == "reached" and not np.isclose(prior.delta_crit_sampled, r.delta_crit_sampled)
+                    r.status == "reached"
+                    and not np.isclose(prior.delta_crit_sampled, r.delta_crit_sampled)
                 ):
                     raise RuntimeError(f"Conflicting rows for {key}")
             else:
                 audited[key] = r
-            provenance.append({"family": family, "background": background, "target": target,
-                               "source": path.name, "points_checked": len(series)})
-    expected = {(f, b, t) for f in EXPECTED_FAMILIES for b in BACKGROUNDS for t in TARGETS}
+            provenance.append(
+                {
+                    "family": family,
+                    "background": background,
+                    "target": target,
+                    "source": path.name,
+                    "points_checked": len(series),
+                }
+            )
+    expected = {
+        (f, b, t) for f in EXPECTED_FAMILIES for b in BACKGROUNDS for t in TARGETS
+    }
     if set(audited) != expected or len(model_hashes) != 1:
-        raise RuntimeError(f"Incomplete or inconsistent thresholds: missing {sorted(expected - set(audited))}")
+        raise RuntimeError(
+            f"Incomplete or inconsistent thresholds: missing {sorted(expected - set(audited))}"
+        )
     table = pd.DataFrame([audited[key] for key in sorted(audited)])
     table.to_csv(THRESHOLDS / "Section37_full_thresholds_combined.csv", index=False)
-    (THRESHOLDS / "reproduction_audit.json").write_text(json.dumps({
-        "model_and_script_sha256": model_hashes.pop(),
-        "grid_step_fraction": 0.00025,
-        "rows": len(table),
-        "sources": provenance,
-    }, indent=2) + "\n")
+    (THRESHOLDS / "reproduction_audit.json").write_text(
+        json.dumps(
+            {
+                "model_and_script_sha256": model_hashes.pop(),
+                "grid_step_fraction": 0.00025,
+                "rows": len(table),
+                "sources": provenance,
+            },
+            indent=2,
+        )
+        + "\n"
+    )
     print(table.to_string(index=False))
 
 

@@ -74,5 +74,5 @@
   },
   "positive_kinetics": "production high-overpotential regular-solution relation",
   "graphite_kinetics": "production linear relation",
-  "model_sha256": "dbe3e38d2f5394ec1ed936a8df91738fa23ab21ab4282d0e7f836bc787b5e4b9"
+  "model_sha256": "fbf8e7247b68123f068b302af13335124e30551ce4d4683680b3c6975bef7cbb"
 }

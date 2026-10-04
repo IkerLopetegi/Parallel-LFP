@@ -1,57 +1,78 @@
-# Parallel LFP model: final paper results
+# Parallel LFP/graphite cells
 
-Simulation code and final numerical data for the manuscript and supplementary information.
+Code and numerical data for *Degradation-Induced Electrode Misalignment and Current Redistribution in Parallel LFP/Graphite Cells*.
 
-## Installation and verification
+## Install
 
-Python 3.10 or later:
+Run from the repository root. The tested environment is Python 3.12.14; the package supports Python 3.10 or later.
 
 ```bash
-python -m pip install -r requirements.txt
-python -m pip install -e .
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements-tested.txt
+python -m pip install --no-deps -e .
+```
+
+For Python 3.10 or 3.11, use `requirements.txt` instead of the tested pins.
+
+On Windows, activate with `.venv\Scripts\activate`. No LaTeX installation is required to generate the figures.
+
+## Reproduce the figures
+
+```bash
+python -m analysis.verify_results --manifest
+python -m analysis.reproduce --stage saved
+```
+
+The first command checks the supplied files, protocols and numerical tables. The second renders every numerical manuscript figure (2–9), every SI figure (S1–S11), and the graphical abstract from supplied histories, tables and analytical expressions. It runs no time-dependent simulations. Figure 1 is an author-supplied schematic at `figures/Figure01_model_architecture.pdf`.
+
+PDFs are written to `results/` and `results/supplementary/`; PNG previews are generated alongside them. PDF metadata may differ between runs, so check the supplied manifest before regeneration.
+
+## Recompute the simulations
+
+```bash
 python -m unittest discover -s tests -v
-python -m analysis.reproduce --stage verify
-python -m analysis.verify_results --manifest # exact release files before regeneration
+python -m analysis.reproduce --stage all --fresh-output ../parallel-lfp-recomputed
 ```
 
-The numerical model is in `lfp_parallel/model.py`. See `MODEL_GUIDE.md` for units, numerical methods and physical assumptions.
+`--fresh-output` must name a directory that does not exist. It copies the simulation code and schematic there and recomputes results without reusing supplied checkpoints. Full recomputation includes the dense threshold searches and 242 full-model Figure S6 cases and can take substantial time. Without `--fresh-output`, compatible robustness, threshold and S6 checkpoints are reused.
 
-## Reproduction
+For an individual study, use the commands below. Finish a recomputation with `python -m analysis.reproduce --stage saved` to apply the common publication layout. Run `python -m analysis.reproduce --help` for all stage names.
 
-Run commands from the repository root:
+| Figure | Simulation command or analytical source |
+|---|---|
+| 1 | Supplied schematic; no simulation |
+| 2 | `python -m analysis.figure02_hysteresis` |
+| 3 | `python -m analysis.figure03_fullmodel` |
+| 4–5 | `python -m analysis.reproduce --stage dynamics` |
+| 6 | `python -m analysis.reproduce --stage robustness` |
+| 7 | `python -m analysis.reproduce --stage np` |
+| 8 and S7 | `python -m analysis.reproduce --stage thresholds` |
+| 9 | `python -m analysis.reproduce --stage resistance` |
+| S1, S3, S4, S8, S9 | `python -m analysis.reproduce --stage supplementary` |
+| S2 | Analytical regular-solution expressions in `analysis/publication_figures.py` |
+| S5 | `python -m analysis.reproduce --stage diffusivity` |
+| S6 | `python -m analysis.fullmodel_lamp_map --workers 6` |
+| S10 | `python -m analysis.reproduce --stage potential` |
+| S11 and loading-path/cutoff tables | `python -m analysis.reproduce --stage checks` |
+| Graphical abstract | `python -m analysis.graphical_abstract` |
+
+Figures 2, 3, S5 and S6 also accept `--plot-only` in their individual modules. To recompute the supplied Figure 3 cells at their specified severities, use:
 
 ```bash
-python -m analysis.reproduce --stage saved   # plots supported by saved tables
-python -m analysis.reproduce --stage figures # all figure assets; includes representative simulations
-python -m analysis.reproduce --stage all     # all numerical studies and final plots
+python -m analysis.figure03_fullmodel --matched-severities 0.22775088039999603 0.3234038789057713
 ```
 
-Full-model simulations and threshold scans can take substantial time. Threshold and robustness studies reuse compatible saved checkpoints. Remove their outputs in a separate checkout to recompute them from scratch. Threshold JSON files describe the current numerical configuration and completed points; they are needed for safe resumption.
+This checks the full-model capacity match and repeats the numerical refinement checks. Omitting `--matched-severities` performs the severity root searches.
 
-Run `python -m analysis.fullmodel_lamp_map --workers 6` to recompute Figure S6 using independent processes, or append `--plot-only` to render the retained map. Checkpoints are reused only for the same full-model protocol; the earlier OCV-R map is not reused. Every case must reach the 2.50 V cutoff; numerical failures stop the runner.
+## Repository structure
 
-`--stage` also accepts `core`, `robustness`, `np`, `thresholds`, `supplementary`, `resistance`, `diffusivity`, `potential`, and `checks`. The default is `verify`, which checks data consistency without rerunning simulations. Use `analysis.verify_results --manifest` to check exact release checksums before regeneration; regenerated PDFs can have different metadata.
+- `lfp_parallel/`: constitutive equations, transport discretization and current/voltage solvers.
+- `analysis/`: figure-specific simulations, plotting and result verification.
+- `tests/`: algebraic consistency, conservation, kinetics and numerical checks.
+- `figures/`: the model architecture schematic.
+- `results/`: manuscript PDFs, numerical tables, plotting histories and protocol JSON files.
+- `results/supplementary/`: SI figures, histories and sensitivity tables.
+- `results/thresholds/`: eight resumable threshold configurations, sampled points and combined results. Hashed filenames identify configurations, not paper versions.
 
-## Result map
-
-Final vector PDFs and numerical tables are in `results/`; supplementary assets are in `results/supplementary/`. Figure 1 is the author-supplied schematic in `figures/`.
-
-| Paper result | Numerical recipe / retained data |
-|---|---|
-| Figure 2 | `figure02_hysteresis.py`; full MP-SPMe trajectories, protocol and metrics |
-| Figure 3 | `figure03_fullmodel.py`; full MP-SPMe capacity matching, trajectories, protocol and solver checks |
-| Figures 4–5 | `core_studies.py`; dynamics and model-fidelity tables |
-| Figure 6 | `robustness.py`; 25 variants and protocol |
-| Figure 7 | `np_sensitivity.py`; N/P design table |
-| Figure 8; SI S7 | `threshold_scan.py`, `assemble_thresholds.py`, `threshold_figures.py`; eight configurations and combined thresholds |
-| Figure 9 | `core_studies.py`; contact-resistance and exchange-area maps |
-| SI S2 | `publication_figures.py`; analytical particle-size-dependent regular-solution curves |
-| SI S3 | `core_studies.py`; capacity-protocol sensitivity |
-| SI S1, S4 | `core_studies.py`; grid-convergence and C-rate tables |
-| SI S5 | `diffusivity_sensitivity.py`; graphite diffusivity sensitivity |
-| SI S6 | `fullmodel_lamp_map.py`; 242 full MP-SPMe discharge cases, protocol, selected histories and solver checks |
-| SI S8 | `supplementary_maps.py`, `supplementary_data.py`; reduced-model integrated maps |
-| SI S9 | `supplementary_data.py`; mixed paths [s, 0.5s, 0.5s] in FigureS09 CSV |
-| SI S10 | `negative_electrode_potential_sensitivity.py`; three full time histories and potential summary |
-| SI S11 | `manuscript_revision_checks.py`; electrode trajectories |
-| SI protocol, controlled N/P and cutoff tables | `core_studies.py`, `manuscript_revision_checks.py`; capacity-protocol, matched-N/P and cutoff CSVs |
+Some CSV table identifiers differ from the displayed SI table numbers; the figure map above identifies their generating studies. `MODEL_GUIDE.md` explains units, model assumptions, kinetics and capacity conventions. This is an isothermal mechanistic simulation study; the negative-electrode potential diagnostic does not simulate lithium deposition.

@@ -5,79 +5,60 @@
 | Quantity | Units / convention |
 |---|---|
 | `I`, `Iapp` | A/m² geometric electrode area; positive means cell charge |
-| `j0_ref`, `i_p` | A/m² active-material surface |
+| `j0_ref`, positive reaction current | A/m² active-material surface |
+| LFP molar flux | Reaction current divided by Faraday constant, mol/m²/s |
 | `Qp`, `Qn`, `QLi`, `Q_nominal_ref` | C/m² geometric area |
 | `lowrate_capacity()` | Ah/m² geometric area |
-| `R_contact`, effective ASR | ohm m² |
+| `R_contact`, effective ASR | Ω m² |
 | `cn`, `ce`, `cmax` | mol/m³ |
-| `xp`, `xn` | dimensionless lithiation fractions |
-| lengths, diffusion coefficients | m, m²/s |
-| time, potentials | s, V |
+| `xp`, `xn` | Dimensionless lithiation fractions |
+| Lengths, diffusion coefficients | m, m²/s |
+| Time, potentials | s, V |
 
-Multiply geometric current density or areal capacity by electrode area to obtain A or Ah. `LLI=0.10` removes `0.10*Q_nominal_ref` from `QLi_fresh`; it is **not** 10% of total `QLi_fresh`. LAM fractions reduce active solid while keeping porosity fixed. Lost active solid is implicitly inactive solid. This is a chosen synthetic degradation construction; lithium trapped by LAM is not a separate state.
+Multiply geometric current density or areal capacity by electrode area to obtain A or Ah.
 
-## State layout
+## Model hierarchy and kinetics
 
-`p['idx']` contains slices into each cell state. `ce` has `Nneg+Nsep+Npos` finite volumes. `xp` reshapes to `(Npos, Npsd)`. `cn` has `Nr_neg` spherical control volumes. Parallel states concatenate cell states.
+The MP-SPMe contains one representative graphite particle with radial solid diffusion, one-dimensional electrolyte concentration transport, and a distribution of internally uniform LFP particles at each positive-electrode location. The single-radius model uses the same transport equations with one LFP radius. The OCV–R model evolves electrode lithium balance using equilibrium full-cell OCV and a state-dependent lumped resistance; it resolves no concentration gradients.
 
-PSD number weights are uniform quantiles of a lognormal distribution; lithium inventory uses volume weights, and reaction area uses `3*eps_s*w_volume/R`. Setting PSD CV to zero reduces the actual number of bins to one and updates state dimensions consistently.
+Positive-electrode reactions use symmetric Butler–Volmer kinetics. `neg.kinetics='linear'` selects linearized graphite Butler–Volmer kinetics, the default for parallel-current studies. `neg.kinetics='butler_volmer'` selects the full relation used by Figures 2 and 3 and the Figure S10 potential diagnostic. Charge-transfer resistance is the small-overpotential kinetic slope expressed per geometric electrode area. It is distinct from added contact resistance and from the electrolyte Ohmic contribution.
 
-## Main path
+The OCV–R resistance contains linearized negative- and positive-electrode charge transfer, Bruggeman-corrected electrolyte Ohmic resistance, and imposed contact resistance. Its exchange-current densities depend on electrode composition. `lowrate_ocvr_characterization()` uses this relation at C/20 to determine cutoff-limited capacity.
 
-1. `get_reference_params()` constructs independent nested parameter dictionaries.
-2. `make_degraded_cell()` or `make_mixed_degraded_cell()` applies validated synthetic degradation fractions.
-3. `init_parallel_at_common_ocv()` solves for each branch's zero-net-current state at the requested dynamic terminal voltage.
-4. `simulate_cc_halfcycle()` solves branch currents and shared voltage during a BDF integration.
-5. `compute_current_metrics()` integrates over actual, nonuniform output times.
+## Thermodynamics and capacity
 
-Zero net current at initialization does not require zero reaction in every PSD population. Homogeneous initial populations can redistribute lithium internally. This distinction matters for a phase-separating material; the initialization does not represent a fully relaxed multiphase equilibrium.
+The MP-SPMe uses the homogeneous regular-solution LFP relation corresponding to the Zelič–Katrašnik high-overpotential limit. Every particle-size bin has its own interaction parameter. Equilibrium balancing and OCV–R use a Maxwell coexistence plateau computed with the volume-weighted interaction parameter. The direction-dependent low-overpotential curves are shown only as analytical illustrations in Figure S2.
 
-## Numerical corrections
+PSD number weights are uniform quantiles of a lognormal distribution. Lithium inventory uses volume weights; reaction area uses `3*eps_s*w_volume/R`. Zero PSD variation gives one radius and consistent state dimensions.
 
-- Spherical diffusion is conservative. The boundary concentration is reconstructed from the last volume-center value and imposed surface flux over half a radial cell. Both graphite OCP and kinetics use that reconstructed value.
-- `neg.surface_method='outer_shell'` remains available as an explicit discretization sensitivity; `extrapolated` is the default. Both returned OCP and reported surface stoichiometry follow the selected method.
-- `neg.kinetics='linear'` retains baseline linearized graphite charge transfer; `butler_volmer` selects the full relation used by Figures 2 and 3. No analysis monkey-patches model functions.
-- Positive BV flux is blocked only when it would drive a population outward at its composition bound. Inward flux remains allowed. The direction is determined from the unmasked trial current at each residual evaluation. A continuous endpoint ramp over the last `x_min` of composition avoids chattering from a discontinuous hard switch; it is unity elsewhere. This narrow numerical regularization is explicit and requires endpoint-width sensitivity checks for new limiting cases.
-- Electrolyte interface resistance is the sum of the two half-cell diffusion resistances. This accounts for unequal neighboring widths and preserves salt conservation.
-- Branch current is solved with residual-checked Newton/backtracking and Brent fallback. Its differential conductance includes the current dependence of graphite surface concentration and kinetics.
-- The shared voltage solve raises if no current-balanced root is found. It never returns the nearest non-root voltage.
-- Full and OCV-R simulations require a terminal cutoff; incomplete trajectories are errors. Shared limits use the most restrictive branch cutoff.
-- Reduced OCV-R integration uses an adaptive solver and voltage event, with no clipping of accepted electrode states. `dq_frac` sets the maximum time step, not a fixed Euler increment.
+N/P is `Qn/Qp` using ideal 0–1 host intercalation spans for graphite and LFP. The reference ratio is 0.883036. `balancing_reference` initializes cyclable-lithium inventory and the fixed nominal capacity scale; those coordinates do not impose cycle endpoints. Operating windows depend on lithium inventory, thermodynamic functions and voltage limits. These host capacities do not establish degradation-free or experimentally measured reversible windows.
 
-## Retained approximations and limitations
+The main N/P sweep changes positive thickness at fixed negative electrode and lithium inventory. The controlled SI comparison also considers changing negative thickness at fixed positive electrode and inventory.
 
-The positive populations are internally uniform and use the regular-solution high-overpotential constitutive limit in the full dynamic model. Electrolyte concentration is resolved, but ionic potential is represented by the existing concentration/Ohmic approximation rather than an independently solved porous-electrode charge-conservation field. The graphite electrode has one representative radial particle. These are model assumptions, not corrected discretization defects.
+`LLI=0.10` removes `0.10*Q_nominal_ref` from `QLi_fresh`. LAM reduces active-material volume while keeping porosity fixed; the inactive volume replaces the lost active solid. In the kinetically decoupled case, the reference exchange-current coefficient is rescaled to preserve its product with reaction area. In the coupled case this compensation is absent. Lithium trapped by LAM is not a separate state.
 
-For the other retained analyses, low-rate capacity matching uses the equilibrium Maxwell OCP plus state-dependent resistance; it is not a full MP-SPMe charge/discharge experiment. Figure 2 now uses the full MP-SPMe, including electrolyte transport and graphite diffusion, with full graphite Butler–Volmer kinetics rather than the linear graphite kinetics retained by other dynamic studies. The MP0D fixed-step routines remain available as reduced-model utilities and do not generate Figure 2. Their time-step sensitivity and endpoint approximations should be checked before using them for new quantitative studies; the primary dynamic verification targets the MP-SPMe and adaptive OCV-R paths.
+## State layout and numerical solution
 
-Composition and BV argument guards remain numerical protections. Returned `xn_surface_raw` exposes the un-clipped reconstructed graphite surface value for diagnostics. Validate state admissibility and convergence for new extreme parameter sets. Neither passing software tests nor a converged solver demonstrates that the chosen constitutive model is physically accurate for every rate.
+`p['idx']` provides the state slices. Electrolyte concentration has `Nneg+Nsep+Npos` finite volumes. LFP stoichiometry reshapes to `(Npos, Npsd)`; graphite has `Nr_neg` spherical control volumes. Parallel states concatenate cell states.
 
-## Electrode capacity and N/P
+Solid and electrolyte diffusion use conservative finite volumes. The graphite surface concentration is reconstructed from the outer volume center and imposed flux. Electrolyte interface flux uses the two adjacent half-volume diffusion resistances. Positive reaction flux is suppressed only when it would drive a population outward at a composition bound; a narrow endpoint ramp regularizes this condition.
 
-N/P is Qn/Qp using ideal 0–1 intercalation spans for both graphite and LFP. The baseline ratio is 0.883036; full-cell SOC reference spans do not define independent electrode capacity. `balancing_reference` initializes lithium inventory and the fixed nominal capacity scale only. Main designs use positive thickness L_pos = L_pos_ref*(Qn/Qp)_ref/target at fixed negative electrode and lithium inventory. The controlled SI comparison also varies negative thickness L_neg = L_neg_ref*target/(Qn/Qp)_ref. These nominal host capacities do not establish degradation-free windows or experimentally measured reversible capacities.
+`cell_at_voltage()` solves branch current with residual-checked Newton iteration and Brent fallback. `solve_parallel_voltage()` imposes the total applied current at the common terminal voltage. After eliminating these algebraic variables, `simulate_cc_halfcycle()` integrates states with BDF and a terminal-voltage event. OCV–R also uses adaptive integration and voltage termination. Incomplete trajectories raise errors.
 
-## Figure 2 protocol and interpretation
+For prescribed-current single-cell calculations, `current_controlled.evaluate_at_current()` evaluates graphite polarization at the known current and solves the positive reaction balance for voltage. It uses the same constitutive and transport functions. Tests compare its voltage and complete state derivative with `cell_at_voltage()` and check lithium and salt conservation.
 
-`analysis.figure02_hysteresis` simulates single cells with the full production MP-SPMe: the fresh reference and isolated 20% LLI, LAMn and LAMp. The C/2 current is identical across cases and uses the fresh nominal capacity. Charge begins at the homogeneous zero-net-current state at the 2.5 V lower cutoff. Discharge continues immediately from the final charge state; neither electrolyte nor particle states are reset. The upper and lower loaded-voltage cutoffs are 3.65 and 2.5 V. Graphite lithiation is averaged with spherical shell volumes.
+## Figure protocols
 
-The retained CSV contains both half-cycles for all four cases, including the graphite surface lithiation and negative-electrode potential components. The LAMn cycle is repeated with tighter BDF tolerances and a smaller maximum step. With full graphite Butler–Volmer kinetics its approximately 20.97 mV voltage rebound persists in the full model: the diminishing graphite polarization near the start of discharge can outweigh the thermodynamic voltage decrease. This is a constitutive model prediction, not experimental validation. The fresh and 20% LAMp trajectories are nearly coincident because this reference balance retains positive-electrode capacity reserve.
+**Figure 2:** four single-cell C/2 charge/discharge cycles, with identical fresh-reference current, full graphite Butler–Volmer kinetics, homogeneous zero-net-current initialization at 2.50 V, and immediate discharge from the final charge state. Cutoffs are 3.65 and 2.50 V. The LAMn case has a tighter-solver repeat.
 
-Suggested manuscript caption:
+**Figure 3:** full graphite Butler–Volmer kinetics and full-model C/20 discharge-capacity matching. Each cell starts from the homogeneous midpoint of its lithium-conserving admissible composition interval, undergoes a conditioning discharge, and then charges and discharges without rest or state reset. Each plotted half-cycle uses its own normalized passed charge. The graphite composition guard is 1e-10 and the LFP guard is 2e-6. Solver and graphite-guard refinements are retained.
 
-```latex
-\caption{C/2 charge/discharge trajectories obtained with the full MP-SPMe for isolated 20\% (a) LLI, (b) \LAMn{}, and (c) \LAMp{}, compared with the fresh cell. The current is referenced to the fresh nominal capacity. Charge starts from a homogeneous zero-net-current state at 2.5~V, and discharge starts immediately from the final charge state; the terminal-voltage limits are 2.5 and 3.65~V. Solid and dashed lines denote charge and discharge, respectively. The x-axis is volume-averaged graphite lithiation.}
-```
+**Figures 4–9 and parallel-current SI studies:** C/20 OCV–R capacity characterization with linearized graphite kinetics in the electrochemical simulations. Figure S10 uses full graphite Butler–Volmer and Ecker concentration-dependent graphite diffusivity. Its negative-electrode potential is `Un + eta_n` versus Li/Li+.
 
-In Section 3.1, describe Figure 2 as full MP-SPMe trajectories and remove the phrase "reduced-model illustration". Supplementary Fig. S11 supplies additional electrode trajectories for a capacity-matched parallel charge pair.
+**Figure S6:** 242 full MP-SPMe discharge cases across two host N/P designs. The 1C current uses the sum of branch C/20 OCV–R capacities. Initialization is at a common zero-net-current voltage of 3.35 V; termination is at 2.50 V. The high-N/P integrator rejects out-of-domain trial states and restarts with a smaller first step. Every retained case reaches its cutoff; selected cases have solver-refinement histories.
 
-## Figure S6 protocol
+All solver settings and numerical provenance are recorded in the figure protocols or generating scripts. Checkpoint hashes prevent resuming with incompatible numerical configurations.
 
-`analysis.fullmodel_lamp_map` evaluates 242 full MP-SPMe discharge cases: an 11 by 11 common-LLI/additional-LAMp grid for each of the reference host N/P ratio and N/P=1.20. The latter changes positive thickness while retaining negative geometry and lithium inventory. Initialization is at a common zero-net-current terminal voltage of 3.35 V. The applied 1C current uses the sum of the two C/20 OCV-R usable capacities; the dynamic trajectory uses the full MP-SPMe and terminates at 2.50 V. LAM kinetic coupling is decoupled, consistent with the thermodynamic comparisons.
+## Physical scope
 
-The full model suppresses outward reaction flux near LFP population composition bounds and allows current transfer to the other branch. The reduced OCV-R boundary termination and its clipped LFP endpoint OCP are not used to determine S6 map completion. For the high-N/P panel, `analysis.bounded_fullmodel` rejects trial BDF steps outside an electrode composition domain and restarts from the last accepted state with a smaller first step. This preserves the production RHS and lithium conservation without clipping the state. Failed integrations raise an error rather than produce blank cells. Saved summaries contain the endpoint states, conservation residual, current-sharing metrics and protocol hash; four refined histories and their solver comparisons are retained. The figure can be rendered directly from the final numerical table.
-
-Figures 2 and 3 explicitly set `neg.kinetics="butler_volmer"`. Figure 3 uses the production MP-SPMe kernel, including graphite diffusion and electrolyte transport, for every capacity-matching residual and both plotted half-cycles. It conditions each cell by discharge from the homogeneous midpoint of the lithium-conserving admissible LFP stoichiometry interval, then charges to 3.65 V and discharges to 2.5 V without rest or state reset. Matching uses the final discharge capacity at C/20 of fresh nominal capacity. Axis normalization uses each half-cycle's own capacity; it does not assert equality of charge capacities. These changes do not modify the kernel default or the retained protocols of other figures.
-
-For Figure 3, the graphite composition guard `num.graphite_x_min` is set to 1e-10 rather than the baseline shared guard of 2e-6; the LFP guard `num.x_min` remains 2e-6. At C/20 the baseline graphite exchange-current floor can cap polarization before the upper cutoff in a negative-electrode-limited cell. The Figure 3 integrator rejects accepted trial states with raw surface stoichiometry outside [0,1], restarts BDF with a smaller first step, and resolves the first loaded-voltage cutoff without state clipping. Both guards are recorded in its protocol; the kernel and other analyses' defaults are unchanged.
-
-Figure 3 calls `lfp_parallel.current_controlled.evaluate_at_current`. For a single cell the branch current is already prescribed: this routine evaluates graphite polarization at that current and solves the positive BV current balance directly for terminal voltage. It retains all electrolyte and particle states and calls the production constitutive and finite-volume transport functions. This is the same MP-SPMe algebraic system solved in a different order, avoiding the nested branch-current root near graphite saturation. Regression tests compare voltage and the complete state derivative with `cell_at_voltage` under both graphite kinetic options, and check lithium and salt conservation. The limiting LAMn cell is also repeated with a tenfold smaller graphite composition guard.
+The model is isothermal, uses internally uniform LFP populations and one representative graphite particle, and approximates ionic potential from concentration and Ohmic terms. It does not solve an independent electrolyte charge-conservation field or include a plating reaction, thermal feedback or evolving degradation. Numerical convergence and software tests do not constitute experimental validation.

@@ -10,10 +10,6 @@
   "matching": "full-model discharge capacity after conditioning and charge",
   "matching_relative_tolerance": 0.0001,
   "curve_refinement_comparison": "own-halfcycle normalized capacity; capacities checked separately",
-  "reused_candidate_severities": [
-    0.22775088039999603,
-    0.3234038789057713
-  ],
   "normalized_axes": "each half-cycle own passed charge",
   "kinetic_coupling": "decoupled",
   "positive_composition_floor": 2e-06,
@@ -37,6 +33,10 @@
     "rtol": 2e-08,
     "atol": 2e-10
   },
-  "model_sha256": "dbe3e38d2f5394ec1ed936a8df91738fa23ab21ab4282d0e7f836bc787b5e4b9",
-  "current_controlled_sha256": "f9b5c6b763e254607ec9feb63b7986b1666357ee1abd264bda7b7280b9f2df4d"
+  "model_sha256": "fbf8e7247b68123f068b302af13335124e30551ce4d4683680b3c6975bef7cbb",
+  "current_controlled_sha256": "9c32a92f7eac647156cdc774c35aa860ce031494019e3ed6e14811efa7d379da",
+  "specified_matching_severities": [
+    0.22775088039999603,
+    0.3234038789057713
+  ]
 }

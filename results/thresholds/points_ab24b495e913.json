@@ -1,9 +1,9 @@
 {
   "config": {
-    "model_and_script_sha256": "525f63c80e84f1d1cacebe390c2c7d3c91426a40d10962c6f66ac43609cf943f",
+    "model_and_script_sha256": "1408193cd63b82353bb5eaa99593ab5cf375542bfcec0e908142681075721156",
     "arguments": {
-      "family": "all",
-      "background": null,
+      "family": "common_LLI_dLAMn",
+      "background": 0.0,
       "fine_step": 0.00025
     },
     "numpy": "2.3.5"

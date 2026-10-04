@@ -1,6 +1,6 @@
-"""Focused full-model checks for the September 2026 manuscript revision.
+"""Supplementary electrode trajectories, loading-path and cutoff sensitivities.
 
-Run from a repository checkout with ``python analysis/manuscript_revision_checks.py``.
+Run from a repository checkout with ``python -m analysis.supplementary_checks``.
 Outputs are saved under ``results/supplementary/``.
 """
 
@@ -8,6 +8,7 @@ from pathlib import Path
 import sys
 
 import matplotlib
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
@@ -34,8 +35,10 @@ def simulate_pair(cells, initial_voltage, direction):
 
 def matched_design_check(base):
     rows = []
-    for path, make_design in (("positive loading", cathode_base_at_np),
-                              ("negative loading", anode_base_at_np)):
+    for path, make_design in (
+        ("positive loading", cathode_base_at_np),
+        ("negative loading", anode_base_at_np),
+    ):
         for ratio in (1.0, 1.2):
             design = make_design(base, ratio)
             # Use the same nominal current reference for the C/20 capacity
@@ -46,12 +49,18 @@ def matched_design_check(base):
             s = simulate_pair(cells, 3.35, "discharge")
             met = m.compute_current_metrics(s["t"], s["I"], s["Iapp"])
             qbar = np.mean([m.lowrate_capacity(p) for p in cells])
-            row = dict(path=path, NP=design["Qn"] / design["Qp"],
-                       L_pos_um=design["geom"]["L_pos"]*1e6,
-                       L_neg_um=design["geom"]["L_neg"]*1e6, LLI_common=0.0,
-                       LAMp_difference=0.20, M_peak=met["M_peak"],
-                       M_rms=met["M_rms"], q_excess=met["Q_excess_Ahm2"] / qbar,
-                       duration_min=s["t"][-1] / 60)
+            row = dict(
+                path=path,
+                NP=design["Qn"] / design["Qp"],
+                L_pos_um=design["geom"]["L_pos"] * 1e6,
+                L_neg_um=design["geom"]["L_neg"] * 1e6,
+                LLI_common=0.0,
+                LAMp_difference=0.20,
+                M_peak=met["M_peak"],
+                M_rms=met["M_rms"],
+                q_excess=met["Q_excess_Ahm2"] / qbar,
+                duration_min=s["t"][-1] / 60,
+            )
             rows.append(row)
             print("matched design", row, flush=True)
             pd.DataFrame(rows).to_csv(OUT / "matched_NP_design.csv", index=False)
@@ -68,11 +77,16 @@ def full_model_electrode_check(base):
     rows = []
     for t, y in zip(s["t"], s["y"]):
         v, currents, ev = m.solve_parallel_voltage(t, y, cells, applied)
-        row = dict(time_s=t, V=v, I1=currents[0], I2=currents[1],
-                   mismatch=abs(currents[0] - currents[1]) / abs(s["Iapp"]))
+        row = dict(
+            time_s=t,
+            V=v,
+            I1=currents[0],
+            I2=currents[1],
+            mismatch=abs(currents[0] - currents[1]) / abs(s["Iapp"]),
+        )
         offset = 0
         for branch, (p, e) in enumerate(zip(cells, ev), start=1):
-            state = m.unpack_cell_state(y[offset:offset + p["Nstate"]], p)
+            state = m.unpack_cell_state(y[offset : offset + p["Nstate"]], p)
             offset += p["Nstate"]
             w = p["lfp"]["psd"]["w_volume"]
             row[f"xn_surface_{branch}"] = e["xn_surface"]
@@ -98,8 +112,7 @@ def full_model_electrode_check(base):
     ax[1, 1].set_ylabel("Mean LFP particle OCP (V)")
     for a, letter in zip(ax.flat, "abcd"):
         a.set_xlabel("Time (min)")
-        a.text(0.03, 0.95, letter, transform=a.transAxes,
-               va="top", fontweight="bold")
+        a.text(0.03, 0.95, letter, transform=a.transAxes, va="top", fontweight="bold")
     ax[0, 0].legend(frameon=False, fontsize=8)
     fig.savefig(OUT / "FigureS11_fullmodel_electrode_trajectories.pdf")
     fig.savefig(OUT / "FigureS11_fullmodel_electrode_trajectories.png", dpi=220)
@@ -116,13 +129,17 @@ def cutoff_check(base):
             p["Vmax"] = cutoff
         y0, _ = m.init_parallel_at_common_ocv([p1, p2], 3.30, 0.4)
         s = m.simulate_cc_halfcycle(
-            [p1, p2], y0, 1.0, "charge", max_step=4,
-            rtol=1e-5, atol=1e-7
+            [p1, p2], y0, 1.0, "charge", max_step=4, rtol=1e-5, atol=1e-7
         )
         met = m.compute_current_metrics(s["t"], s["I"], s["Iapp"])
-        row = dict(Vmax=cutoff, common_LLI=0.10, delta_LAMn=0.0135,
-                   M_peak=met["M_peak"], M_rms=met["M_rms"],
-                   duration_min=s["t"][-1] / 60)
+        row = dict(
+            Vmax=cutoff,
+            common_LLI=0.10,
+            delta_LAMn=0.0135,
+            M_peak=met["M_peak"],
+            M_rms=met["M_rms"],
+            duration_min=s["t"][-1] / 60,
+        )
         rows.append(row)
         print("cutoff", row, flush=True)
     pd.DataFrame(rows).to_csv(OUT / "cutoff_sensitivity.csv", index=False)

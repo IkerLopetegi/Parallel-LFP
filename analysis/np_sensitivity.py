@@ -41,15 +41,27 @@ def main():
     args = parser.parse_args()
     prepare_output()
     base = m.get_reference_params()
-    protocol=dict(capacity_convention='full_0_1_intercalation_host_capacity',
-                  graphite_span=[0.,1.], LFP_span=[0.,1.],
-                  reference_NP=design_np(base), target_ratios=args.ratios,
-                  loading_path='positive_thickness', fixed_negative_electrode=True,
-                  fixed_lithium_inventory=True, fixed_nominal_capacity_reference=True,
-                  degradation_fraction=.20, C_rate=1.0,
-                  grid=base['disc'], rtol=8e-5, atol=7e-7,max_step_s=8,
-                  model_sha256=hashlib.sha256((Path(__file__).resolve().parents[1]/'lfp_parallel/model.py').read_bytes()).hexdigest())
-    (OUT/'Figure07_protocol.json').write_text(json.dumps(protocol,indent=2))
+    protocol = dict(
+        capacity_convention="full_0_1_intercalation_host_capacity",
+        graphite_span=[0.0, 1.0],
+        LFP_span=[0.0, 1.0],
+        reference_NP=design_np(base),
+        target_ratios=args.ratios,
+        loading_path="positive_thickness",
+        fixed_negative_electrode=True,
+        fixed_lithium_inventory=True,
+        fixed_nominal_capacity_reference=True,
+        degradation_fraction=0.20,
+        C_rate=1.0,
+        grid=base["disc"],
+        rtol=8e-5,
+        atol=7e-7,
+        max_step_s=8,
+        model_sha256=hashlib.sha256(
+            (Path(__file__).resolve().parents[1] / "lfp_parallel/model.py").read_bytes()
+        ).hexdigest(),
+    )
+    (OUT / "Figure07_protocol.json").write_text(json.dumps(protocol, indent=2))
     rows = []
     for ratio in args.ratios:
         p1 = base_at_np(base, ratio)
@@ -85,6 +97,7 @@ def main():
             )
             print(row, flush=True)
     from analysis.publication_figures import render_np_figure
+
     render_np_figure()
 
 

@@ -1,10 +1,10 @@
 """Numerical recipes for main Figures 3–5 and 9."""
+
 from pathlib import Path
-import sys, copy, math, json, time
+import sys, copy
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from matplotlib.lines import Line2D
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import lfp_parallel.model as m
@@ -70,25 +70,58 @@ def qex_norm(sim, p1, p2):
 def figure3_lowrate(base=None):
     """Generate Figure 3 with full MP-SPMe and full-model capacity matching."""
     from analysis.figure03_fullmodel import main
+
     return main([])
 
 
-def figure4_dynamics(base, sn):
-    # Charge: equal low-rate capacity; discharge: realistic <=25% pure LAMp comparison.
+def save_current_history(sim, path):
+    """Retain the time, voltage and branch currents used in a figure."""
+    pd.DataFrame(
+        dict(
+            t_s=sim["t"],
+            V=sim["V"],
+            I1=sim["I"][:, 0],
+            I2=sim["I"][:, 1],
+            Iapp=sim["Iapp"],
+        )
+    ).to_csv(path, index=False)
+
+
+def load_current_history(path):
+    """Load plotting histories without running an electrochemical simulation."""
+    table = pd.read_csv(path)
+    return dict(
+        t=table.t_s.to_numpy(),
+        V=table.V.to_numpy(),
+        I=table[["I1", "I2"]].to_numpy(),
+        Iapp=float(table.Iapp.iloc[0]),
+    )
+
+
+def figure4_dynamics(base, sn, plot_only=False):
+    # Charge and discharge use separately surrogate-capacity-matched pairs.
     p1 = m.make_degraded_cell(base, "LLI", 0.10)
     p2 = m.make_degraded_cell(base, "LAMn", sn)
-    y, _ = m.init_parallel_at_common_ocv([p1, p2], 3.30, 0.4)
-    ch = m.simulate_cc_halfcycle(
-        [p1, p2], y, 1, "charge", max_step=8, rtol=8e-5, atol=7e-7
-    )
+    if not plot_only:
+        y, _ = m.init_parallel_at_common_ocv([p1, p2], 3.30, 0.4)
+        ch = m.simulate_cc_halfcycle(
+            [p1, p2], y, 1, "charge", max_step=8, rtol=8e-5, atol=7e-7
+        )
+        save_current_history(ch, OUT / "Figure04_charge_trajectories.csv")
+    else:
+        ch = load_current_history(OUT / "Figure04_charge_trajectories.csv")
     p3 = m.make_degraded_cell(base, "LLI", 0.10)
     p4, sp, _ = m.match_capacity_lowrate_ocvr(
         base, p3, "LAMp", bounds=(0, 0.50), C_rate=CAP_RATE
     )
-    y, _ = m.init_parallel_at_common_ocv([p3, p4], 3.35, 0.75)
-    ds = m.simulate_cc_halfcycle(
-        [p3, p4], y, 1, "discharge", max_step=8, rtol=8e-5, atol=7e-7
-    )
+    if not plot_only:
+        y, _ = m.init_parallel_at_common_ocv([p3, p4], 3.35, 0.75)
+        ds = m.simulate_cc_halfcycle(
+            [p3, p4], y, 1, "discharge", max_step=8, rtol=8e-5, atol=7e-7
+        )
+        save_current_history(ds, OUT / "Figure04_discharge_trajectories.csv")
+    else:
+        ds = load_current_history(OUT / "Figure04_discharge_trajectories.csv")
     mch = qex_norm(ch, p1, p2)
     mds = qex_norm(ds, p3, p4)
     fig, axs = plt.subplots(2, 2, figsize=(7.25, 5.15), constrained_layout=True)
@@ -144,24 +177,36 @@ def figure4_dynamics(base, sn):
     return ch, p1, p2
 
 
-def figure5_model_fidelity(base, sn):
+def figure5_model_fidelity(base, sn, plot_only=False):
     p1 = m.make_degraded_cell(base, "LLI", 0.10)
     p2 = m.make_degraded_cell(base, "LAMn", sn)
-    ocv = m.simulate_ocvr_pair_fast_stateR(p1, p2, 1, "charge", 3.30, dq_frac=7e-4)
-    b1 = make_grid(base, 6, 3, 6, 1, 9)
-    s1 = m.make_degraded_cell(b1, "LLI", 0.10)
-    s2 = m.make_degraded_cell(b1, "LAMn", sn)
-    y, _ = m.init_parallel_at_common_ocv([s1, s2], 3.30, 0.4)
-    single = m.simulate_cc_halfcycle(
-        [s1, s2], y, 1, "charge", max_step=9, rtol=1e-4, atol=1e-6
-    )
-    bm = make_grid(base, 6, 3, 6, 9, 9)
-    q1 = m.make_degraded_cell(bm, "LLI", 0.10)
-    q2 = m.make_degraded_cell(bm, "LAMn", sn)
-    y, _ = m.init_parallel_at_common_ocv([q1, q2], 3.30, 0.4)
-    multi = m.simulate_cc_halfcycle(
-        [q1, q2], y, 1, "charge", max_step=9, rtol=1e-4, atol=1e-6
-    )
+    if not plot_only:
+        ocv = m.simulate_ocvr_pair_fast_stateR(p1, p2, 1, "charge", 3.30, dq_frac=7e-4)
+        b1 = make_grid(base, 6, 3, 6, 1, 9)
+        s1 = m.make_degraded_cell(b1, "LLI", 0.10)
+        s2 = m.make_degraded_cell(b1, "LAMn", sn)
+        y, _ = m.init_parallel_at_common_ocv([s1, s2], 3.30, 0.4)
+        single = m.simulate_cc_halfcycle(
+            [s1, s2], y, 1, "charge", max_step=9, rtol=1e-4, atol=1e-6
+        )
+        bm = make_grid(base, 6, 3, 6, 9, 9)
+        q1 = m.make_degraded_cell(bm, "LLI", 0.10)
+        q2 = m.make_degraded_cell(bm, "LAMn", sn)
+        y, _ = m.init_parallel_at_common_ocv([q1, q2], 3.30, 0.4)
+        multi = m.simulate_cc_halfcycle(
+            [q1, q2], y, 1, "charge", max_step=9, rtol=1e-4, atol=1e-6
+        )
+        for name, sim in (
+            ("ocvr", ocv),
+            ("single_radius", single),
+            ("multiparticle", multi),
+        ):
+            save_current_history(sim, OUT / f"Figure05_{name}_trajectories.csv")
+    else:
+        ocv, single, multi = [
+            load_current_history(OUT / f"Figure05_{name}_trajectories.csv")
+            for name in ("ocvr", "single_radius", "multiparticle")
+        ]
     fig, ax = plt.subplots(figsize=(3.4, 2.55), constrained_layout=True)
     for s, lab, c, ls in [
         (ocv, "OCV-R", COL["lli"], "-"),
@@ -287,9 +332,8 @@ def figure9_resistance(base):
     ).to_csv(OUT / "Figure09_contact_map.csv", index=False)
 
 
-
 def supplementary_studies(base, sn):
-    # S2 grid convergence on central charge case
+    # Figure S1: grid convergence on the central charge case
     grids = [(4, 2, 4, 5, 7), (6, 3, 6, 7, 9), (8, 4, 8, 9, 11), (10, 5, 10, 13, 13)]
     rows = []
     for g in grids:
@@ -351,7 +395,7 @@ def supplementary_studies(base, sn):
     )
     save(fig, "FigureS03_capacity_protocol_sensitivity", supp=True)
 
-    # S6 C-rate sensitivity, full model central pair
+    # Figure S4: full-model C-rate sensitivity
     rows = []
     for cr in [0.1, 0.25, 0.5, 1.0]:
         p1 = m.make_degraded_cell(base, "LLI", 0.10)
@@ -378,4 +422,3 @@ def supplementary_studies(base, sn):
     axs[0].set(xlabel="C-rate", ylabel="$M_{peak}$")
     axs[1].set(xlabel="C-rate", ylabel="$Q_{excess}/\\bar Q$")
     save(fig, "FigureS04_Crate_sensitivity", supp=True)
-

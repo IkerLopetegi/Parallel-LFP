@@ -1,4 +1,4 @@
-"""Render V28 full-model threshold plots from verified sampled-grid outputs."""
+"""Render full-model threshold plots from verified sampled-grid outputs."""
 
 from pathlib import Path
 import hashlib
@@ -22,8 +22,9 @@ COLORS = ("#0072B2", "#D55E00", "#009E73", "#CC79A7")
 
 def verified_data():
     audit = json.loads((SOURCE / "reproduction_audit.json").read_text())
-    digest = hashlib.sha256(Path(m.__file__).read_bytes() +
-                            Path(threshold_model.__file__).read_bytes()).hexdigest()
+    digest = hashlib.sha256(
+        Path(m.__file__).read_bytes() + Path(threshold_model.__file__).read_bytes()
+    ).hexdigest()
     if digest != audit["model_and_script_sha256"] or audit["rows"] != 16:
         raise RuntimeError("Full-model threshold results are from different source")
     summary = pd.read_csv(SOURCE / "Section37_full_thresholds_combined.csv")
@@ -50,50 +51,92 @@ def save(fig, name, supplementary=False):
 
 def plot_main(data, summary):
     # Keep the threshold comparison at a readable two-column scale. The
-    # capacity panel spans the lower row, as in the original Elsevier layout.
+    # capacity panel spans the lower row.
     fig = plt.figure(figsize=(6.3, 6.05), constrained_layout=True)
     grid = fig.add_gridspec(2, 2, height_ratios=(1, 1.02))
-    axs = [fig.add_subplot(grid[0, 0]), fig.add_subplot(grid[0, 1]),
-           fig.add_subplot(grid[1, :])]
+    axs = [
+        fig.add_subplot(grid[0, 0]),
+        fig.add_subplot(grid[0, 1]),
+        fig.add_subplot(grid[1, :]),
+    ]
     for ax, family in zip(axs[:2], FAMILIES):
         for bg, color in zip(BACKGROUNDS, COLORS):
-            z = data[(data.family == family) & (data.background == bg)].sort_values("delta")
-            ax.plot(z.delta * 100, z.M_peak, lw=1.25, marker="o", ms=3.0,
-                    color=color,
-                    label=f"{bg * 100:g}% background")
+            z = data[(data.family == family) & (data.background == bg)].sort_values(
+                "delta"
+            )
+            ax.plot(
+                z.delta * 100,
+                z.M_peak,
+                lw=1.25,
+                marker="o",
+                ms=3.0,
+                color=color,
+                label=f"{bg * 100:g}% background",
+            )
         for y, style in ((0.8, "--"), (0.95, ":")):
             ax.axhline(y, color="0.35", ls=style, lw=0.8)
-        ax.set(xlabel="Additional severity (pp)", ylabel=r"$M_{\rm peak}$",
-               ylim=(0, 1.09), xlim=(0, 7))
+        ax.set(
+            xlabel="Additional severity (pp)",
+            ylabel=r"$M_{\rm peak}$",
+            ylim=(0, 1.09),
+            xlim=(0, 7),
+        )
     axs[0].legend(frameon=False, fontsize=6.5, loc="lower right")
-    for family, marker, color, name in zip(FAMILIES, ("o", "s"),
-                                           ("#0072B2", "#D55E00"),
-                                           ("Common LLI", "Same trajectory")):
+    for family, marker, color, name in zip(
+        FAMILIES, ("o", "s"), ("#0072B2", "#D55E00"), ("Common LLI", "Same trajectory")
+    ):
         for target, ls in ((0.8, "-"), (0.95, "--")):
             z = summary[(summary.family == family) & (summary.target == target)]
-            axs[2].plot(z.background * 100, z.capacity_difference_pct.abs(),
-                        marker=marker, ls=ls, color=color,
-                        label=f"{name}, {target:.2f}")
-    axs[2].set(xlabel="Common/background aging state in both cells (%)",
-               ylabel=r"C/20 capacity difference (% of mean capacity)",
-               yscale="log", xticks=[0, 5, 10, 15])
+            axs[2].plot(
+                z.background * 100,
+                z.capacity_difference_pct.abs(),
+                marker=marker,
+                ls=ls,
+                color=color,
+                label=f"{name}, {target:.2f}",
+            )
+    axs[2].set(
+        xlabel="Common/background aging state in both cells (%)",
+        ylabel=r"C/20 capacity difference (% of mean capacity)",
+        yscale="log",
+        xticks=[0, 5, 10, 15],
+    )
     legend_handles = [
-        Line2D([], [], color=COLORS[0], marker="o", lw=1.5,
-               label="Common LLI"),
-        Line2D([], [], color=COLORS[1], marker="s", lw=1.5,
-               label="Same trajectory"),
-        Line2D([], [], color="0.25", ls="-", lw=1.5,
-               label=r"$M_{\rm peak}\geq0.80$ (solid)"),
-        Line2D([], [], color="0.25", ls="--", lw=1.5,
-               label=r"$M_{\rm peak}\geq0.95$ (dashed)"),
+        Line2D([], [], color=COLORS[0], marker="o", lw=1.5, label="Common LLI"),
+        Line2D([], [], color=COLORS[1], marker="s", lw=1.5, label="Same trajectory"),
+        Line2D(
+            [],
+            [],
+            color="0.25",
+            ls="-",
+            lw=1.5,
+            label=r"$M_{\rm peak}\geq0.80$ (solid)",
+        ),
+        Line2D(
+            [],
+            [],
+            color="0.25",
+            ls="--",
+            lw=1.5,
+            label=r"$M_{\rm peak}\geq0.95$ (dashed)",
+        ),
     ]
-    axs[2].legend(handles=legend_handles, frameon=True, framealpha=0.92,
-                  facecolor="white", edgecolor="none", fontsize=7.0,
-                  ncol=2, loc="center", bbox_to_anchor=(0.60, 0.52),
-                  borderpad=0.45, columnspacing=0.9, handlelength=1.5)
+    axs[2].legend(
+        handles=legend_handles,
+        frameon=True,
+        framealpha=0.92,
+        facecolor="white",
+        edgecolor="none",
+        fontsize=7.0,
+        ncol=2,
+        loc="center",
+        bbox_to_anchor=(0.60, 0.52),
+        borderpad=0.45,
+        columnspacing=0.9,
+        handlelength=1.5,
+    )
     for ax, label in zip(axs, "abc"):
-        ax.text(.02, .98, label, transform=ax.transAxes,
-                va="top", fontweight="bold")
+        ax.text(0.02, 0.98, label, transform=ax.transAxes, va="top", fontweight="bold")
     save(fig, "Figure08_threshold_heterogeneity")
 
 
@@ -102,15 +145,20 @@ def plot_summary(summary):
     for ax, family in zip(axs, FAMILIES):
         for target, style in ((0.8, "o-"), (0.95, "s--")):
             z = summary[(summary.family == family) & (summary.target == target)]
-            ax.plot(z.background * 100, z.delta_crit_sampled * 100, style,
-                    label=f"$M_{{\\rm peak}}\\geq{target:.2f}$")
-        ax.set(xlabel="Background severity (%)",
-               ylabel="First sampled heterogeneity (percentage points)",
-               xticks=[0, 5, 10, 15])
+            ax.plot(
+                z.background * 100,
+                z.delta_crit_sampled * 100,
+                style,
+                label=f"$M_{{\\rm peak}}\\geq{target:.2f}$",
+            )
+        ax.set(
+            xlabel="Background severity (%)",
+            ylabel="First sampled heterogeneity (percentage points)",
+            xticks=[0, 5, 10, 15],
+        )
         ax.legend(frameon=False)
     for ax, label in zip(axs, "ab"):
-        ax.text(.02, .98, label, transform=ax.transAxes,
-                va="top", fontweight="bold")
+        ax.text(0.02, 0.98, label, transform=ax.transAxes, va="top", fontweight="bold")
     save(fig, "FigureS07_threshold_summary", True)
 
 
