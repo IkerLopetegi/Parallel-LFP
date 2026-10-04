@@ -1,6 +1,6 @@
 # Parallel LFP model: final paper results
 
-Simulation code and final numerical data for the manuscript and supplementary information. This repository contains one current release; historical outputs, drafts, audit reports and unused analyses have been removed from the working tree.
+Simulation code and final numerical data for the manuscript and supplementary information.
 
 ## Installation and verification
 
@@ -14,7 +14,7 @@ python -m analysis.reproduce --stage verify
 python -m analysis.verify_results --manifest # exact release files before regeneration
 ```
 
-The numerical model is in `lfp_parallel/model.py`. See `MODEL_GUIDE.md` for units, numerical methods and physical assumptions. The studies are isothermal simulations; negative-electrode potential is a diagnostic and does not validate or simulate lithium deposition.
+The numerical model is in `lfp_parallel/model.py`. See `MODEL_GUIDE.md` for units, numerical methods and physical assumptions.
 
 ## Reproduction
 
@@ -28,13 +28,13 @@ python -m analysis.reproduce --stage all     # all numerical studies and final p
 
 Full-model simulations and threshold scans can take substantial time. Threshold and robustness studies reuse compatible saved checkpoints. Remove their outputs in a separate checkout to recompute them from scratch. Threshold JSON files describe the current numerical configuration and completed points; they are needed for safe resumption.
 
-Run `python -m analysis.fullmodel_lamp_map --workers 6` to recompute Figure S6 using independent processes, or append `--plot-only` to render the retained map. Checkpoints are reused only for the same full-model protocol; the earlier OCV-R map is not reused. Every case must reach the 2.50 V cutoff; numerical failures stop the runner instead of being treated as blank map cells.
+Run `python -m analysis.fullmodel_lamp_map --workers 6` to recompute Figure S6 using independent processes, or append `--plot-only` to render the retained map. Checkpoints are reused only for the same full-model protocol; the earlier OCV-R map is not reused. Every case must reach the 2.50 V cutoff; numerical failures stop the runner.
 
 `--stage` also accepts `core`, `robustness`, `np`, `thresholds`, `supplementary`, `resistance`, `diffusivity`, `potential`, and `checks`. The default is `verify`, which checks data consistency without rerunning simulations. Use `analysis.verify_results --manifest` to check exact release checksums before regeneration; regenerated PDFs can have different metadata.
 
 ## Result map
 
-Final vector PDFs and numerical tables are in `results/`; supplementary assets are in `results/supplementary/`. Figure 1 is the author-supplied schematic in `figures/`. Generated PNG previews are not part of the release.
+Final vector PDFs and numerical tables are in `results/`; supplementary assets are in `results/supplementary/`. Figure 1 is the author-supplied schematic in `figures/`.
 
 | Paper result | Numerical recipe / retained data |
 |---|---|
