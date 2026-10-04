@@ -113,7 +113,7 @@ def figure4_dynamics(base, sn):
     )
     axs[1, 0].set(xlabel="Time (min)", ylabel="$|I_1-I_2|/|I_{app}|$", ylim=(0, 1.08))
     axs[1, 0].text(
-        0.04,
+        0.12,
         0.88,
         f'$M_{{peak}}={mch["M_peak"]:.2f}$\n$q_{{ex}}={mch["qex_norm"]:.3f}$',
         transform=axs[1, 0].transAxes,
@@ -126,7 +126,7 @@ def figure4_dynamics(base, sn):
     )
     axs[1, 1].set(xlabel="Time (min)", ylabel="$|I_1-I_2|/|I_{app}|$", ylim=(0, 1.08))
     axs[1, 1].text(
-        0.04,
+        0.12,
         0.88,
         f'$M_{{peak}}={mds["M_peak"]:.2f}$\n$q_{{ex}}={mds["qex_norm"]:.3f}$\n$\\Delta Q={100*mds["capdiff"]:.1f}\\%$',
         transform=axs[1, 1].transAxes,
@@ -178,7 +178,6 @@ def figure5_model_fidelity(base, sn):
         xlim=(0, 1),
     )
     ax.legend(frameon=False)
-    panel(ax, "a")
     save(fig, "Figure05_model_fidelity")
     rows = []
     for s, lab in [
