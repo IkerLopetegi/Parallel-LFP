@@ -74,4 +74,4 @@ This checks the full-model capacity match and repeats the numerical refinement c
 - `results/supplementary/`: SI figures, histories and sensitivity tables.
 - `results/thresholds/`: eight resumable threshold configurations, sampled points and combined results. Hashed filenames identify configurations, not paper versions.
 
-Some CSV table identifiers differ from the displayed SI table numbers; the figure map above identifies their generating studies. `MODEL_GUIDE.md` explains units, model assumptions, kinetics and capacity conventions. This is an isothermal mechanistic simulation study; the negative-electrode potential diagnostic does not simulate lithium deposition.
+Some CSV table identifiers differ from the displayed SI table numbers; the figure map above identifies their generating studies. `MODEL_GUIDE.md` explains units, model assumptions, kinetics and capacity conventions.
