@@ -61,4 +61,4 @@ All solver settings and numerical provenance are recorded in the figure protocol
 
 ## Physical scope
 
-The model is isothermal, uses internally uniform LFP populations and one representative graphite particle, and approximates ionic potential from concentration and Ohmic terms. It does not solve an independent electrolyte charge-conservation field or include a plating reaction, thermal feedback or evolving degradation. Numerical convergence and software tests do not constitute experimental validation.
+The model is isothermal, uses internally uniform LFP populations and one representative graphite particle, and approximates ionic potential from concentration and Ohmic terms.
